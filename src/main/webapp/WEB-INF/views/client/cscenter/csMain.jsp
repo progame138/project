@@ -41,6 +41,28 @@
   </head>
 
   <body>
+  <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="#">ShoeStar</a>
+          <div class="nav-collapse collapse">
+            <p class="navbar-text pull-right">
+              <a href="#" class="navbar-link"></a> 로그인됨
+            </p>
+            <ul class="nav">
+              <li class="active"><a href="#">남자</a></li>
+              <li><a href="#about">여자</a></li>
+              <li><a href="#contact">고객센터</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
     <div class="container-fluid">
       <div class="row-fluid">
         <div class="span3">
@@ -60,18 +82,36 @@
         </div><!--/span-->
         <div class="span9">
           <div class="hero-unit">
-           	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../image/hedgehog.jpg" class="img-polaroid">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-           	<img src="../image/hedgehog2.jpg" class="img-polaroid">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-           	<img src="../image/hedgehog3.PNG" class="img-polaroid">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-           	<img src="../image/hedgehog4.PNG" class="img-polaroid">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-           	<br>
-           	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">공지사항</a>
-           	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">이벤트</a>
-           	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">주문/배송현황</a>
-           	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">1:1문의</a>
+          <div>
+           	<figure>
+           		<img src="/resources/images/cscenter/notice.png" class="img-polaroid"/>
+           		<figcaption><a href="#">공지사항</a></figcaption>
+           	</figure>
+          	
+          </div>
+          
+          <!-- <div class="entry">
+   				<figure><img src="image2/print-02.jpg" alt="Passiflora" />
+   					<figcaption>시계꽃<span>(Passiflora)</span></figcaption>
+   				</figure>
+   			</div>
+           	 -->
+          <div>	
+          	<img src="/resources/images/cscenter/event.png" class="img-polaroid">
+          	<a href="#">이벤트</a>
+          </div>
+          <div>	
+           	<img src="/resources/images/cscenter/delivery.png" class="img-polaroid">
+          	<a href="#">주문/배송현황</a>
+          </div>
+          <div>	
+           	<img src="/resources/images/cscenter/one_one.png" class="img-polaroid">
+          	<a href="#">1:1문의</a>
+          </div> 	
+           	
           </div>
           <div id="boardList">
-          	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<h2 style="font-weight:lighter;">공지사항</h2>
+          	<h2 style="font-weight:lighter;">공지사항</h2><hr>
          <table summary="게시판리스트" class="table table-striped">
             <colgroup>
                <col width="10%" />
@@ -86,40 +126,16 @@
                   <th data-value="b_date" class="order">작성일</th>
                   <th class="borcle">작성자</th>
                </tr>
-            </thead>
+            </thead>	
             <tbody id="list">
                <!-- 데이터 출력 -->
-               <c:choose>
                
-                     <tr>
-                        <td colspan="4" class="tac">등록된 게시물이 없습니다.</td>
-                     </tr>
-               </c:choose>
             </tbody>
          </table>
       </div>
    </div>
         </div><!--/span-->
       </div><!--/row-->
-
-    
-
-    <!-- 자바스크립트
-    ================================================== -->
-    <!-- 페이지를 빨리 읽어들이도록 문서 마지막에 배치 -->
-    <script src="../assets/js/jquery.js"></script>
-    <script src="../assets/js/bootstrap-transition.js"></script>
-    <script src="../assets/js/bootstrap-alert.js"></script>
-    <script src="../assets/js/bootstrap-modal.js"></script>
-    <script src="../assets/js/bootstrap-dropdown.js"></script>
-    <script src="../assets/js/bootstrap-scrollspy.js"></script>
-    <script src="../assets/js/bootstrap-tab.js"></script>
-    <script src="../assets/js/bootstrap-tooltip.js"></script>
-    <script src="../assets/js/bootstrap-popover.js"></script>
-    <script src="../assets/js/bootstrap-button.js"></script>
-    <script src="../assets/js/bootstrap-collapse.js"></script>
-    <script src="../assets/js/bootstrap-carousel.js"></script>
-    <script src="../assets/js/bootstrap-typeahead.js"></script>
-
+	
   </body>
 </html>
