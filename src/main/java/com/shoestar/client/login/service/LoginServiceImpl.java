@@ -10,7 +10,7 @@ import lombok.Setter;
 @Service
 public class LoginServiceImpl implements LoginService{
 	
-	@Setter(onMethod_=@Autowired)
+	//@Setter(onMethod_ = @Autowired)
 	private LoginDao loginDao;
 
 	@Override
