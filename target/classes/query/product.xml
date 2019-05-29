@@ -1,5 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.shoestar.client.product.dao.ProductDao">
+<mapper namespace="com.shoestar.client.prod.dao.ProdDao">
+	
+	<select id="prodList" parameterType="prod" resultType="prod">
+		SELECT
+			*
+		FROM
+			(
+			SELECT
+				/*+ INDEX_DESC(prod prod_pk)*/
+				rownum rn, rowid ri,
+				pd_no, pd_name, pd_sex, pd_age, pct_no, co_no,
+				pd_price, pd_fabric, pd_country, pd_year, pd_manu,
+				pd_import, pi_no, pd_date, pd_status, pim_no_main
+			FROM
+				prod
+			WHERE
+				<![CDATA[rownum <= #{pageNum} * #{amount}]]>
+			) prodlist
+		WHERE
+			<![CDATA[rn > (#{pageNum} - 1) * #{amount}]]>
+			<if test="(size + color + priceBottom + priceTop) != 0">
+				AND (
+					SELECT DISTINCT
+						1
+					FROM
+						prod_ins
+					WHERE
+					<trim>
+						pd_no = prodlist.pd_no
+						<if test="size != 0">
+						AND pi_size = #{size}
+						</if>
+						<if test="color != 0">
+						AND pcl_no = #{color}
+						</if>
+					</trim>
+				) IS NOT NULL
+				<if test="priceBottom != 0">
+    				<![CDATA[AND pd_price >= #{priceBottom}]]>
+				</if>
+				<if test="priceTop != 0">
+    				<![CDATA[and pd_price < 50000]]>
+				</if>
+			</if>
+	</select>
+	
 	
 </mapper>

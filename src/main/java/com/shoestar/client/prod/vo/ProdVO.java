@@ -1,5 +1,7 @@
 package com.shoestar.client.prod.vo;
 
+import java.sql.Date;
+
 import com.shoestar.common.vo.CommonVO;
 
 import lombok.Data;
@@ -8,20 +10,26 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper=false)
 public class ProdVO extends CommonVO {
-	private Integer pd_no;
+	private int pd_no;
 	private String pd_name;
 	private String pd_sex;
 	private String pd_age;
-	private Integer pct_no;
-	private Integer co_no;
-	private Integer pd_price;
+	private int pct_no;
+	private int co_no;
+	private int pd_price;
 	private String pd_fabric;
 	private String pd_country;
 	private String pd_year;
 	private String pd_manu;
 	private String pd_import;
-	private String pi_no;
-	private String pd_date;
+	private int pi_no;
+	private Date pd_date;
 	private String pd_status;
-	private String pim_no_main;
+	private int pim_no_main;
+	
+	// 검색을 위한 필터값
+	private int size;
+	private int color;
+	private int priceBottom;
+	private int priceTop;
 }
