@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" trimDirectiveWhitespaces="true" %>
 <div class="container">
 	<p class="text-muted">
-		사업자등록번호: 123-45-67890 |
-		대표: 홍길동 |
-		개인정보보호책임자: 김철수 |
-		이메일: javauser1234@naver.com |
-		서울특별시 성동구 무학로2길 54(신방빌딩)
+		프로젝트 : 슈즈스타 |
+		개발자 : 배정훈, 조수빈, 강현석, 박운석, 이정수 |
+		융합 소프트웨어 3회차 1조 |
+		(주)미래능력개발교육원 |
+		2019년
 	</p>
 </div>
