@@ -4,11 +4,15 @@
 <html>
 	<head>
 		<title></title>
+		
+		<script type="text/javascript">
+			$(function() {
+				
+			});
+		</script>
 	</head>
 	
 	<body>
-		<c:forEach items="${prodList}" var="stack">
-			<p>${stack.pd_no} : ${stack.pd_name}</p>
-		</c:forEach>
+		<div class="tester"></div>
 	</body>
 </html>

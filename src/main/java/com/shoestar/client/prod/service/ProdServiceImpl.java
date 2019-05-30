@@ -10,6 +10,10 @@ import com.shoestar.client.prod.vo.ProdVO;
 
 import lombok.Setter;
 
+/**
+ * Prod 전담 서비스
+ * @author 배정훈
+ */
 @Service
 public class ProdServiceImpl implements ProdService {
 	
