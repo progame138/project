@@ -1,5 +1,6 @@
 package com.shoestar.client.login.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shoestar.client.login.dao.LoginDao;
@@ -10,7 +11,7 @@ import lombok.Setter;
 @Service
 public class LoginServiceImpl implements LoginService{
 	
-	//@Setter(onMethod_ = @Autowired)
+	@Setter(onMethod_=@Autowired)
 	private LoginDao loginDao;
 
 	@Override
@@ -24,6 +25,10 @@ public class LoginServiceImpl implements LoginService{
 		LoginVO vo = loginDao.loginSelect(lvo);
 		return vo;
 	}
-	
+
+	@Override
+	public LoginVO memIdSelect(String mem_id) {
+		return loginDao.memIdSelect(mem_id);
+	}
 	
 }
