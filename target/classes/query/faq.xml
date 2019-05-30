@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shoestar.client.cscenter.dao.FAQDao">
+	<select id="faqList" parameterType="com.shoestar.client.cscenter.vo.FAQVO" resultType="com.shoestar.client.cscenter.vo.FAQVO">
+		SELECT faq_no,faq_title, faq_content 
+		FROM faq
+		ORDER BY faq_no desc
+	</select>
+	
+	<select id="faqDetail" parameterType="com.shoestar.client.cscenter.vo.FAQVO" resultType="com.shoestar.client.cscenter.vo.FAQVO">
+		select faq_no, faq_title, faq_content, to_char(faq_date, 'YYYY-MM-DD HH24:MI:SS') AS faq_date
+		from faq
+		where faq_no = ${faq_no} 
+	</select>
+</mapper>

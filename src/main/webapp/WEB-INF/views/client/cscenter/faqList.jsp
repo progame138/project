@@ -31,11 +31,24 @@
       }
     </style>
     <link href="/resources/include/dist/css/bootstrap-responsive.css" rel="stylesheet">
-
-    <!-- IE6~8에서 HTML5 태그를 지원하기위한 HTML5 shim -->
-    <!--[if lt IE 9]>
-      <script src="../assets/js/html5shiv.js"></script>
-    <![endif]-->
+	<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
+    <script>
+    	$(function(){
+    		$(".detailGo").click(function(){
+    			
+    			var faq_no = $(this).parents("div").attr("data-num");
+    			console.log(faq_no);
+    			$("#faq_no").val(faq_no);
+    			
+    			$("#faqList").attr({
+    				"method" : "get",
+    				"action" : "/cscenter/faqDetail+faq_no="+faq_no
+    			});
+    			$("#faqList").submit();
+    		});
+    	});
+    	
+    </script>
   </head>
 
   <body>
@@ -67,6 +80,7 @@
 	        <button class="">기타</button>
         </div>
         <div class="span9">
+          <!-- 리스트시작 -->
           <div id="faqList"> 	
 	          <div class="row-fluid">
 	          <c:choose>
@@ -75,7 +89,7 @@
 	          			<div class="span4" data-num="${faq.faq_no}">
 	          				<h2>${faq.faq_title}</h2>
 	          				<p>${faq.faq_content}</p>
-	          				<p><a class="btn">자세히보기</a></p>
+	          				<p><button class="detailGo" >자세히보기</button></p>
 	          			</div>
 	          		</c:forEach>
 	          	</c:when>
