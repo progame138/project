@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shoestar.client.cscenter.dao.ProvisionDao">
+
+	<select id= "provisionList" parameterType="com.shoestar.client.cscenter.vo.ProvisionVO" resultType="com.shoestar.client.cscenter.vo.ProvisionVO">
+		select p_no ,p_title, p_content
+		from provision
+		where p_no = ${p_no}
+	</select>
+</mapper>

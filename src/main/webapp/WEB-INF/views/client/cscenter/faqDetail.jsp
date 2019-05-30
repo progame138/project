@@ -1,21 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Title</title>
-      
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="viewport" content="width=device-width initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
-		<link rel="shortcut icon" type="image⁄x-icon" href="../image/icon.png" />
-		<link rel="apple-touch-icon" type="image⁄x-icon" href="../image/icon.png" />
-		<!-- [if lt IE 9]>
-		<script src="../js/html5shiv.js"></script>
-		<![endif] -->
+<html lang="ko">
+  <head>
+    <title>자주묻는질문</title>
+
+    <!-- 스타일 -->
+    <link href="/resources/include/dist/css/bootstrap-ko.css" rel="stylesheet">
+    
+    
+    <script ></script>
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+
+      @media (max-width: 980px) {
+        /* Enable use of floated navbar text */
+        .navbar-text.pull-right {
+          float: none;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+      }
+    </style>
+    <link href="/resources/include/dist/css/bootstrap-responsive.css" rel="stylesheet">
+	<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
       
 	</head>
    
@@ -35,8 +51,8 @@
               <li><a href="#">-이벤트</a></li>
               <li><a href="#">-기타</a><hr></li>
               <li class="nav-header">1:1 게시판<hr></li>
-              <li class="nav-header">개인정보처리지침<hr></li>
-              <li class="nav-header">이용약관</li>
+              <li class="nav-header"><a href="/cscenter/provision?p_no=2">개인정보처리지침</a><hr></li>
+              <li class="nav-header"><a href="/cscenter/provision?p_no=1">이용약관</a></li>
             </ul>
           </div><!--/.well -->
         </div><!--/span-->
@@ -66,15 +82,15 @@
 							<td>작성자</td>
 							<td class="text-left">관리자</td>
 							<td>작성일</td>
-							<td class="text-left">${faq.faq_date}</td>
+							<td class="text-left">${detail.faq_date}</td>
 						</tr>
 						<tr>
 							<td>제목</td>
-							<td colspan="3" class="text-left">${faq.faq_title}</td>
+							<td colspan="3" class="text-left">${detail.faq_title}</td>
 						</tr>
 						<tr class="table-height">
 							<td>내용</td>
-							<td colspan="3" class="text-left">${faq.faq_content}</td>
+							<td colspan="3" class="text-left">${detail.faq_content}</td>
 						</tr>
 					</tbody>
 				</table>

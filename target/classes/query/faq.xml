@@ -2,8 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shoestar.client.cscenter.dao.FAQDao">
 	<select id="faqList" parameterType="com.shoestar.client.cscenter.vo.FAQVO" resultType="com.shoestar.client.cscenter.vo.FAQVO">
-		SELECT faq_no,faq_title, faq_content 
+		SELECT faq_no,faq_title, faq_content ,fc_no
 		FROM faq
+		where fc_no = ${fc_no}
 		ORDER BY faq_no desc
 	</select>
 	
@@ -12,4 +13,6 @@
 		from faq
 		where faq_no = ${faq_no} 
 	</select>
+	
+	
 </mapper>

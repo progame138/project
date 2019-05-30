@@ -53,8 +53,10 @@ public class FAQController {
 		return "client/cscenter/faqDetail";
 	}
 	
-	@GetMapping("/test")
-	public String test() {
+	
+	//고개센터 링크
+	@GetMapping("/")
+	public String csMain() {
 		return "client/cscenter/csMain";
 	}
 	
