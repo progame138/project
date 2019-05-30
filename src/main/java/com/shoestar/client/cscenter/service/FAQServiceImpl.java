@@ -12,11 +12,11 @@ import lombok.extern.log4j.Log4j;
 
 @Log4j
 @Service
-//@AllArgsConstructor
+@AllArgsConstructor
 public class FAQServiceImpl implements FAQService {
 	
 	private FAQDao fdao;
-	/*
+
 	@Override
 	public List<FAQVO> faqList(FAQVO fvo) {
 		log.info("faqList..............");
@@ -24,6 +24,16 @@ public class FAQServiceImpl implements FAQService {
 		list = fdao.faqList(fvo);
 		return list;
 	}
-	*/
+
+	@Override
+	public FAQVO faqDetail(FAQVO fvo) {
+		FAQVO detail = new FAQVO();
+		detail = fdao.faqDetail(fvo);
+		if(detail != null) {
+			detail.setFaq_content(detail.getFaq_content().toString().replaceAll("\n", "<br>"));
+		}
+		return detail;
+	}
+	
 	
 }

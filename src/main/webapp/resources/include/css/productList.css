@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+.prodContainer {
+	width: 200px;
+	margin: 20px 10px;
+	display: inline-block;
+}
+
+.prodEvent {
+	text-align: center;
+	margin: 5px 0;
+	border-bottom: 1px dotted #ccc;
+	padding-bottom: 5px;
+}
+
+.prodStat {
+	font-size: 0.6em;
+	display: inline-block;
+	margin: 0 3px;
+	padding: 2px 5px;
+	font-weight: bold;
+	color: white;
+}
+
+.prodStat_hot {
+	background-color: #C75252;
+}
+
+.prodStat_new {
+	background-color: #315F97;
+}
+
+.prodStat_dc {
+	background-color: #4F7529;
+}
+
+.prodName {
+	font-weight: bold;
+}
+
+.prodCtg {
+	color: #aaa;
+}
+
+.prodPrice {
+	font-size: 1.2em;
+}
+
+.prodPrice_normal {
+	font-weight: bold;
+}
+

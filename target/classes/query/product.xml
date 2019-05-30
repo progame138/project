@@ -15,9 +15,17 @@
 			SELECT
 				/*+ INDEX_DESC(prod prod_pk)*/
 				rownum rn, rowid ri,
-				pd_no, pd_name, pd_sex, pd_age, pct_no, co_no,
-				pd_price, pd_fabric, pd_country, pd_year, pd_manu,
-				pd_import, pi_no, pd_date, pd_status, pim_no_main
+				pd_no, pd_name, pd_sex, pd_age, pct_no,
+				(
+				SELECT
+					pct_name
+				FROM
+					prod_ctg
+				WHERE
+					pct_no = prod.pct_no
+				) AS pct_name,
+				co_no, pd_price, pd_fabric, pd_country, pd_year, pd_manu,
+				pd_import, pi_no, pd_date, pd_status, pim_main
 			FROM
 				prod
 			WHERE
