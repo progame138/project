@@ -6,4 +6,6 @@ public interface LoginDao {
 
 	public LoginVO loginSelect(LoginVO lvo);
 
+	public LoginVO memIdSelect(String mem_id);
+
 }

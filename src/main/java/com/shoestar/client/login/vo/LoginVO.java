@@ -1,5 +1,7 @@
 package com.shoestar.client.login.vo;
 
+import java.util.Date;
+
 import lombok.Data;
 import lombok.ToString;
 
@@ -19,7 +21,7 @@ public class LoginVO {
 	private String mem_email="";
 	private int cls_no;
 	private String mem_zip="";
-	
+	private Date mem_rdate;
 	
 
 }
