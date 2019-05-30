@@ -46,7 +46,16 @@
 	font-size: 1.2em;
 }
 
-.prodPrice_normal {
+.prodPrice_normal, .prodPrice_discount {
 	font-weight: bold;
 }
 
+.prodPrice_depricate {
+	font-weight: normal;
+	text-decoration: line-through;
+	color: #777;
+}
+
+.prodPrice_discount {
+	color: #C75252;
+}

@@ -75,7 +75,7 @@ function createProductDiv(prodVO) {
 	}, pPriceSection);
 	
 	// 별점 표시
-	var pRatingSection = $("<div>").addClass("ratingSection");
+	var pRatingSection = $("<div>").addClass("ratingSection text-center");
 	pRatingSection.append(createRatingLabel(prodVO, false));
 	
 	// 조립

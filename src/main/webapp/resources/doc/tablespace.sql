@@ -1,5 +1,5 @@
 create tablespace teamProjectData
-datafile 'D:\app\alfo3-27\oradata\orcl\team_data.dbf'
+datafile 'D:\Programs\Oracle\oradata\orcl\team_data.dbf'
 size 20M
 autoextend on
 next 3M

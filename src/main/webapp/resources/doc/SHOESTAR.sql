@@ -496,7 +496,7 @@ CREATE TABLE PROD_INS
 	PI_SIZE              NUMBER(3) NOT NULL ,
 	PI_QTY               NUMBER NOT NULL ,
 	PI_STATUS            CHAR(1) NULL ,
-	PCL_NO               NUMBER NOT NULL ,
+	PCL_NO               NUMBER NOT NULL
 );
 
 
