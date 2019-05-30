@@ -35,7 +35,7 @@ function createProductDiv(prodVO) {
 	// 신규, 인기, 세일, 품절등 정보 표시란
 	var pEventSection = $("<div>").addClass("prodEvent");
 	// 세일가 표시
-	pEventSection.append(createDiscountLabel(prodVO, false));
+	pEventSection.append(createDiscountLabel(prodVO, false)).addClass("prodEvent");
 	// 기타 상태
 	var prodStatNew = $("<span>").text("신규").addClass("prodStat prodStat_new");
 	var prodStatHot = $("<span>").text("인기").addClass("prodStat prodStat_hot");
@@ -57,10 +57,12 @@ function createProductDiv(prodVO) {
 	}
 	
 	// 이름 표시
-	var pNameSection = $("<div>").text(prodVO.pd_name).addClass("prodName text-center");
+	var pNameSection = $("<div>").text(prodVO.pd_name).addClass("prodName text-left");
+	// 분류  표시
+	var pCtgSection = $("<div>").text(prodVO.pct_name).addClass("prodCtg text-left");
 	
 	// 가격 표시
-	var pPriceSection = $("<div>");
+	var pPriceSection = $("<div>").addClass("priceSection text-right");
 	var pNormalPrice = $("<span>").text(prodVO.pd_price).addClass("prodPrice prodPrice_normal");
 	pPriceSection.append(pNormalPrice);
 	// 할인 정보 존재 시 콜백 함수를 통한 표시
@@ -68,17 +70,17 @@ function createProductDiv(prodVO) {
 		var normalPrice = targetPriceSection.find("span.prodPrice_normal");
 		normalPrice.removeClass("prodPrice_normal").addClass("prodPrice_depricate");
 		
-		var discountPrice = $("<span>").text(calculateDiscount(normalPrice.text(), dcRate)).addClass("prodPrice prodPrice_normal");
+		var discountPrice = $("<span>").text(calculateDiscount(normalPrice.text(), dcRate)).addClass("prodPrice prodPrice_discount");
 		targetPriceSection.append(discountPrice);
 	}, pPriceSection);
 	
 	// 별점 표시
-	var pRatingSection = $("<div>");
+	var pRatingSection = $("<div>").addClass("ratingSection");
 	pRatingSection.append(createRatingLabel(prodVO, false));
 	
 	// 조립
-	var pColumn = $("<div>").addClass("prodContainer col-sm-4 col-md-3");
-	pColumn.append(pImageSection).append(pEventSection).append(pNameSection).append(pPriceSection).append(pRatingSection);
+	var pColumn = $("<div>").addClass("prodContainer");
+	pColumn.append(pImageSection).append(pEventSection).append(pNameSection).append(pCtgSection).append(pPriceSection).append(pRatingSection);
 	
 	return pColumn;
 }

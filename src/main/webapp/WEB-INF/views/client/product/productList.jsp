@@ -5,6 +5,7 @@
 	<head>
 		<title></title>
 		
+		<link rel="stylesheet" href="/resources/include/css/productList.css" />
 		<script type="text/javascript" src="/resources/include/js/product.js"></script>
 		<script type="text/javascript">
 			$(function() {
@@ -24,6 +25,10 @@
 					success: function(data) {
 						if(!jQuery.isEmptyObject(data)) {
 							$.each(data, function(index, stack) {
+								$("#itemList").append(createProductDiv(stack));
+								$("#itemList").append(createProductDiv(stack));
+								$("#itemList").append(createProductDiv(stack));
+								$("#itemList").append(createProductDiv(stack));
 								$("#itemList").append(createProductDiv(stack));
 							});
 						} else {
