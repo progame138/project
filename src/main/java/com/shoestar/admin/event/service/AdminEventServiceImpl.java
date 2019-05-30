@@ -1,4 +1,4 @@
-package com.shoestar.client.event.service;
+package com.shoestar.admin.event.service;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
 
@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shoestar.client.event.dao.EventDAO;
+import com.shoestar.admin.event.dao.AdminEventDAO;
 import com.shoestar.client.event.vo.EventVO;
 
 
@@ -22,10 +23,11 @@ import lombok.extern.log4j.Log4j;
 @Service
 @Log4j
 @AllArgsConstructor
-public class EventServiceImpl implements EventService {
+public class AdminEventServiceImpl implements AdminEventService {
 
 	@Setter(onMethod_ = @Autowired)
 	private EventDAO eventDao;
+
 	
 	// 이벤트 목록 구현
 	@Override

@@ -1,7 +1,9 @@
 package com.shoestar.client.event.service;
 
+import java.util.List;
+
 import com.shoestar.client.event.vo.EventVO;
 
 public interface EventService {
-	public String eventList(EventVO evo);
+	public List<EventVO> eventList(EventVO evo);
 }

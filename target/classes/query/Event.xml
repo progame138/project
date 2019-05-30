@@ -2,6 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.shoestar.client.event.dao.EventDAO">
-	<!-- 이벤트 조회 -->
-
+	<!-- 이벤트 조회 <![CDATA[ -->
+	<select id="eventList" resultType="event">
+				SELECT
+				    ev_no,
+				    ev_title,
+				    ev_content,
+				    ev_img,
+				    ev_thumb,
+				    to_char(ev_date, 'yyyy-mm-dd hh:mm:ss') as ev_date,
+				    to_char(ev_edate, 'yyyy-mm-dd hh:mm:ss') as ev_edate
+				FROM
+				    event
+		
+	</select>
 </mapper>
