@@ -19,7 +19,7 @@
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 	<!-- 파일 업로드 경로 매핑: mapping="/매핑명/**" location="실제 파일을 업로드할 경로 지정" -->
-	<resources mapping="/uploadStorage/**" location="C:/shoestarStorage/" />
+	<resources mapping="/shoestarStorage/**" location="C:/shoestarStorage/" />
 	
 	<!-- tiles를 쓰면 다른 형식으로 resolver를 사용하기 때문에 아래 코드는 주석처리 되었음 -->
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->

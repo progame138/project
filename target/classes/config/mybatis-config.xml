@@ -3,5 +3,8 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
+		<typeAlias type="com.shoestar.client.prod.vo.ProdVO" alias="prod"/>
+		<typeAlias type="com.shoestar.client.login.vo.LoginVO" alias="login"/>
+		<typeAlias type="com.shoestar.client.member.vo.MemberVO" alias="member"/>
 	</typeAliases>
 </configuration>

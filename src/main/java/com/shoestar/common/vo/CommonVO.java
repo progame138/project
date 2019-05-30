@@ -8,14 +8,12 @@ public class CommonVO {
 	private int pageNum;
 	/** 한 페이지에서 보여줄 레코드 수 */
 	private int amount;
-	/** 검색 대상 */
-	private String search;
 	/** 검색 단어 */
 	private String keyword;
+	/** 검색 타입 */
+	private String search;
 	
-	/**
-	 * 기본 생성자. 페이지 번호와 레코드 수가 각각 1, 20으로 자동 설정된다.
-	 */
+	/** 기본 생성자. 페이지 번호와 레코드 수가 각각 1, 20으로 자동 설정된다. */
 	public CommonVO() {
 		this.pageNum = 1;
 		this.amount = 20;
