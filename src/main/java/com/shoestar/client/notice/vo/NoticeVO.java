@@ -1,6 +1,8 @@
-package com.shoestar.client.brand.vo;
+package com.shoestar.client.notice.vo;
 
-import java.sql.Date;
+
+
+import java.util.Date;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
