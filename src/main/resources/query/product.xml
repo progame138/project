@@ -27,21 +27,23 @@
 			<![CDATA[rn > (#{pageNum} - 1) * #{amount}]]>
 			<!-- 성별 -->
 			<trim prefix="AND"><choose>
-				<when test='pd_sex == "m"'>
+				<when test='pd_sex == "m"'> <!-- male -->
 					pd_sex = 'm'
 				</when>
-				<when test='pd_sex == "f"'>
+				<when test='pd_sex == "f"'> <!-- female -->
 					pd_sex = 'f'
 				</when>
 			</choose></trim>
 			<!-- 연령 -->
 			<trim prefix="AND"><choose>
-				<when test='pd_age == "a"'>
-					pd_age = 'a'
+				<when test='pd_age == "a"'> <!-- all -->
 				</when>
-				<when test='pd_age == "k"'>
+				<when test='pd_age == "k"'> <!-- kids -->
 					pd_age = 'k'
 				</when>
+				<otherwise>
+					pd_age = 'a'
+				</otherwise>
 			</choose></trim>
 			<!-- 컬렉션 -->
 			<if test="co_no != 0">

@@ -5,25 +5,33 @@
   
 <tiles-definitions>
 	<definition name="intro" template="/WEB-INF/views/template/client/mainLayout.jsp">
-		<put-attribute name="title" value="" />
 		<put-attribute name="header" value="/WEB-INF/views/template/client/header.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/views/template/client/footer.jsp" />
 	</definition>
 	
 	<definition name="content" template="/WEB-INF/views/template/client/contentLayout.jsp">
-		<put-attribute name="title" value="" />
 		<put-attribute name="header" value="/WEB-INF/views/template/client/header.jsp" />
 		<put-attribute name="body" value="" />
 		<put-attribute name="footer" value="/WEB-INF/views/template/client/footer.jsp" />
 	</definition>
 	
 	<definition name="client/product/*" extends="content">
-		<put-attribute name="title" value="기본 게시판" />
 		<put-attribute name="body" value="/WEB-INF/views/client/product/{1}.jsp" />
 	</definition>
 	
-	<definition name="login/*" extends="content"> 
-		<put-attribute name="title" value="로그인화면"/>
+	<definition name="client/member/*" extends="content">
 		<put-attribute name="body" value="/WEB-INF/views/client/member/{1}.jsp"/>
+	</definition>
+	
+	<definition name="client/cscenter/*" extends="content">
+		<put-attribute name="body" value="/WEB-INF/views/client/cscenter/{1}.jsp"/>
+	</definition>
+	
+	<definition name="client/event/*" extends="content">
+		<put-attribute name="body" value="/WEB-INF/views/client/event/{1}.jsp"/>
+	</definition>
+	
+	<definition name="client/brand/*" extends="content">
+		<put-attribute name="body" value="/WEB-INF/views/client/brand/{1}.jsp"/>
 	</definition>
 </tiles-definitions>

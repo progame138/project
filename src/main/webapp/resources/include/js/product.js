@@ -4,7 +4,7 @@
  */
 
 /** 상품 리스트를 읽어오는 URL */
-var PROD_LIST_URL = "/product/list";
+var PROD_LIST_URL = "/product/showList";
 
 /** 상품 이미지 저장소의 URL */
 var PROD_IMAGE_STORATE_URL = "/shoestarStorage/prod";
