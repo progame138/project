@@ -90,11 +90,11 @@
       <div class="container-fluid">
       <div class="row-fluid">
       	<div class="buttonForm">
-	        <button id="order">주문/결제</button>
-	        <button id="cancel">취소/반품</button>
-	        <button id="goods">상품/배송</button>
-	        <button id="event">이벤트</button>
-	        <button id="exc">기타</button>
+	        <a id="order" class="btn btn-default">주문/결제</a>
+	        <a id="cancel" class="btn btn-default">취소/반품</a>
+	        <a id="goods" class="btn btn-default">상품/배송</a>
+	        <a id="event" class="btn btn-default">이벤트</a>
+	        <a id="exc" class="btn btn-default">기타</a>
         </div>
         <div class="span9">
           <!-- 리스트시작 -->

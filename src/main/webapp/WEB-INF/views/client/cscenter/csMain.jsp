@@ -51,6 +51,7 @@
       			float:left;
       			margin:10px;
       		}
+      		
     </style>
     <link href="/resources/include/dist/css/bootstrap-responsive.css" rel="stylesheet">
 
