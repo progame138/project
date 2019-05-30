@@ -32,7 +32,7 @@ public class LoginController {
 	@RequestMapping(value="/login", method = RequestMethod.GET)
 	public String loginForm(){
 		log.info("login 호출 성공");
-		return "member/login";
+		return "client/member/login";
 	}
 	
 	/////////////////////[로그인 처리 (실패 횟수 제한 X)]//////////////////////////

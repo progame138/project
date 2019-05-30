@@ -7,6 +7,60 @@ var pattern = [
 		"((?=.*[a-zA-Z])(?=.*[0-9@#$%^&]).{8,12})",
 		"^\\d{3}-\\d{3,4}=\\d{4}"];
 
+function inputVerify(index, data, printarea) {
+	var data_regExp = new RegExp(pattern[index]);
+	var match = data_regExp.exec($(data).val());
+	if(match==null) {
+		$(printarea).html("입력값이 형식에 맞지 않습니다. 다시 입력해 주세요.");
+		$(data).val("");
+		return false;
+	}else {
+		return true;
+	}
+}
+
+/*함수명: chkData(유효성 체크 대상, 메시지 내용)*/
+/*출력영역: alert로*/
+/*예시: if(!chkData("#keyword", "검색어를")) return*/
+function chkData(item, msg){
+	if($(item).val().replace(/\s/g,"")==""){
+		alert(msg+" 입력해 주세요.");
+		$(item).val("");
+		$(item).focus();
+		return false;
+	}else{
+		return true;
+	}
+}	
+
+
+/*formCheck(유효성 체크 대상, 출력영역, 메시지 내용)*/
+function formCheck(main, item, msg){
+	if($(main).val().replace(/\s/g,"")==""){
+		item.html(msg+" 입력해 주세요");
+		$(main).val("");
+		return false;
+	}else{
+		return true;
+	}
+}
+
+/*함수명: checkForm(유효성 체크 대상, 메시지 내용)
+출력 영역: placeholder
+예시: if(!checkForm("#keyword", "검색어를"))return;*/
+function checkForm(item, msg){
+    var message = "";
+    if($(item).val().replace(/\s/g,"")==""){
+       message = msg + " 입력해 주세요.";
+       $(item).attr("placeholder",message);
+       return false;
+    }else{
+       return true;
+    }
+}
+
+
+
 	function checkPassword(id,password){
 
 		if(!/^[a-zA-Z0-9]{10,15}$/.test(password)){
@@ -35,14 +89,4 @@ var pattern = [
 		return true;
 
 		}
-	function inputVerify(index, data, printarea) {
-		var data_regExp = new RegExp(pattern[index]);
-		var match = data_regExp.exec($(data).val());
-		if(match==null) {
-			$(printarea).html("입력값이 형식에 맞지 않습니다. 다시 입력해 주세요.");
-			$(data).val("");
-			return false;
-		}else {
-			return true;
-		}
-	}
+	
