@@ -2,6 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shoestar.client.prod.dao.ProdDao">
 	
+	<!-- 할인율 검색하는 쿼리문 -->
+	<sql id="discount">
+		
+	</sql>
+	
 	<select id="prodList" parameterType="prod" resultType="prod">
 		SELECT
 			*
@@ -10,9 +15,17 @@
 			SELECT
 				/*+ INDEX_DESC(prod prod_pk)*/
 				rownum rn, rowid ri,
-				pd_no, pd_name, pd_sex, pd_age, pct_no, co_no,
-				pd_price, pd_fabric, pd_country, pd_year, pd_manu,
-				pd_import, pi_no, pd_date, pd_status, pim_no_main
+				pd_no, pd_name, pd_sex, pd_age, pct_no,
+				(
+				SELECT
+					pct_name
+				FROM
+					prod_ctg
+				WHERE
+					pct_no = prod.pct_no
+				) AS pct_name,
+				co_no, pd_price, pd_fabric, pd_country, pd_year, pd_manu,
+				pd_import, pi_no, pd_date, pd_status, pim_main
 			FROM
 				prod
 			WHERE
@@ -20,7 +33,36 @@
 			) prodlist
 		WHERE
 			<![CDATA[rn > (#{pageNum} - 1) * #{amount}]]>
-			<if test="(size + color + priceBottom + priceTop) != 0">
+			<!-- 성별 -->
+			<trim prefix="AND"><choose>
+				<when test='pd_sex == "m"'> <!-- male -->
+					pd_sex = 'm'
+				</when>
+				<when test='pd_sex == "f"'> <!-- female -->
+					pd_sex = 'f'
+				</when>
+			</choose></trim>
+			<!-- 연령 -->
+			<trim prefix="AND"><choose>
+				<when test='pd_age == "a"'> <!-- all -->
+				</when>
+				<when test='pd_age == "k"'> <!-- kids -->
+					pd_age = 'k'
+				</when>
+				<otherwise>
+					pd_age = 'a'
+				</otherwise>
+			</choose></trim>
+			<!-- 컬렉션 -->
+			<if test="co_no != 0">
+				AND co_no = #{co_no}
+			</if>
+			<!-- 이름 검색 -->
+			<if test="keyword != null and keyword != ''">
+				AND (pd_name LIKE '%'||#{keyword}||'%')
+			</if>
+			<!-- 사이즈와 컬러 필터링 -->
+			<if test="size != 0 or color != 0">
 				AND (
 					SELECT DISTINCT
 						1
@@ -37,12 +79,13 @@
 						</if>
 					</trim>
 				) IS NOT NULL
-				<if test="priceBottom != 0">
-    				<![CDATA[AND pd_price >= #{priceBottom}]]>
-				</if>
-				<if test="priceTop != 0">
-    				<![CDATA[and pd_price < 50000]]>
-				</if>
+			</if>
+			<!-- 가격 범위 -->
+			<if test="priceBottom != 0">
+   				AND pd_price <![CDATA[>= #{priceBottom}]]>
+			</if>
+			<if test="priceTop != 0">
+   				AND pd_price <![CDATA[< #{priceTop}]]>
 			</if>
 	</select>
 	
