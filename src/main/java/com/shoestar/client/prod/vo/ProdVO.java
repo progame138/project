@@ -17,6 +17,7 @@ public class ProdVO extends ProdFilterVO {
 	private String pd_sex;
 	private String pd_age;
 	private int pct_no;
+	private String pct_name; // 분류 이름
 	private int co_no;
 	private int pd_price;
 	private String pd_fabric;
@@ -27,5 +28,5 @@ public class ProdVO extends ProdFilterVO {
 	private int pi_no;
 	private Date pd_date;
 	private String pd_status;
-	private int pim_no_main;
+	private String pim_main;
 }
