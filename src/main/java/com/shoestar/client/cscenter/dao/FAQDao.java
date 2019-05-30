@@ -6,6 +6,12 @@ import com.shoestar.client.cscenter.vo.FAQVO;
 
 public interface FAQDao {
 
+	public List<FAQVO> faqList(FAQVO fvo);
+
+	public FAQVO faqDetail(FAQVO fvo);
+
+	
+
 	//public List<FAQVO> faqList(FAQVO fvo);
 
 	
