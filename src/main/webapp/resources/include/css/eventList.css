@@ -1,5 +1,27 @@
 
-#conTitle{text-align: center; margin: 40px;}
-#viewImage{color: red;}
-.eventTitle{color: gray;}
-.eventTitle:hover{text-decoration: none;}
+hr{color: gray;}
+
+#EvconTitle{text-align: center; margin: 40px;}
+
+#EventTable{border-collapse: collapse;}
+
+.Event_td{padding: 30px; border: 1px solid black;}
+
+#EviewImage{color: red;}
+
+.EventTitle{color: gray;}
+
+.EventTitle:hover{text-decoration: none;}
+
+
+
+
+
+
+
+
+/* Admin */
+.Acaption{text-align: left; margin-bottom: 10px;}
+.table{border-collapse: collapse;}
+.Avent_td, .Avent_tdInput{border: 1px solid black; padding: 7px;}
+#AventSearchBtn{margin: 5px;}

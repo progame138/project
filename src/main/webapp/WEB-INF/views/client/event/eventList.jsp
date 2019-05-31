@@ -11,9 +11,10 @@
 <script type="text/javascript" src="/resources/include/js/eventList.js" ></script>
 
 <script type="text/javascript">
-	$function(){
-		
+	/* function(){
+		eventThumbnailList()
 	}
+	*/
 // 캐러셀
 //섬네일 틀 생성 함수																	//index 생략 가능
 	function eventThumbnailList(ev_no, ev_title) {
@@ -41,20 +42,20 @@
 
 </head>
 <body>
-	<div id="container">
+	<div id="Container">
 	
 	
-		<div id="containerTitle"><h2 id="conTitle">이벤트</h2></div>
+		<div id="EvcontainerTitle"><h2 id="EvconTitle">이벤트</h2></div>
 		
-		<div id="eventList">
-			<form id="form" name="form d">
-				<div id="table">
-					<table>
+		<div id="EventList">
+			<form id="EventListform" name="EventListform">
+				<div id="EventTable">
+					<table id="EvnetViewTable">
 						<tr>
 							<!-- 이벤트 제목인  event_tab_A~D를 hover하면 그 제목에 해당하는 이미지로 뜬다. -->
-							<td rowspan="5" class="event_Img">
-								<div id="eventImage">
-									<img id="viewImage" alt="이미지 슬라이드 쇼 = 이미지가 안나오면 이벤트 제목이 나온다.">
+							<td rowspan="5" class="Event_td">
+								<div id="EventImage">
+									<img id="EviewImage" alt="이미지 슬라이드 쇼 = 이미지가 안나오면 이벤트 제목이 나온다.">
 								</div>
 								
 							</td>
@@ -64,8 +65,8 @@
 						<c:forEach var="evt" items="${eventList}" varStatus="status" end="3">
 							<tr>
 								
-								<td>
-									<a href="#" class="eventTitle">
+								<td class="Event_td">
+									<a href="#" class="EventTitle">
 											
 											${evt.ev_title}
 										

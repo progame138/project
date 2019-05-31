@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.shoestar.admin.event.dao.AdminEventDAO;
 import com.shoestar.client.event.dao.EventDAO;
 import com.shoestar.client.event.vo.EventVO;
 
@@ -26,6 +27,9 @@ public class EventServiceImpl implements EventService {
 
 	@Setter(onMethod_ = @Autowired)
 	private EventDAO eventDao;
+
+	@Setter(onMethod_ =@Autowired)
+	private AdminEventDAO aEventDao;
 	
 	// 이벤트 목록 구현
 	@Override
@@ -35,7 +39,7 @@ public class EventServiceImpl implements EventService {
 		List<EventVO> list = null;
 		
 
-		list = eventDao.eventList(evo);
+		list = aEventDao.eventList(evo);
 		
 		return list;
 	
