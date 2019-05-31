@@ -27,6 +27,9 @@
            <script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
            <script type="text/javascript" src="/resources/include/js/jquery.form.min.js"></script>
            <script type="text/javascript" src="/resources/include/js/common.js"></script>
+           <script type="text/javascript" src="/resources/include/js/join.js"></script>
+           <script type="text/javascript" src="/resources/include/js/login.js"></script>
+           <script type="text/javascript" src="/resources/include/js/pwdPattern.js"></script>
             <!-- <link rel="stylesheet" type="text/css" href="/resources/include/css/bootstrap.css"/> -->
             <link rel="stylesheet" href="/resources/include/css/default.css"/>
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -34,23 +37,27 @@
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
             <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
             <!-- lightbox 라이브러리 -->
-            <link rel="stylesheet" href="/resources/include/css/lightbox.css"/>
-            <script type="text/javascript" src="/resources/include/js/lightbox.min.js"></script>
+           <!--  <link rel="stylesheet" href="/resources/include/css/lightbox.css"/>
+            <script type="text/javascript" src="/resources/include/js/lightbox.min.js"></script> -->
             
             <style>
-            	form{
-            	margin:20px;
-            	}
-            	table {
-			    width: 100%;
-			    border: 1px solid #D5D5D5;
-			    text-color:#D5D5D5;
-			    border-color:#D5D5D5;
-			    }
-			   
+            	
 			    
             </style>
            <script type="text/javascript">
+           function codeCheck(){
+        	   var codeNumber = '<c:out value="${codeNumber}"/>';
+        	   if(codeNumber !=''){
+        		   switch(parseInt(codeNumber)){
+        		   case 1:
+        			   		alert("이미 가입된 회원입니다");
+        			   		break;
+        		   case 2:
+        			   		alert("회원 가입처리가 실패하였습니다. \n다시 시도해 주세요.");
+        			   		break;
+        		   }
+        	   }
+           }
            
            function execDaumPostcode() {
              new daum.Postcode({
@@ -78,9 +85,9 @@
                    fullRoadAddr += extraRoadAddr;
                  }
                  // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                 document.getElementById('zipcode').value = data.zonecode; //5자리 새우편번호 사용
-                 document.getElementById('roadAddress').value = fullRoadAddr;
-                 document.getElementById('jibunAddress').value = data.jibunAddress;
+                 document.getElementById('mem_zip').value = data.zonecode; //5자리 새우편번호 사용
+                 document.getElementById('mem_addr1').value = fullRoadAddr;
+                 document.getElementById('mem_addr2').value = data.jibunAddress;
                  // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
                  if(data.autoRoadAddress) {
                    //예상되는 도로명 주소에 조합형 주소를 추가한다.
@@ -97,7 +104,7 @@
                }
              }).open();
            }
-           function fn_overlapped(){
+           /* function fn_overlapped(){
                var _id=$("#_member_id").val();
                if(_id==''){
               	 alert("ID를 입력하세요");
@@ -126,135 +133,105 @@
                      //alert("작업을완료 했습니다");
                   }
                });  //end ajax	 
-            }	
+            }	 */
            </script>
 			
 		</head>
 	<body>
-		<body>
-	<h3>회원가입</h3>
-	<form action="${contextPath}/member/addMember.do" method="post">	
-	<div id="detail_table" class="form-group">
-		<table>
-			<tbody>
-				<tr class="dot_line">
-					<td class="fixed_join">아이디</td>
-					<td>
-					  <input type="text" name="_member_id"  id="_member_id"  size="20" />
-					  <input type="hidden" name="member_id"  id="member_id" />
-					  
-					  <input type="button"  id="btnOverlapped" value="중복체크" onClick="fn_overlapped()" />
-					</td>
-				</tr>
-				<tr class="dot_line">
-					<td class="fixed_join">비밀번호</td>
-					<td><input name="member_pw" type="password" size="20" /></td>
-				</tr>
-				<tr class="dot_line">
-					<td class="fixed_join">이름</td>
-					<td><input name="member_name" type="text" size="20" /></td>
-				</tr>
-				<tr class="dot_line">
-					<td class="fixed_join">성별</td>
-					<td><input type="radio" name="member_gender" value="102" />
-						여성<span style="padding-left:120px"></span>
-						 <input type="radio" name="member_gender" value="101" checked />남성
-					</td>
-				</tr>
-				<tr class="dot_line">
-					<td class="fixed_join">생년월일</td>
-					<td>
-					<select name="member_birth_y">
-					 
-					     <c:forEach var="year" begin="1" end="100">
-					       <c:choose>
-					         <c:when test="${year==80}">
-							   <option value="${ 1920+year}" selected>${ 1920+year} </option>
-							</c:when>
-							<c:otherwise>
-							  <option value="${ 1920+year}" >${ 1920+year} </option>
-							</c:otherwise>
-							</c:choose>
-					   	</c:forEach> 
+	
+		<div class="contentContainer">
+			<div class="well">
+				<form id="memberForm" class="form-jorizontal">
+					<input type="hidden" name="mem_email" id="mem_email"/>
+					<input type="hidden" name="pinno" id="pinno"/>
+					<div class="form-group form-group-sm">
+						<label for="mem_id" class="col-sm-2 control-label">아이디</label>
+							<div class="col-sm-3">
+								<input type="text" id="mem_id" name="mem_id" maxlength="12" class="form-conrtrol" placeholder="아이디입력"/>
+							</div>
 							
-					</select>년 
-					 <select name="member_birth_m" >
-					   <c:forEach var="month" begin="1" end="12">
-					       <c:choose>
-					         <c:when test="${month==5 }">
-							   <option value="${month }" selected>${month }</option>
-							</c:when>
-							<c:otherwise>
-							  <option value="${month }">${month}</option>
-							</c:otherwise>
-							</c:choose>
-					   	</c:forEach>
-					</select>월  
-					<select name="member_birth_d">
-							<c:forEach var="day" begin="1" end="31">
-					       <c:choose>
-					         <c:when test="${day==10 }">
-							   <option value="${day}" selected>${day}</option>
-							</c:when>
-							<c:otherwise>
-							  <option value="${day}">${day}</option>
-							</c:otherwise>
-							</c:choose>
-					   	</c:forEach>
-					</select>일 <span style="padding-left:50px"></span>
-					  <input type="radio" name="member_birth_gn" value="2" checked />양력
-						 <span style="padding-left:50px"></span>
-						<input type="radio"  name="member_birth_gn" value="1" />음력
-				  </td>
-				</tr>
-				<tr class="dot_line">
-					<td class="fixed_join">전화번호</td>
-					<td><select  name="tel1">
-							<option>없음</option>
-							<option value="02">02</option>
-							<option value="031">031</option>
-							<option value="032">032</option>
-							<option value="033">033</option>
-							<option value="041">041</option>
-							<option value="042">042</option>
-							<option value="043">043</option>
-							<option value="044">044</option>
-							<option value="051">051</option>
-							<option value="052">052</option>
-							<option value="053">053</option>
-							<option value="054">054</option>
-							<option value="055">055</option>
-							<option value="061">061</option>
-							<option value="062">062</option>
-							<option value="063">063</option>
-							<option value="064">064</option>
-							<option value="0502">0502</option>
-							<option value="0503">0503</option>
-							<option value="0505">0505</option>
-							<option value="0506">0506</option>
-							<option value="0507">0507</option>
-							<option value="0508">0508</option>
-							<option value="070">070</option>
-					   </select> - <input  size="10px" type="text" name="tel2"> - <input size="10px"  type="text" name="tel3">
-					</td>
-				</tr>
-				<tr class="dot_line">
-					<td class="fixed_join">휴대폰번호</td>
-					<td><select  name="hp1">
-							<option>없음</option>
-							<option selected value="010">010</option>
-							<option value="011">011</option>
-							<option value="016">016</option>
-							<option value="017">017</option>
-							<option value="018">018</option>
-							<option value="019">019</option>
-					</select> - <input size="10px"  type="text" name="hp2"> - <input size="10px"  type="text"name="hp3"><br> <br> 
-					<input type="checkbox"	name="smssts_yn" value="Y" checked /> ShoeStar에서 발송하는 SMS 소식을 수신합니다.</td>
-				</tr>
-				<tr class="dot_line">
-					<td class="fixed_join">이메일<br>(e-mail)</td>
-					<td><input size="10px"   type="text" name="email1" /> @ <input  size="10px"  type="text"name="email2" /> 
-						  <select name="email2" onChange=""	title="직접입력">
+							<div class="col-sm-2">
+								<input type="button" id="idConfirmBtn" value="아이디 중복체크" class="form-control btn-primary"/>
+							</div>
+							
+							<div class="col-sm-5">
+								<p class="form-control-static error"></p>
+							</div>
+					</div>
+					
+					<div class="form-group form-group-sm">
+						<label for="mem_pwd" class="col-sm-2 control-label">비밀번호</label>
+							<div class="col-sm-3">
+								<input type="password" id="mem_pwd" name="mem_pwd" maxlength="15" class="form-control" placeholder="비밀번호입력"/>
+							</div>
+							
+							<div class="col-sm-5">
+								<p class="form-control-static error"></p>
+							</div>
+					</div>
+					
+					<div class="form-group form-group-sm">
+						<label for="mem_pwdCheck" class="col-sm-2 control-label">비밀번호 확인</label>
+							<div class="col-sm-3">
+								<input type="password" id="mem_pwdCheck" name="mem_pwdCheck" class="form-control" 
+								maxlength="15" placeholder="비밀번호확인"/>
+							</div>
+							
+							<div class="col-sm-5">
+								<p class="form-control-static error"></p>
+							</div>
+					</div>
+					
+					<div class="form-group form-group-sm">
+						<label for="phone" class="col-sm-2 control-label">휴대폰번호</label>
+							<div class="col-sm-3">
+								<input type="text" id="mem_phone" name="mem_phone" maxlength="15"
+								class="form-control" placeholder="휴대폰 번호"/>
+							</div>	
+							
+							<div class="col-sm-5">
+								<p class="form-control-static error"></p>
+							</div>
+					</div>
+					
+					<div class="form-group form-group-sm">
+						<label for="birth" class="col-sm-2 control-label">생년월일</label>
+							<div class="col-sm-3">
+								<input type="text" id="mem_birth" name="mem_birth" maxlength="6"
+								class="form-control" placeholder="주민등록번호 앞 6자리"/>
+							</div>	
+							
+							<div class="col-sm-2">
+								<input type="text" id="gender" name="gender" maxlength="1"
+								class="form-control" placeholder="주민등록번호 7자리중 앞 1자리"/>
+							</div>	
+							
+							<div class="col-sm-5">
+								<p class="form-control-static error"></p>
+							</div>
+					</div>
+					
+					<div class="form-group form-group-sm">
+						<label for="mem_name" class="col-sm-2 control-label">회원이름</label>
+							<div class="col-sm-3">
+								<input type="text" id="mem_name" name="mem_name" maxlength="10"
+								class="form-control" placeholder="이름입력"/>
+							</div>	
+							
+							<div class="col-sm-5">
+								<p class="form-control-static error"></p>
+							</div>
+					</div>
+					
+					<div class="form-group form-group-sm">
+						<label for="mem_name" class="col-sm-2 control-label">이메일</label>
+							<div class="col-sm-3">
+								<input type="text" id="mem_email" name="mem_email" maxlength="60"
+								class="form-control" placeholder="이메일주소"/>
+							</div>	
+							
+							<div class="col-sm-2">
+								<select id="emailDomain" class="form-control">
 									<option value="non">직접입력</option>
 									<option value="hanmail.net">hanmail.net</option>
 									<option value="naver.com">naver.com</option>
@@ -267,8 +244,36 @@
 									<option value="empal.com">empal.com</option>
 									<option value="korea.com">korea.com</option>
 									<option value="freechal.com">freechal.com</option>
-							</select><br> <br> <input type="checkbox" name="emailsts_yn" value="Y" checked /> ShoeStar에서 발송하는 e-mail을 수신합니다.</td>
-				</tr>
+								</select>
+							</div>
+							
+							<div class="col-sm-5">
+								<p class="form-control-static error"></p>
+							</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-6">
+							<input type="button" value="확인" id="joinInsert" class="btn btn-default"/>
+							<input type="button" value="리셋" id="joinReset" class="btn btn-default"/>
+							<input type="button" value="취소" id="joinCancel" class="btn btn-default"/>
+						</div>
+					</div>
+					
+					<div class="form-group form-group-sm">
+						<label for="phone" class="col-sm-2 control-label">주소</label>
+							<div class="col-sm-3">
+								 <input type="text" id="mem_zip" name="mem_zip" size="10" > <a href="javascript:execDaumPostcode()">주소검색</a>
+								<label>도로명주소 <input type="text" id="mem_addr1" name="mem_addr1" size="50" /></label>
+								 <label>지번주소<input type="text" id="mem_addr2" name="mem_addr2" size="50" /></label> 
+								 
+							</div>	
+							
+							<div class="col-sm-5">
+								<p class="form-control-static error"></p>
+							</div>
+					</div>
+					<!-- </tr>
 				<tr class="dot_line">
 					<td class="fixed_join">주소</td>
 					<td>
@@ -278,7 +283,7 @@
 					   지번 주소:<br><input type="text" id="roadAddress"  name="roadAddress" size="50"><br><br>
 					  도로명 주소: <input type="text" id="jibunAddress" name="jibunAddress" size="50" placeholder="선택사항"><br><br>
 					  나머지 주소: <input type="text"  name="namujiAddress" size="50" />
-					 <!--   <span id="guide" style="color:#999"></span> -->
+					   <span id="guide" style="color:#999"></span>
 					   </p>
 					</td>
 				</tr>
@@ -288,15 +293,11 @@
 				<input type="submit"  value="회원 가입">
 				<input  type="reset"  value="다시입력">
 			</td>
-		</tr>
-			</tbody>
-		</table>
+		</tr> -->
+					
+				</form>
+			</div>
 		</div>
-		<div class="clear">
-		<br><br>
-		
-	</div>
-</form>	
-</body>
+	
 	</body>
 </html>

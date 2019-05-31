@@ -13,6 +13,11 @@ public class LoginServiceImpl implements LoginService{
 	
 	@Setter(onMethod_=@Autowired)
 	private LoginDao loginDao;
+	
+	@Override
+	public LoginVO userIdSelect(String mem_id) {
+		return loginDao.memIdSelect(mem_id);
+	}
 
 	@Override
 	//로그인처리//
@@ -26,9 +31,6 @@ public class LoginServiceImpl implements LoginService{
 		return vo;
 	}
 
-	@Override
-	public LoginVO memIdSelect(String mem_id) {
-		return loginDao.memIdSelect(mem_id);
-	}
+	
 	
 }

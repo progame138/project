@@ -6,5 +6,5 @@ public interface LoginService {
 
 	public LoginVO loginSelect(String mem_id, String mem_pwd);
 
-	public LoginVO memIdSelect(String mem_id);
+	public LoginVO userIdSelect(String mem_id);
 }

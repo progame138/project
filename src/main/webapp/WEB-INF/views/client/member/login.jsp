@@ -54,7 +54,8 @@
 		</head>
 	<body>
 		<div class="contentContainer">
-			<%-- <c:if test="${login.mem_id = = null or login.mem_id = = }" > --%>
+		<div class="Well">
+			<c:if test="${login.mem_id == null or login.mem_id == ''}"> 
 			<form id="loginForm" class="form-horizontal">
 			  
 			  <div class="form-group">
@@ -62,6 +63,7 @@
 			    <div class="col-sm-3">
 			      <input type="text" class="form-control" id="mem_id" placeholder="아이디입력">
 			    </div>
+			    <p class="form-control-static error"></p>
 			  </div>
 			  
 			  <div class="form-group">
@@ -69,6 +71,7 @@
 			    <div class="col-sm-3">
 			      <input type="password" class="form-control" id="mem_pwd" placeholder="비밀번호 입력">
 			    </div>
+			    <p class="form-control-static error"></p>
 			  </div>
 			  
 			  <div class="form-group">
@@ -79,7 +82,7 @@
 			        </label>
 			      </div>
 			    </div>
-			  </div>
+			  </div>  
 			  
 			  <div class="form-group">
 			    <div class="col-sm-offset-2 col-sm-6">
@@ -88,7 +91,18 @@
 			    </div>
 			  </div>
 		  </form>
-		  <%-- </c:if> --%>
+		  </c:if>
+		  
+		  <c:if test="${login.mem_id != null and login.mem_id != ''}">
+		  	<fieldset id="loginAfter">
+		  		<legend><strong>[${login.mem_name}]님 어서오세요</strong></legend>
+			  		<span id="memberMenu" class="tac">
+			  			<a href="/memberMenu/logout">로그아웃</a>
+			  			<a href="/member/delete">회원탈퇴</a>
+			  		</span>
+		  	</fieldset>
+		  </c:if>
+		 </div>
 		 </div>
 	</body>
 </html>
