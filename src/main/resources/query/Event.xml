@@ -4,23 +4,49 @@
 <mapper namespace="com.shoestar.admin.event.dao.AdminEventDAO">
 	<!-- 이벤트 조회 -->
 	<select id="eventList" resultType="event">
-		
 				SELECT
 				    ev_no,
 				    ev_title,
 				    ev_content,
 				    ev_img,
 				    ev_thumb,
-				    to_char(ev_date, 'YYYY-MM-DD HH:MM:SS') as ev_date
-				    
-				    <!-- 이벤트가 널값이면 안보이게 처리 -->
-				   <!--  <if test="ev_edate != null"> -->
-						, to_char(ev_edate, 'YYYY-MM-DD  HH:MM:SS') as ev_edate
-					<!-- </if> -->
-				    
-				   
+				    ev_date,
+				    ev_edate
 				FROM
 				    event
-		
+				WHERE
+				<![CDATA[
+					ev_edate >= trunc(sysdate) or ev_edate is null
+				]]>
 	</select>
+	
+	<!-- 관리자 이벤트 조회 -->
+	<select id="AdmineventList" resultType="event">
+				SELECT
+				    ev_no,
+				    ev_title,
+				    ev_content,
+				    ev_img,
+				    ev_thumb,
+				    ev_date,
+				    ev_edate
+				FROM
+				    event
+	</select>
+	
+	<!-- 갤러리 상세 -->
+	<select id = "eventDetail" parameterType="event" resultType="event">
+				SELECT 
+					ev_no, 
+					ev_title, 
+					ev_content, 
+					ev_img,
+					ev_date, 
+					ev_edate
+				FROM 
+					event 
+				WHERE 
+					ev_no = #{ev_no}
+	</select>
+	
 </mapper>

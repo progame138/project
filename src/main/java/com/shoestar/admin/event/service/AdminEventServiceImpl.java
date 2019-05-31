@@ -30,13 +30,13 @@ public class AdminEventServiceImpl implements AdminEventService {
 	
 	// 이벤트 목록 구현
 	@Override
-	public List<EventVO> eventList(EventVO evo) {
+	public List<EventVO> AdmineventList(EventVO evo) {
 		log.info("목록 불러오기");
 		
 		List<EventVO> list = null;
 		
 
-		list = aEventDao.eventList(evo);
+		list = aEventDao.AdmineventList(evo);
 		
 		return list;
 	

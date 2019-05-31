@@ -29,8 +29,7 @@ public class AdminEventController {
 	public String eventList(EventVO evo, Model model) {
 		log.info("eventList 호출 성공");
 		
-		model.addAttribute("eventList", eventService.eventList(evo));
-		
+		model.addAttribute("AdmineventList", eventService.AdmineventList(evo));
 		
 		return "admin/event/eventList";
 	
