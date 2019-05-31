@@ -13,4 +13,8 @@ public class ProdFilterVO extends CommonVO {
 	private int color;
 	private int priceBottom;
 	private int priceTop;
+	
+	// 검색 후 표시할 정보값
+	private String pct_name; // 분류 이름
+	private int pd_discount; // 할인율
 }

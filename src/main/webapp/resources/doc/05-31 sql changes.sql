@@ -1,0 +1,11 @@
+-- 범위 할인 등록일 추가
+ALTER TABLE RANGE_DISCOUNT
+   ADD  RD_DATE DATE;
+
+-- 범위 할인 만료일 추가
+ALTER TABLE RANGE_DISCOUNT
+    ADD RD_EDATE DATE;
+
+-- 범위 할인 이벤트 연결고리 삭제
+ALTER TABLE RANGE_DISCOUNT
+    DROP COLUMN EV_NO;

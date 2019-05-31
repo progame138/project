@@ -28,10 +28,7 @@ public class ProdTest {
 		
 		ProdVO pvo = new ProdVO();
 		
-		pvo.setPriceBottom(10000);
-		pvo.setPriceTop(50000);
-		pvo.setSize(270);
-		pvo.setColor(1);
+		pvo.setPriceBottom(5000);
 		
 		log.info("prodVO : " + pvo);
 		log.info(prodDao.prodList(pvo));

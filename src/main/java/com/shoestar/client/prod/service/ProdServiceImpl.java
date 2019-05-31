@@ -19,12 +19,23 @@ public class ProdServiceImpl implements ProdService {
 	
 	@Setter(onMethod_ = @Autowired)
 	private ProdDao prodDao;
-
+	
+	/**
+	 * 전체 검색 메서드
+	 */
 	@Override
 	public List<ProdVO> prodList(ProdVO pvo) {
 		List<ProdVO> list = prodDao.prodList(pvo);
-		
 		return list;
+	}
+	
+	/**
+	 * 단일 객체 검색 메서드
+	 */
+	@Override
+	public ProdVO prodDetail(ProdVO pvo) {
+		ProdVO result = prodDao.prodDetail(pvo);
+		return result;
 	}
 
 }

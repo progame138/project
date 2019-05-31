@@ -4,13 +4,13 @@
  */
 
 /** 상품 리스트를 읽어오는 URL */
-var PROD_LIST_URL = "/product/showList";
+const PROD_LIST_URL = "/product/showList";
 
 /** 상품 이미지 저장소의 URL */
-var PROD_IMAGE_STORATE_URL = "/shoestarStorage/prod/";
+const PROD_IMAGE_STORATE_URL = "/shoestarStorage/prod/";
 
 /** 상품 이미지 저장소의 URL */
-var PROD_THUMB_STORATE_URL = "/shoestarStorage/prod/thumb/";
+const PROD_THUMB_STORATE_URL = "/shoestarStorage/prod/thumb/";
 
 /**
  * 상품정보를 매개변수로 이미지와 가격등이 표시되는 div를 만들어내는 함수
@@ -33,9 +33,11 @@ function createProductDiv(prodVO) {
 	pImageSection.append(pImage);
 	
 	// 신규, 인기, 세일, 품절등 정보 표시란
-	var pEventSection = $("<div>").addClass("prodEvent");
+	var pEventSection = $("<div>").addClass("prodEvent text-right");
+	// 공백 잡기
+	var prodStatEmpty = $("<span>").addClass("prodStat invisible");
 	// 세일가 표시
-	pEventSection.append(createDiscountLabel(prodVO, false)).addClass("prodEvent");
+	pEventSection.append(prodStatEmpty).append(createDiscountLabel(prodVO, false));
 	// 기타 상태
 	var prodStatNew = $("<span>").text("신규").addClass("prodStat prodStat_new");
 	var prodStatHot = $("<span>").text("인기").addClass("prodStat prodStat_hot");
@@ -63,16 +65,17 @@ function createProductDiv(prodVO) {
 	
 	// 가격 표시
 	var pPriceSection = $("<div>").addClass("priceSection text-right");
-	var pNormalPrice = $("<span>").text(prodVO.pd_price).addClass("prodPrice prodPrice_normal");
-	pPriceSection.append(pNormalPrice);
-	// 할인 정보 존재 시 콜백 함수를 통한 표시
-	getProductDiscount(prodVO, function(targetPriceSection, dcRate) {
-		var normalPrice = targetPriceSection.find("span.prodPrice_normal");
-		normalPrice.removeClass("prodPrice_normal").addClass("prodPrice_depricate");
-		
-		var discountPrice = $("<span>").text(calculateDiscount(normalPrice.text(), dcRate)).addClass("prodPrice prodPrice_discount");
-		targetPriceSection.append(discountPrice);
-	}, pPriceSection);
+	var pSmallPrice = $("<span>").addClass("prodPrice prodPrice_depricate");
+	var pActualPrice = $("<span>").addClass("prodPrice");
+	pPriceSection.append(pSmallPrice).append(pActualPrice);
+	// 할인 정보 존재 시 정보 표시  
+	if(!isNaN(prodVO.pd_discount) && prodVO.pd_discount != 0) {
+		pSmallPrice.text(prodVO.pd_price + "원");
+		pActualPrice.text(calculateDiscount(prodVO.pd_price, prodVO.pd_discount) + "원").addClass("prodPrice_discount");
+	} else {
+		pSmallPrice.text("e").addClass("invisible");
+		pActualPrice.text(prodVO.pd_price + "원").addClass("prodPrice_normal");
+	}
 	
 	// 별점 표시
 	var pRatingSection = $("<div>").addClass("ratingSection text-center");
@@ -86,35 +89,20 @@ function createProductDiv(prodVO) {
 }
 
 /**
- * 상품 정보를 입력하면 할인율을 계산해서 콜백함수로 넘겨주는 함수
- * @param prodVO 상품 정보를 담은 prodVO JSON 객체
- * @param callback 호출할 콜백 함수
- * @param callbackParam 콜백 함수로 넘길 파라미터
- * @returns 정수로 변환한 할인율 (15% => 15)
- */
-function getProductDiscount(prodVO, callback, callbackParam) {
-	//TODO: 할인 정보 ajax로 받아서 대조하고 콜백으로 넘겨주기 callback(callbackParam, discountRate)
-}
-
-/**
  * 상품 정보를 토대로 할인율 라벨을 만드는 함수
  * @param prodVO 상품 정보를 담은 prodVO JSON 객체
  * @param enlarge 라벨의 크기를 키울지 여부. 기본 값은 false.
- * @param dcRate 할인율 직접 입력
  * @returns 할인율 %를 표시한 jQuery div 객체. 할인이 존재하지 않을 경우 sr-only로 숨겨짐
  */
-function createDiscountLabel(prodVO, enlarge, dcRate) {
+function createDiscountLabel(prodVO, enlarge) {
+	var discountRate = prodVO.pd_discount;
+	
 	// 리턴할 객체
 	var dcLabel = $("<span>").addClass("prodStat prodStat_dc sr-only");
 	
 	// 할인 정보 담기
-	if(isNaN(dcRate)) {
-		try {
-			getProductDiscount(prodVO, dcCallback, dcLabel);
-		} catch (e) {
-		}
-	} else {
-		dcCallback(dcLabel, dcRate);
+	if(discountRate != 0) {
+		dcLabel.removeClass("sr-only").text("-" + discountRate + "%");
 	}
 	
 	// 크기 조절
@@ -124,14 +112,6 @@ function createDiscountLabel(prodVO, enlarge, dcRate) {
 	
 	return dcLabel;
 }
-
-/** 할인율을 레이블에 입력하기 위한 함수 */
-var dcCallback = function(targetLabel, discountRate) {
-	if(discountRate != 0) {
-		targetLabel.removeClass("sr-only").text("-" + discountRate + "%");
-	}
-};
-
 
 /**
  * 상품 정보를 토대로 평점 평균을 계산하고 라벨로 만들어주는 함수
@@ -160,5 +140,5 @@ function calculateDiscount(normalPrice, discountRate) {
 	if(discountRate < 1) {
 		discountRate = discountRate * 100;
 	}
-	return Math.floor(parseInt(normalPrice) * discountRate / 1000) * 10;
+	return Math.floor(parseInt(normalPrice) * (100 - discountRate) / 1000) * 10;
 }

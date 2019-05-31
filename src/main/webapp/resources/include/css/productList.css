@@ -1,4 +1,16 @@
 @charset "UTF-8";
+/* 
+#mainFrame > * {
+	display: inline-block;
+} */
+
+body > .container {
+	width: 80%;
+}
+#mainFrame > #sideMenuBar {
+	margin-right: 20px;
+	margin-top: 20px;
+}
 
 .prodContainer {
 	width: 200px;
@@ -7,7 +19,6 @@
 }
 
 .prodEvent {
-	text-align: center;
 	margin: 5px 0;
 	border-bottom: 1px dotted #ccc;
 	padding-bottom: 5px;
@@ -36,14 +47,20 @@
 
 .prodName {
 	font-weight: bold;
+	font-size: 1.1em;
 }
 
 .prodCtg {
 	color: #aaa;
 }
 
+.priceSection {
+	margin-top: 5px;
+}
+
 .prodPrice {
 	font-size: 1.2em;
+	display: block;
 }
 
 .prodPrice_normal, .prodPrice_discount {
@@ -54,8 +71,13 @@
 	font-weight: normal;
 	text-decoration: line-through;
 	color: #777;
+	font-size: 0.8em;
 }
 
 .prodPrice_discount {
-	color: #C75252;
+	color: #C73232;
+}
+
+.emptyResult {
+	margin: 200px 0;
 }
