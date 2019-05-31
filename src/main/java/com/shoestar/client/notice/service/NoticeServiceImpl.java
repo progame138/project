@@ -21,18 +21,17 @@ public class NoticeServiceImpl implements NoticeService {
 	@Setter(onMethod_ = @Autowired)
 	private NoticeDao noticeDao;
 	
-
+	
+	// 테이블 전체화면 호출
+	
 	@Override
-	public List<NoticeVO> noticeList() {
-		log.info("noticeList 서비스 호출");
-		
+	public List<NoticeVO> noticeList(NoticeVO nvo) {
 		List<NoticeVO> myList = null;
-		myList = noticeDao.noticeList();
+		myList = noticeDao.noticeList(nvo);
 		return myList;
 	}
-
-
-
+	
+	
 	@Override
 	public NoticeVO noticeDetail(NoticeVO nvo) {
 		log.info("noticeDetail 서비스 호출");
@@ -47,14 +46,9 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 
+	
 
-	@Override
-	public List<NoticeVO> noticeList(NoticeVO nvo) {
-		log.info("noticeList........");
-		
-		List<NoticeVO> myList = null;
-		myList = noticeDao.noticeList(nvo);
-		return myList;
-	}
+
+
 
 }
