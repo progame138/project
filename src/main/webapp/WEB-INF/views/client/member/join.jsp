@@ -36,6 +36,20 @@
             <!-- lightbox 라이브러리 -->
             <link rel="stylesheet" href="/resources/include/css/lightbox.css"/>
             <script type="text/javascript" src="/resources/include/js/lightbox.min.js"></script>
+            
+            <style>
+            	form{
+            	margin:20px;
+            	}
+            	table {
+			    width: 100%;
+			    border: 1px solid #D5D5D5;
+			    text-color:#D5D5D5;
+			    border-color:#D5D5D5;
+			    }
+			   
+			    
+            </style>
            <script type="text/javascript">
            
            function execDaumPostcode() {
@@ -118,9 +132,9 @@
 		</head>
 	<body>
 		<body>
-	<h3>필수입력사항</h3>
+	<h3>회원가입</h3>
 	<form action="${contextPath}/member/addMember.do" method="post">	
-	<div id="detail_table">
+	<div id="detail_table" class="form-group">
 		<table>
 			<tbody>
 				<tr class="dot_line">
@@ -148,7 +162,7 @@
 					</td>
 				</tr>
 				<tr class="dot_line">
-					<td class="fixed_join">법정생년월일</td>
+					<td class="fixed_join">생년월일</td>
 					<td>
 					<select name="member_birth_y">
 					 
@@ -235,7 +249,7 @@
 							<option value="018">018</option>
 							<option value="019">019</option>
 					</select> - <input size="10px"  type="text" name="hp2"> - <input size="10px"  type="text"name="hp3"><br> <br> 
-					<input type="checkbox"	name="smssts_yn" value="Y" checked /> 쇼핑몰에서 발송하는 SMS 소식을 수신합니다.</td>
+					<input type="checkbox"	name="smssts_yn" value="Y" checked /> ShoeStar에서 발송하는 SMS 소식을 수신합니다.</td>
 				</tr>
 				<tr class="dot_line">
 					<td class="fixed_join">이메일<br>(e-mail)</td>
@@ -253,34 +267,34 @@
 									<option value="empal.com">empal.com</option>
 									<option value="korea.com">korea.com</option>
 									<option value="freechal.com">freechal.com</option>
-							</select><br> <br> <input type="checkbox" name="emailsts_yn" value="Y" checked /> 쇼핑몰에서 발송하는 e-mail을 수신합니다.</td>
+							</select><br> <br> <input type="checkbox" name="emailsts_yn" value="Y" checked /> ShoeStar에서 발송하는 e-mail을 수신합니다.</td>
 				</tr>
 				<tr class="dot_line">
 					<td class="fixed_join">주소</td>
 					<td>
-					   <input type="text" id="zipcode" name="zipcode" size="10" > <a href="javascript:execDaumPostcode()">우편번호검색</a>
+					   <input type="text" id="zipcode" name="zipcode" size="10" > <a href="javascript:execDaumPostcode()">주소검색</a>
 					  <br>
 					  <p> 
 					   지번 주소:<br><input type="text" id="roadAddress"  name="roadAddress" size="50"><br><br>
-					  도로명 주소: <input type="text" id="jibunAddress" name="jibunAddress" size="50"><br><br>
+					  도로명 주소: <input type="text" id="jibunAddress" name="jibunAddress" size="50" placeholder="선택사항"><br><br>
 					  나머지 주소: <input type="text"  name="namujiAddress" size="50" />
 					 <!--   <span id="guide" style="color:#999"></span> -->
 					   </p>
 					</td>
 				</tr>
+				
+				<tr id="center">
+			<td>
+				<input type="submit"  value="회원 가입">
+				<input  type="reset"  value="다시입력">
+			</td>
+		</tr>
 			</tbody>
 		</table>
 		</div>
 		<div class="clear">
 		<br><br>
-		<table>
-		<tr>
-			<td >
-				<input type="submit"  value="회원 가입">
-				<input  type="reset"  value="다시입력">
-			</td>
-		</tr>
-	</table>
+		
 	</div>
 </form>	
 </body>
