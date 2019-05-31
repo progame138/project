@@ -28,14 +28,43 @@
           padding-left: 5px;
           padding-right: 5px;
         }
+        
+        
       }
     </style>
     <link href="/resources/include/dist/css/bootstrap-responsive.css" rel="stylesheet">
-
-    <!-- IE6~8에서 HTML5 태그를 지원하기위한 HTML5 shim -->
-    <!--[if lt IE 9]>
-      <script src="../assets/js/html5shiv.js"></script>
-    <![endif]-->
+	<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
+    <script>
+    	$(function(){
+    		$(".detailGo").click(function(){
+    			
+    			var faq_no = $(this).parents("div").attr("data-num");
+    			console.log(faq_no);
+    			$("#faq_no").val(faq_no);
+    			
+    			location.href = "/cscenter/faqDetail?faq_no="+faq_no
+    		});
+    		
+    		var fc_no = $(".span4").attr("data-value")
+    		$("#order").click(function(){
+    			//console.log(fc_no);
+    			location.href = "/cscenter/faqList?fc_no=1";
+    		});
+    		$("#cancel").click(function(){
+    			location.href= "/cscenter/faqList?fc_no=2";
+    		});
+    		$("#goods").click(function(){
+    			location.href= "/cscenter/faqList?fc_no=3";
+    		});
+    		$("#event").click(function(){
+    			location.href= "/cscenter/faqList?fc_no=4";
+    		});
+    		$("#exc").click(function(){
+    			location.href= "/cscenter/faqList?fc_no=5";
+    		});
+    	});
+    	
+    </script>
   </head>
 
   <body>
@@ -45,46 +74,48 @@
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
               <li class="nav-header">자주묻는질문</li>
-              <li class="active"><a href="#">-주문/결제</a></li>
-              <li><a href="#">-취소/반품</a></li>
-              <li><a href="#">-상품/배송</a></li>
-              <li><a href="#">-이벤트</a></li>
-              <li><a href="#">-기타</a><hr></li>
+              <li class="active"><a href="/cscenter/faqList?fc_no=1">-주문/결제</a></li>
+              <li><a href="/cscenter/faqList?fc_no=2">-취소/반품</a></li>
+              <li><a href="/cscenter/faqList?fc_no=3">-상품/배송</a></li>
+              <li><a href="/cscenter/faqList?fc_no=4">-이벤트</a></li>
+              <li><a href="/cscenter/faqList?fc_no=5">-기타</a><hr></li>
               <li class="nav-header">1:1 게시판<hr></li>
-              <li class="nav-header">개인정보처리지침<hr></li>
-              <li class="nav-header">이용약관</li>
+              <li class="nav-header"><a href="/cscenter/provision?p_no=2">개인정보처리지침</a><hr></li>
+              <li class="nav-header"><a href="/cscenter/provision?p_no=1">이용약관</a></li>
             </ul>
-          </div><!--/.well -->
-        </div><!--/span-->
+          </div>
+        </div>
        <!-- faq리스트 -->
+       
       <div class="container-fluid">
       <div class="row-fluid">
       	<div class="buttonForm">
-	        <button class="">주문/결제</button>
-	        <button class="">취소/반품</button>
-	        <button class="">상품/배송</button>
-	        <button class="">이벤트</button>
-	        <button class="">기타</button>
+	        <a id="order" class="btn btn-default">주문/결제</a>
+	        <a id="cancel" class="btn btn-default">취소/반품</a>
+	        <a id="goods" class="btn btn-default">상품/배송</a>
+	        <a id="event" class="btn btn-default">이벤트</a>
+	        <a id="exc" class="btn btn-default">기타</a>
         </div>
         <div class="span9">
-          <div id="faqList"> 	
-	          <div class="row-fluid">
-	          <c:choose>
-	          	<c:when test="${not empty faqList}">
-	          		<c:forEach var="faq" items="${faqList}" varStatus="status">
-	          			<div class="span4" data-num="${faq.faq_no}">
-	          				<h2>${faq.faq_title}</h2>
-	          				<p>${faq.faq_content}</p>
-	          				<p><a class="btn">자세히보기</a></p>
-	          			</div>
-	          		</c:forEach>
-	          	</c:when>
-	          	<c:otherwise>
-	        		<div class="span4">
-	        			<h2>게시글이 존재하지 않습니다</h2>
-	        		</div>
-	          	</c:otherwise>
-	          </c:choose>
+          <!-- 리스트시작 -->
+          <div id="provisionList"> 	
+	          <div class="row-fluid">     
+			          <c:choose>
+			          	<c:when test="${not empty faqList}">
+			          		<c:forEach var="faq" items="${faqList}" varStatus="status">
+			          			<div class="span4" data-num="${faq.faq_no}" data-value="${faq.fc_no}">
+			          				<h2>${faq.faq_title}</h2>
+			          				<p>${faq.faq_content}</p>
+			          				<p><button class="detailGo" >자세히보기</button></p>
+			          			</div>
+			          		</c:forEach>
+			          	</c:when>
+			          	<c:otherwise>
+			        		<div class="span4">
+			        			<h2>게시글이 존재하지 않습니다</h2>
+			        		</div>
+			          	</c:otherwise>
+			          </c:choose>
 	            
 	          </div><!--/row-->
 	        </div><!--/span-->

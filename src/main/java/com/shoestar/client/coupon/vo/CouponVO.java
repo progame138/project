@@ -1,6 +1,8 @@
 package com.shoestar.client.coupon.vo;
 
-import java.sql.Date;
+
+
+import java.util.Date;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

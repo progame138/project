@@ -29,8 +29,29 @@
           padding-right: 5px;
         }
       }
-      img{width:140px; height:140px; }
+     
       a{text-decoration: none;}
+      figure{
+      			display: block;
+      			width:202px; height:170px;
+      			margin:0px; padding: 9px;
+      			background-color: white;
+      			text-align: center;
+      		}
+      		figure img{
+      			width:140px; height:140px
+      			border: 1px solid #d6d6d6;
+      		}
+      		figcaption{
+      			background:url("images/icon.png") left center no-repeat;
+      			padding-left:18px;
+      		}
+      		.entry{
+      			
+      			float:left;
+      			margin:10px;
+      		}
+      		
     </style>
     <link href="/resources/include/dist/css/bootstrap-responsive.css" rel="stylesheet">
 
@@ -52,7 +73,7 @@
           <a class="brand" href="#">ShoeStar</a>
           <div class="nav-collapse collapse">
             <p class="navbar-text pull-right">
-              <a href="#" class="navbar-link"></a> 로그인됨
+              <a href="#" class="navbar-link"></a>
             </p>
             <ul class="nav">
               <li class="active"><a href="#">남자</a></li>
@@ -69,45 +90,47 @@
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
               <li class="nav-header">자주묻는질문</li>
-              <li class="active"><a href="#">-주문/결제</a></li>
-              <li><a href="#">-취소/반품</a></li>
-              <li><a href="#">-상품/배송</a></li>
-              <li><a href="#">-이벤트</a></li>
-              <li><a href="#">-기타</a><hr></li>
-              <li class="nav-header">1:1 게시판<hr></li>
-              <li class="nav-header">개인정보처리지침<hr></li>
-              <li class="nav-header">이용약관</li>
+              <li class="active"><a href="/cscenter/faqList?fc_no=1">-주문/결제</a></li>
+              <li><a href="/cscenter/faqList?fc_no=2">-취소/반품</a></li>
+              <li><a href="/cscenter/faqList?fc_no=3">-상품/배송</a></li>
+              <li><a href="/cscenter/faqList?fc_no=4">-이벤트</a></li>
+              <li><a href="/cscenter/faqList?fc_no=5">-기타</a><hr></li>
+              <li class="nav-header"><a>1:1 게시판</a><hr></li>
+              <li class="nav-header"><a href="/cscenter/provision?p_no=2">개인정보처리지침</a><hr></li>
+              <li class="nav-header"><a href="/cscenter/provision?p_no=1">이용약관</a></li>
             </ul>
           </div><!--/.well -->
         </div><!--/span-->
         <div class="span9">
-          <div class="hero-unit">
-          <div>
-           	<figure>
-           		<img src="/resources/images/cscenter/notice.png" class="img-polaroid"/>
-           		<figcaption><a href="#">공지사항</a></figcaption>
-           	</figure>
-          	
-          </div>
-          
-          <!-- <div class="entry">
-   				<figure><img src="image2/print-02.jpg" alt="Passiflora" />
-   					<figcaption>시계꽃<span>(Passiflora)</span></figcaption>
-   				</figure>
-   			</div>
-           	 -->
-          <div>	
-          	<img src="/resources/images/cscenter/event.png" class="img-polaroid">
-          	<a href="#">이벤트</a>
-          </div>
-          <div>	
-           	<img src="/resources/images/cscenter/delivery.png" class="img-polaroid">
-          	<a href="#">주문/배송현황</a>
-          </div>
-          <div>	
-           	<img src="/resources/images/cscenter/one_one.png" class="img-polaroid">
-          	<a href="#">1:1문의</a>
-          </div> 	
+         <!--  <div class="hero-unit"> -->
+          	<div class="entry">
+	           	<figure>
+	           		<img src="/resources/images/cscenter/notice.png" class="img-polaroid"/>
+	           		<figcaption><a href="#">공지사항</a></figcaption>
+	           	</figure>
+	          	
+	         </div>
+     
+	          <div class="entry">
+	          	<figure>	
+	          		<img src="/resources/images/cscenter/event.png" class="img-polaroid">
+	          		<figcaption><a href="#">이벤트</a></figcaption>
+	          	</figure>
+	          </div>
+	          
+	          <div class="entry">	
+		         <figure>  	
+		           	<img src="/resources/images/cscenter/delivery.png" class="img-polaroid">
+		          	<figcaption><a href="#">주문/배송현황</a></figcaption>
+	         	</figure>
+	          </div>
+	          
+	          <div class="entry">
+	          	<figure>	
+	           		<img src="/resources/images/cscenter/one_one.png" class="img-polaroid">
+	          		<figcaption><a href="#">1:1문의</a></figcaption>
+	          	</figure>
+	          </div> 	
            	
           </div>
           <div id="boardList">
@@ -135,7 +158,7 @@
       </div>
    </div>
         </div><!--/span-->
-      </div><!--/row-->
+    <!--   </div>/row -->
 	
   </body>
 </html>

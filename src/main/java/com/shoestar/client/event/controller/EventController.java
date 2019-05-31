@@ -1,9 +1,10 @@
 package com.shoestar.client.event.controller;
 
-import java.util.List;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.shoestar.client.event.service.EventService;
 import com.shoestar.client.event.vo.EventVO;
@@ -24,11 +25,15 @@ public class EventController {
 	 * @param evo
 	 * @return
 	 */
-	@RequestMapping("/eventList")
-	public String eventList() {
+	@RequestMapping(value="/list", method=RequestMethod.GET)
+	public String eventList(EventVO evo, Model model) {
 		log.info("eventList 호출 성공");
 		
+		model.addAttribute("eventList", eventService.eventList(evo));
+		
+		
 		return "client/event/eventList";
+	
 	}
 	
 }

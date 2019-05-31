@@ -1,7 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.shoestar.client.event.dao.EventDAO">
+<mapper namespace="com.shoestar.admin.event.dao.AdminEventDAO">
 	<!-- 이벤트 조회 -->
-
+	<select id="eventList" resultType="event">
+		
+				SELECT
+				    ev_no,
+				    ev_title,
+				    ev_content,
+				    ev_img,
+				    ev_thumb,
+				    to_char(ev_date, 'YYYY-MM-DD HH:MM:SS') as ev_date
+				    
+				    <!-- 이벤트가 널값이면 안보이게 처리 -->
+				   <!--  <if test="ev_edate != null"> -->
+						, to_char(ev_edate, 'YYYY-MM-DD  HH:MM:SS') as ev_edate
+					<!-- </if> -->
+				    
+				   
+				FROM
+				    event
+		
+	</select>
 </mapper>
