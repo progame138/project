@@ -1,8 +1,8 @@
-package com.shoestar.client.prodctg.dao;
+package com.shoestar.client.prod.dao;
 
 import java.util.List;
 
-import com.shoestar.client.prodctg.vo.ProdCtgVO;
+import com.shoestar.client.prod.vo.ProdCtgVO;
 
 public interface ProdCtgDao {
 	

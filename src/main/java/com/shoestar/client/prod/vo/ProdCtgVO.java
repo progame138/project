@@ -1,4 +1,4 @@
-package com.shoestar.client.prodctg.vo;
+package com.shoestar.client.prod.vo;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

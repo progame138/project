@@ -4,6 +4,7 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.shoestar.client.prod.vo.ProdVO" alias="prod"/>
+		<typeAlias type="com.shoestar.client.prod.vo.ProdCtgFilterVO" alias="prodctg"/>
 		<typeAlias type="com.shoestar.client.login.vo.LoginVO" alias="login"/>
 		<typeAlias type="com.shoestar.client.member.vo.MemberVO" alias="member"/>
 		<typeAlias type="com.shoestar.client.event.vo.EventVO" alias="event" />
