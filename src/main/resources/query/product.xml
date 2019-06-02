@@ -9,25 +9,21 @@
 			MAX(rd_discount) AS maximum
 		FROM
 			range_discount r
-			INNER JOIN
+			LEFT OUTER JOIN
 				rd_type rt
 			ON
 				r.rd_no = rt.rd_no
-			INNER JOIN
+			LEFT OUTER JOIN
 				rd_product rp
 			ON
 				r.rd_no = rp.rd_no
-			INNER JOIN
-				prod p
-			ON
-				rt.pct_no = p.pct_no OR
-				rp.pd_no = p.pd_no
 		WHERE
 			(
 				RD_EDATE >= TRUNC(sysdate) OR
 				RD_EDATE IS NULL
 			)
-			AND	p.pd_no = prod.pd_no
+			AND	rp.pd_no = prod.pd_no
+			OR rt.pct_no = prod.pct_no
 		)
 	</sql>
 	

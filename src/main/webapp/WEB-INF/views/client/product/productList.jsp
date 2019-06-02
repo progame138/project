@@ -3,9 +3,10 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title></title>
+		<title>상품 리스트</title>
 		
-		<link rel="stylesheet" href="/resources/include/css/productList.css" />
+		<link rel="stylesheet" href="/resources/include/css/prodctg.css" />
+		<link rel="stylesheet" href="/resources/include/css/product.css" />
 		<script type="text/javascript" src="/resources/include/js/product.js"></script>
 		<script type="text/javascript">
 			$(function() {
@@ -55,54 +56,50 @@
 			<!-- ############################## 메뉴란 ############################## -->
 			<div id="sideMenuBar" class="col-md-2">
 				<!-- 카테고리 선택란 -->
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">분류</h3>
+				<div class="menuSection">
+					<div class="menuTitle">
+						<h3 class="menuTitleBody">분류</h3>
 					</div>
 					<!-- 카테고리 리스트 -->
-					<ul class="list-group" id="ctgList">
-						<li class="list-group-item"><a href="#">HTML</a></li>
-						<li class="list-group-item"><a href="#">CSS</a></li>
-						<li class="list-group-item"><a href="#">ECMAScript5</a></li>
+					<ul class="menuList" id="ctgList">
+						<li class=""><a href="#">HTML</a></li>
+						<li class=""><a href="#">CSS</a></li>
+						<li class=""><a href="#">ECMAScript5</a></li>
 					</ul>
 				</div>
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">필터링</h3>
-					</div>
-					
+				<div class="menuSection">
 					<!-- 사이즈 필터 -->
-					<div class="panel-heading">
-						<h3 class="panel-title">사이즈</h3>
+					<div class="menuTitle">
+						<h3 class="menuTitleBody">사이즈</h3>
 					</div>
 					<!-- 사이즈 리스트 -->
-					<ul class="list-group">
-						<li class="list-group-item"><a href="#">jQuery</a></li>
-						<li class="list-group-item"><a href="#">BootStrap</a></li>
+					<ul class="menuList" id="sizeList"><!-- 코어태그로 나이별 처리하기 -->
+						<li class=""><a href="#">jQuery</a></li>
+						<li class=""><a href="#">BootStrap</a></li>
 					</ul>
 					
 					<!-- 컬러 필터 -->
-					<div class="panel-heading">
-						<h3 class="panel-title">색상</h3>
+					<div class="menuTitle">
+						<h3 class="menuTitleBody">색상</h3>
 					</div>
 					<!-- 색상 리스트 -->
-					<ul class="list-group">
-						<li class="list-group-item"><a href="#">About</a></li>
-						<li class="list-group-item"><a href="#">Help</a></li>
+					<ul class="menuList" id="colorList">
+						<li class=""><a href="#">About</a></li>
+						<li class=""><a href="#">Help</a></li>
 					</ul>
 					
 					<!-- 가격 필터 -->
-					<div class="panel-heading">
-						<h3 class="panel-title">가격대</h3>
+					<div class="menuTitle">
+						<h3 class="menuTitleBody">가격대</h3>
 					</div>
 					<!-- 가격 리스트 -->
-					<ul class="list-group">
-						<li class="list-group-item"><a href="#">About</a></li>
-						<li class="list-group-item"><a href="#">Help</a></li>
+					<ul class="menuList" id="priceList">
+						<li class=""><a href="#">About</a></li>
+						<li class=""><a href="#">Help</a></li>
 					</ul>
 				</div>
 				<!-- 필터 적용을 위한 폼 -->
-				<div>
+				<div class="sumbitSection">
 					필터 선택 적용을 위한 자리
 				</div>
 			</div>

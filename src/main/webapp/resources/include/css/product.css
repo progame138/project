@@ -1,16 +1,4 @@
 @charset "UTF-8";
-/* 
-#mainFrame > * {
-	display: inline-block;
-} */
-
-body > .container {
-	width: 80%;
-}
-#mainFrame > #sideMenuBar {
-	margin-right: 20px;
-	margin-top: 20px;
-}
 
 .prodContainer {
 	width: 200px;

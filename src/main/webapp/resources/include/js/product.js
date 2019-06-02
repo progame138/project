@@ -27,9 +27,12 @@ function createProductDiv(prodVO) {
 		imgUrl = PROD_THUMB_STORATE_URL + prodVO.pim_main;
 	}
 	var pImage = $("<img>").attr({
-		"src" : imgUrl,
-		"alt" : prodVO.pd_name
-		}).addClass("img-rounded");
+			"src" : imgUrl,
+			"alt" : prodVO.pd_name
+		}).addClass("img-rounded").css({
+			"width":200,
+			"height":200
+		});
 	pImageSection.append(pImage);
 	
 	// 신규, 인기, 세일, 품절등 정보 표시란
