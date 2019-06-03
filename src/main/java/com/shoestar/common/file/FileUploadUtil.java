@@ -18,11 +18,11 @@ public class FileUploadUtil {
 	
 	/* 파일 업로드할 폴더 생성 */
 	public static void makeDir(String docRoot) {
-		File fileDir = new File(docRoot); // 경로 받아오고 인스턴스 생성
-		if(fileDir.exists()) { // 존재하면 
-			return; // 종료
+		File fileDir = new File(docRoot);
+		if(fileDir.exists()) { 
+			return;
 		}
-		fileDir.mkdirs(); // mkdirs | + s : 그 앞의 파일 경로도 파일 생성한다. 
+		fileDir.mkdirs();
 	}
 	
 	/* 파일 업로드 메서드 
@@ -34,27 +34,27 @@ public class FileUploadUtil {
 	 * 50e8400-e29b-41d4-a716-446655440000
 	 */
 	
-	/* 파일 업로드 메서드 */				// ★ 파일을 서버에 저장해주는
+	/* 파일 업로드 메서드 */				
 	public static String fileUpload(MultipartFile file, String fileName) throws IOException {
 		log.info("fileUpload 호출 성공");
 		
 		String real_name = null;
-		// MultipartFile 클래스의 getFile() 메서드로 클라이언트가 업로드한 파일
-		String org_name = file.getOriginalFilename(); // 업로드되는 파일의 이름
+		
+		String org_name = file.getOriginalFilename(); 
 		log.info("org_name : " + org_name);
 		
 		// 파일명 변경(중복되지 않기)
 		if(org_name != null && (!org_name.equals(""))) {
-						// 폴더명_현재 시간_사용자지정파일명
-			real_name = fileName + "_" + System.currentTimeMillis() + "_" + org_name; // 저
+						
+			real_name = fileName + "_" + System.currentTimeMillis() + "_" + org_name;
 			
-			String docRoot = "C://uploadStorage//" + fileName;
+			String docRoot = "C://shoestarStorage//" + fileName;
 			makeDir(docRoot);
 			
-			File fileAdd = new File(docRoot + "/" + real_name); // 파일 생성후
+			File fileAdd = new File(docRoot + "/" + real_name);
 			log.info("업로드할 파일(fileAdd) : " + fileAdd);
 			
-			file.transferTo(fileAdd);// 지정위치에 실질적으로 저장시켜주는 메소드
+			file.transferTo(fileAdd);
 		}
 		return real_name;
 	}
@@ -64,19 +64,18 @@ public class FileUploadUtil {
 		log.info("fileDelete 호출 성공");
 		boolean result = false;							
 		String startDirName = "", docRoot = "";
-												// 첫번째 위치의 _를 자른다.
-		String dirName = fileName.substring(0, fileName.indexOf("_")); // 폴더명
-		/*String docRoot = "C://uploadStorage//" + dirName;*/
+												
+		String dirName = fileName.substring(0, fileName.indexOf("_"));
 		
 		if(dirName.equals("thumbnail")) {
 			startDirName = fileName.substring(
 					dirName.length()+1, fileName.indexOf("_", dirName.length()+1));
-			docRoot = "C://uploadStorage//" + startDirName + "//" + dirName;
+			docRoot = "C://shoestarStorage//" + startDirName + "//" + dirName;
 		} else {
-			docRoot = "C://uploadStorage//" + dirName;
+			docRoot = "C://shoestarStorage//" + dirName;
 		}
 		
-		File fileDelete = new File(docRoot + "/" + fileName); // 파일 생성후
+		File fileDelete = new File(docRoot + "/" + fileName);
 		log.info("삭제할 파일(fileDelete) : " + fileDelete);
 		if(fileDelete.exists() && fileDelete.isFile()) {
 			result = fileDelete.delete();
@@ -88,33 +87,31 @@ public class FileUploadUtil {
 	/* 파일 Thumbnail 생성 메서드 */
 	public static String makeThumbnail(String fileName) throws Exception{
 		String dirName = fileName.substring(0, fileName.indexOf("_"));
-		// 이미지가 존재하는 폴더 추출
-		String imgPath = "C://uploadStorage//" + dirName;
-		// 추출된 폴더의 실제 경로(물리적 위치: C:\...)
+		
+		String imgPath = "C://shoestarStorage//" + dirName;
+		
 		File fileAdd = new File(imgPath, fileName);
 		log.info("원본 이미지 파일(fileAdd) : " + fileAdd);
 		
-		// ★
 		BufferedImage sourceImg = ImageIO.read(fileAdd); 
 		// 사이즈 변경
 		BufferedImage destImg 
 		= Scalr.resize(sourceImg, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_TO_HEIGHT,200);
 		// 		resize(대상[BufferedImage 타입], 원본비율,			높이 또는 너비,			크기)
 	
-		String thumbnailName = "thumbnail_" + fileName; // 앞에 thumbnail_
-		String docRoot = imgPath+"/thumbnail"; // C://uploadStorage//폴더명/thumbnail
+		String thumbnailName = "thumbnail_" + fileName;
+		String docRoot = imgPath+"/thumbnail"; 
 		makeDir(docRoot);
 		
 		// 썸네일을 저장하기 위한 파일 객체
 		File newFile = new File(docRoot, thumbnailName);
 		log.info("업로드할 파일(newFile) : " + newFile);
 		
-		String formatName = fileName.substring(fileName.lastIndexOf(".")+1); // 확장자까지 구해옴
+		String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
 		log.info("확장자(formatName) : " + formatName);
 		
 		// 출력
-		ImageIO.write(destImg, formatName, newFile); // 사이즈, 확장자, 어느 위치에 저장
-		return thumbnailName; // 현재 이름 return 
-		
+		ImageIO.write(destImg, formatName, newFile);
+		return thumbnailName;
 	}
 }
