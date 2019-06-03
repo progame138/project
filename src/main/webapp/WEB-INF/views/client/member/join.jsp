@@ -13,7 +13,7 @@
          
          <title>Insert title here</title>
          
-         <!--모바일 웹 페이지 설정-->
+          <!--모바일 웹 페이지 설정-->
          <link rel="shortcut icon" href="../image/icon.png"/>
          <link rel="apple-touch-icon" href="../image/icon.png"/>
       <!--    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css"> -->
@@ -26,17 +26,17 @@
          <!-- jQuery프레임워크 참조 -->         
            <script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
            <script type="text/javascript" src="/resources/include/js/jquery.form.min.js"></script>
-           <!-- <script type="text/javascript" src="/resources/include/js/common.js"></script> -->
            <script type="text/javascript" src="/resources/include/js/join.js"></script>
            <script type="text/javascript" src="/resources/include/js/login.js"></script>
            <script type="text/javascript" src="/resources/include/js/pwdPattern.js"></script>
            <script type="text/javascript" src="/resources/include/js/html5shiv.js"></script>
+           <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+           <!-- <script type="text/javascript" src="/resources/include/js/modify.js"></script> -->
             <!-- <link rel="stylesheet" type="text/css" href="/resources/include/css/bootstrap.css"/> -->
-            <!-- <link rel="stylesheet" href="/resources/include/css/default.css"/> -->
+           <!--  <link rel="stylesheet" href="/resources/include/css/default.css"/> -->
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-            <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
             <!-- lightbox 라이브러리 -->
            <!--  <link rel="stylesheet" href="/resources/include/css/lightbox.css"/>
             <script type="text/javascript" src="/resources/include/js/lightbox.min.js"></script> -->
@@ -49,7 +49,7 @@
             </style>
            <script type="text/javascript">
            
-         //로그인화면으로
+         //회원수정 테스트
        	$("#modifyBtn").click(function(){
        		location.href="/member/modify";
        	}); 
@@ -149,9 +149,11 @@
 	
 		<div class="contentContainer" >
 			<div class="well"> 
-				<form id="memberForm" class="form-jorizontal">
+				<form id="memberForm" class="form-horizontal">
+				
+				
 					<input type="hidden" name="mem_email" id="mem_email">
-					<input type="hidden" name="pinno" id="pinno">
+					<input type="hidden" name="mem_birth" id="mem_birth">
 					
 					<div class="form-group form-group-sm">
 						<label for="mem_id" class="col-sm-2 control-label">아이디</label>
@@ -211,9 +213,9 @@
 								class="form-control" placeholder="주민등록번호 앞 6자리">
 							</div>	
 							
-							<div class="col-sm-2">
+							<div class="col-sm-1">
 								<input type="text" id="gender" name="gender" maxlength="1"
-								class="form-control" placeholder="주민등록번호 7자리중 앞 1자리"/>
+								class="form-control" placeholder="앞1자리"/>
 							</div>	
 							
 							<div class="col-sm-5">
@@ -267,7 +269,7 @@
 					<div class="form-group form-group-sm">
 						<label for="phone" class="col-sm-2 control-label">주소</label>
 							<div class="col-sm-3">
-								 <input type="text" id="mem_zip" name="mem_zip" size="10" > <a href="javascript:execDaumPostcode()">주소검색</a>
+								 <label>우편번호<input type="text" id="mem_zip" name="mem_zip" size="10" ></label> <a href="javascript:execDaumPostcode()">주소검색</a>
 								<label>도로명주소 <input type="text" id="mem_addr1" name="mem_addr1" size="50" /></label>
 								 <label>지번주소<input type="text" id="mem_addr2" name="mem_addr2" size="50" /></label> 
 							</div>

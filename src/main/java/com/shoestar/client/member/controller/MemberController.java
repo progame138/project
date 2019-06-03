@@ -35,6 +35,13 @@ import lombok.extern.log4j.Log4j;
 				return "client/member/join";
 			}
 			
+	/*
+	 * //회원수정 폼 (임시)
+	 * 
+	 * @RequestMapping(value="/modify", method = RequestMethod.GET) public String
+	 * modifyForm(){ log.info("modify 호출 성공"); return "client/member/modify"; }
+	 */
+			
 			
 			
 			/////////////////////[사용자 아이디 중복 체크 메서드]///////////////
@@ -57,15 +64,15 @@ import lombok.extern.log4j.Log4j;
 			switch(result){
 			case 1:
 					mav.addObject("codeNumber", 1); //유저 아이디가 이미 존재함
-					mav.setViewName("member/join");
+					mav.setViewName("client/member/join");
 					break;
 			case 2:
 					mav.addObject("codeNumber", 3);
-					mav.setViewName("member/join_success"); //새로운 맴버 추가시, 로그인페이지 이동
+					mav.setViewName("client/member/join_success"); //새로운 맴버 추가시, 로그인페이지 이동
 					break;
 			default:
 					mav.addObject("codeNumber", 2); //맴버추가 실패
-					mav.setViewName("member/join");
+					mav.setViewName("client/member/join");
 					break;
 			}
 			return mav;
@@ -81,13 +88,13 @@ import lombok.extern.log4j.Log4j;
 				
 				
 				if(login==null){
-					mav.setViewName("/member/login");
+					mav.setViewName("client/member/login");
 					return mav;
 				}
 				
 				MemberVO vo = memberService.memberSelect(login.getMem_id());
 				mav.addObject("member", vo);
-				mav.setViewName("member/modify");
+				mav.setViewName("client/member/modify");
 				return mav;
 			}
 			
@@ -97,7 +104,7 @@ import lombok.extern.log4j.Log4j;
 				log.info("modify post방식에 의한 메서드 호출 성공");
 				
 				if(login==null){
-					mav.setViewName("member/login");
+					mav.setViewName("client/member/login");
 					return mav;
 				}
 				mvo.setMem_id(login.getMem_id());
@@ -106,7 +113,7 @@ import lombok.extern.log4j.Log4j;
 				if(loginService.loginSelect(mvo.getMem_id(), mvo.getOldUserpwd()) == null){
 					mav.addObject("codeNumber", 1);
 					mav.addObject("member", vo);
-					mav.setViewName("member/modify");
+					mav.setViewName("client/member/modify");
 					return mav;
 				}
 				
@@ -123,7 +130,7 @@ import lombok.extern.log4j.Log4j;
 				ModelAndView mav = new ModelAndView();
 				
 				if(login==null){
-					mav.setViewName("member/login");
+					mav.setViewName("client/member/login");
 					return mav;
 				}
 				
@@ -134,7 +141,7 @@ import lombok.extern.log4j.Log4j;
 						break;
 				case 3:
 						mav.addObject("codeNumber", 3);
-						mav.setViewName("member/login");
+						mav.setViewName("client/member/login");
 						break;
 				}
 				return mav;

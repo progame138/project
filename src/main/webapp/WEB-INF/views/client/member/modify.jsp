@@ -61,6 +61,7 @@
 				<form id="memberForm" class="form-horizontal">
 					<input type="hidden" name="idx" id="idx" value="${member.dix}"/>
 					<input type="hidden" name="email" id="email">
+					
 					<div class="form-group form-group-sm">
 						<label for="mem_id" class="col-sm-2 control-label">아이디</label>
 						<div class="col-sm-3">
@@ -119,7 +120,7 @@
 					<div class="form-group form-group-sm">
 						<label for="mem_phone" class="col-sm-2 control-label">생년월일</label>
 							<div class="col-sm-3">
-								{member.pinno}******
+								{member.mem_birth}******
 							</div>
 					</div>
 					

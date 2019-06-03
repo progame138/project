@@ -69,7 +69,7 @@ $(function(){
 	
 	//회원수정 테스트
 	$("#modifyBtn").click(function(){
-		location.href="/modify/modify";
+		location.href="/member/modify";
 	}); 
 	
 	//확인 버튼 클릭 시 처리 이벤트
@@ -81,20 +81,20 @@ $(function(){
 		else if(!inputVerify(1, '#mem_pwd', '.error:eq(1)')) return;
 		else if(!idPwdCheck()) return;
 		
-		else if(!formCheck($('#userPwdCheck'), $('.error:eq(2)'), "비밀번호 확인을")) return;
-		else if(!inputVerify(1, '#userPwdCheck', '.error:eq(2)')) return;
+		else if(!formCheck($('#mem_pwdCheck'), $('.error:eq(2)'), "비밀번호 확인을")) return;
+		else if(!inputVerify(1, '#mem_pwdCheck', '.error:eq(2)')) return;
 		else if(!passwordCheck()) return;
 		
-		else if(!formCheck($('#phone'), $('.error:eq(3)'), "전화번호를")) return;
-		else if(!inputVerify(2, '#phone', '.error:eq(3)')) return;
-		else if(!formCheck($('#userName'), $('.error:eq(5)'), "이름을")) return;
-		else if(!formCheck($('#emailName'), $('.error:eq(6)'), "이름을")) return;
+		else if(!formCheck($('#mem_phone'), $('.error:eq(3)'), "전화번호를")) return;
+		else if(!inputVerify(2, '#mem_phone', '.error:eq(3)')) return;
+		else if(!formCheck($('#mem_name'), $('.error:eq(5)'), "이름을")) return;
+		else if(!formCheck($('#mem_email'), $('.error:eq(6)'), "이름을")) return;
 		else if(idConfirm!=2) {
 			alert("아이디 중복 체크를 해주세요");
 			return;
 		}else {
 			$("#mem_email").val($("#emailName").val()+"@"+$("#emailDomain").val());
-			$("#pinno").val($("#mem_birth").val()+"-"+$("#gender").val());
+			$("#mem_birth").val($("#birth").val()+"-"+$("#gender").val());
 			$("#memberForm").attr({
 				"method":"post",
 				"action":"/member/join"
