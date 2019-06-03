@@ -31,7 +31,7 @@ import lombok.extern.log4j.Log4j;
 			//////////////////////[회원가입 폼 처리]////////////////////////
 			@RequestMapping(value="/join", method = RequestMethod.GET)
 			public String joinForm(Model model){
-				log.info("member 호출 성공");
+				log.info("join post방식에 의한 메서드 호출 성공");
 				return "client/member/join";
 			}
 			
@@ -46,7 +46,7 @@ import lombok.extern.log4j.Log4j;
 			
 			/////////////////////[사용자 아이디 중복 체크 메서드]///////////////
 			@ResponseBody
-			@RequestMapping(value="/mem_idConfirm", method=RequestMethod.POST)
+			@RequestMapping(value="/userIdConfirm", method=RequestMethod.POST)
 			public String  userIdConfirm(@RequestParam("mem_id")String mem_id){
 				int result = memberService.userIdConfirm(mem_id);
 		
@@ -56,7 +56,9 @@ import lombok.extern.log4j.Log4j;
 			//////////////////////[회원가입 처리]//////////////////////////
 			@RequestMapping(value="/join", method = RequestMethod.POST)
 			public ModelAndView memberInsert(@ModelAttribute MemberVO mvo){
-			ModelAndView mav = new ModelAndView();
+				
+				log.info("join post방식에 의한 메서드 호출 성공");
+				ModelAndView mav = new ModelAndView();
 				
 			int result = 0;
 			result = memberService.memberInsert(mvo);

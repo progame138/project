@@ -36,12 +36,13 @@ public class LoginController {
 	}
 	
 	/////////////////////[로그인 처리 (실패 횟수 제한 X)]//////////////////////////
-	@RequestMapping(value="login", method = RequestMethod.POST)
+	@RequestMapping(value="/login", method = RequestMethod.POST)
 	public ModelAndView loginInsert(@ModelAttribute LoginVO lvo, ModelAndView mav){
-		log.info("login.do post 호출 성공");
+		log.info("login post 호출 성공");
 		
 		String mem_id = lvo.getMem_id();
 		String mem_pwd = lvo.getMem_pwd();
+		log.info(mem_id + " / " + mem_pwd);
 		LoginVO loginCheckResult = loginService.loginSelect(mem_id, mem_pwd);
 		
 		//입력받은 아이디와 비밀번호로 DB확인 시, 일치 데이터가 존재하지 않으면
@@ -51,6 +52,7 @@ public class LoginController {
 			return mav;
 		}else{ //일치할 시
 			mav.addObject("login", loginCheckResult);
+			log.info("loginCheckResult"+loginCheckResult);
 			mav.setViewName("client/member/login");
 			return mav;
 		}

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shoestar.client.login.dao.LoginDao">
 
-	<select id="memIdSelect" parameterType="String" resultType="login">
+	<select id="userIdSelect" parameterType="String" resultType="login">
 		select mem_id, mem_pwd, mem_name 
 		from member
 		where mem_id = #{mem_id}

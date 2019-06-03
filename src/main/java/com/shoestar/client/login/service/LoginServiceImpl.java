@@ -16,7 +16,7 @@ public class LoginServiceImpl implements LoginService{
 	
 	@Override
 	public LoginVO userIdSelect(String mem_id) {
-		return loginDao.memIdSelect(mem_id);
+		return loginDao.userIdSelect(mem_id);
 	}
 
 	@Override
