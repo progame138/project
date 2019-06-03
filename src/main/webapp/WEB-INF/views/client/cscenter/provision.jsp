@@ -50,7 +50,7 @@
               <li><a href="/cscenter/faqList?fc_no=3">-상품/배송</a></li>
               <li><a href="/cscenter/faqList?fc_no=4">-이벤트</a></li>
               <li><a href="/cscenter/faqList?fc_no=5">-기타</a><hr></li>
-              <li class="nav-header">1:1 게시판<hr></li>
+              <li class="nav-header"><a href="/cscenter/qnaBoard">1:1 게시판</a><hr></li>
               <li class="nav-header"><a href="/cscenter/provision?p_no=2">개인정보처리지침</a><hr></li>
               <li class="nav-header"><a href="/cscenter/provision?p_no=1">이용약관</a></li>
             </ul>
