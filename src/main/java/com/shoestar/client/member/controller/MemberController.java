@@ -35,6 +35,8 @@ import lombok.extern.log4j.Log4j;
 				return "client/member/join";
 			}
 			
+			
+			
 			/////////////////////[사용자 아이디 중복 체크 메서드]///////////////
 			@ResponseBody
 			@RequestMapping(value="/mem_idConfirm", method=RequestMethod.POST)

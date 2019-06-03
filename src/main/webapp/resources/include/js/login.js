@@ -1,5 +1,5 @@
 $(function(){
-        	   errorCodeCheck(); 
+			/*codeCheck();*/ 
         		$('#mem_id, #mem_pwd').bind("keyup", function(){
         			$(this).parents("div").find(".error").html("");
         		});
@@ -19,7 +19,7 @@ $(function(){
         		});
         		
         	 	//회원가입 버튼 클릭시 처리 이벤트
-        		$("#signUpBtn").click(function(){
-        			location.href="/member/signUp";
+        		$("#joinBtn").click(function(){
+        			location.href="/member/join";
         		}); 
         	});

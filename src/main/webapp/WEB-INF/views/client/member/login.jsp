@@ -37,7 +37,7 @@
             <!-- <link rel="stylesheet" href="/resources/include/css/lightbox.css"/>
             <script type="text/javascript" src="/resources/include/js/lightbox.min.js"></script> -->
            <script type="text/javascript">
-       
+         
            //에러코드체크
            function errorCodeCheck(){
         	   var codeNumber = '<c:out value = "${codeNumber}"/>';
@@ -54,7 +54,7 @@
 		</head>
 	<body>
 		<div class="contentContainer">
-		<div class="Well">
+		<div class="well">
 			<c:if test="${login.mem_id == null or login.mem_id == ''}"> 
 			<form id="loginForm" class="form-horizontal">
 			  
@@ -87,7 +87,7 @@
 			  <div class="form-group">
 			    <div class="col-sm-offset-2 col-sm-6">
 			      <input type="button" value="로그인" id="loginBtn" class="btn btn-default"/>
-			      <input type="button" value="회원가입" id="signUpBtn" class="btn btn-default"/>
+			      <input type="button" value="회원가입" id="joinBtn" class="btn btn-default"/>
 			    </div>
 			  </div>
 		  </form>

@@ -67,6 +67,11 @@ $(function(){
 		}
 	});
 	
+	//회원수정 테스트
+	$("#modifyBtn").click(function(){
+		location.href="/modify/modify";
+	}); 
+	
 	//확인 버튼 클릭 시 처리 이벤트
 	$("#joinInsert").click(function(){
 		//입력값 체크
@@ -89,7 +94,7 @@ $(function(){
 			return;
 		}else {
 			$("#mem_email").val($("#emailName").val()+"@"+$("#emailDomain").val());
-			$("#pinno").val($("#birth").val()+"-"+$("#gender").val());
+			$("#pinno").val($("#mem_birth").val()+"-"+$("#gender").val());
 			$("#memberForm").attr({
 				"method":"post",
 				"action":"/member/join"
