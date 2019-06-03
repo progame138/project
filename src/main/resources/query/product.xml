@@ -72,6 +72,10 @@
 							pd_age = #{pd_age}
 						</otherwise>
 					</choose></trim>
+					<!-- 분류 -->
+					<if test='pct_no != null and pct_no != ""'>
+						AND pct_no = #{pct_no}
+					</if>
 					<!-- 컬렉션 -->
 					<if test="co_no != 0">
 						AND co_no = #{co_no}

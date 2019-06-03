@@ -1,5 +1,10 @@
 package com.shoestar.client.prod.service;
 
-public interface ProdCtgService {
+import java.util.List;
 
+import com.shoestar.client.prod.vo.ProdCtgVO;
+
+public interface ProdCtgService {
+	
+	public List<ProdCtgVO> getProdCtgList(ProdCtgVO pcvo);
 }

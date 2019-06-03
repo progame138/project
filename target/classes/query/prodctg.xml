@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shoestar.client.prod.dao.ProdCtgDao">
 	
-	<select id="getProdCtgList">
+	<select id="getProdCtgList" parameterType="prodctg" resultType="prodctg">
 		SELECT
 			/*+ INDEX_DESC(prod_ctg prod_ctg_pk)*/
 			prod_ctg.pct_no, pct_name, COUNT(pd_no) AS pd_count
@@ -12,6 +12,23 @@
 				prod
 			ON
 				prod_ctg.pct_no = prod.pct_no
+		<where>
+			<!-- 성별 -->
+			<if test='pd_sex != null and pd_sex != ""'>
+				pd_sex = #{pd_sex}
+			</if>
+			<!-- 연령 -->
+			<trim prefix="AND"><choose>
+				<when test='pd_age == null'> <!-- default -->
+					pd_age = 'a'
+				</when>
+				<when test='pd_age == "all"'> <!-- all -->
+				</when>
+				<otherwise>
+					pd_age = #{pd_age}
+				</otherwise>
+			</choose></trim>
+		</where>
 		GROUP BY
 			prod_ctg.pct_no, pct_name
 		ORDER BY

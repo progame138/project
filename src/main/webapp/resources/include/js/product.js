@@ -3,9 +3,6 @@
  * @author 배정훈
  */
 
-/** 상품 리스트를 읽어오는 URL */
-const PROD_LIST_URL = "/product/showList";
-
 /** 상품 이미지 저장소의 URL */
 const PROD_IMAGE_STORATE_URL = "/shoestarStorage/prod/";
 
