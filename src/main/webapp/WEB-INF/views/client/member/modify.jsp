@@ -59,8 +59,8 @@
 		<div class="contentContainer">
 			<div class="well">
 				<form id="memberForm" class="form-horizontal">
-					<input type="hidden" name="idx" id="idx" value="${member.dix}"/>
-					<input type="hidden" name="email" id="email">
+					<input type="hidden" name="mem_no" id="mem_no" value="${member.dix}"/>
+					<input type="hidden" name="mem_email" id="mem_no">
 					
 					<div class="form-group form-group-sm">
 						<label for="mem_id" class="col-sm-2 control-label">아이디</label>
@@ -157,6 +157,7 @@
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-6">
 							<input type="button" value="확인" id="modify" class="btn btn-default"/>
+							<input type="button" value="재작성" id="modifyReset" class="btn btn-default"/>
 							<input type="button" value="취소" id="modifyCancel" class="btn btn-default"/>
 						</div>
 					</div>

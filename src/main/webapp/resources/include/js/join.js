@@ -1,9 +1,9 @@
 //비밀번호와 비밀번호 확인 일치여부
 function passwordCheck() {
-	if($("#mem_pwd").val() != $("#mem_pwdCheck").val()) {
+	if($("#mem_pwd").val() != $("#userPwdCheck").val()) {
 		alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-		$("#mem_pwdCheck").focus();
-		$("#mem_pwdCheck").val("");
+		$("#userPwdCheck").focus();
+		$("#userPwdCheck").val("");
 		return false;
 	}else {
 		return true;
@@ -12,7 +12,7 @@ function passwordCheck() {
 
 //아이디에 비밀번호 포함 여부 확인
 function idPwdCheck() {
-	var mem_id = $("#userId").val();
+	var mem_id = $("#mem_id").val();
 	var mem_pwd = $("#mem_pwd").val();
 	if(mem_pwd.indexOf(mem_id) > -1) {
 		alert("비밀번호에 아이디를 포함할 수 없습니다.");
@@ -37,10 +37,10 @@ $(function(){
 		$('.error').eq(index).html(message[index]);
 	});
 	
-	$('#mem_id, #mem_pwd, #mem_pwdCheck, #phone').bind("focus", function(){
-		var idx = $("#mem_id, #mem_pwd, #mem_pwdCheck, #phone").index(this);
+	$('#mem_id, #mem_pwd, #userPwdCheck, #mem_phone').bind("focus", function(){
+		var mem_no = $("#mem_id, #mem_pwd, #userPwdCheck, #mem_phone").index(this);
 		//console.log("대상 : " + dix);
-		$(this).parents(".form-group").find(".error").html(message[idx]);
+		$(this).parents(".form-group").find(".error").html(message[mem_no]);
 	});
 	
 	$("#idConfirmBtn").click(function(){
@@ -55,11 +55,11 @@ $(function(){
 				 		alert('사이트 접속문제로 정상접속이 되지 않았습니다.\n잠시 후 다시 시도해 주세요~');
 				 	},
 				 	success: function(resultData){
-				 		console.log("resultDataL "+ resultData);
+				 		console.log("resultData : "+ resultData);
 				 		if(resultData=="1") {
-				 			$("#userId").parents(".form-group").find(".error").html("현재 사용중인 아이디입니다.");
+				 			$("#mem_id").parents(".form-group").find(".error").html("현재 사용중인 아이디입니다.");
 				 		}else if(resultData=="2") {
-				 			$("#mem_id").parents("form-group").find(".error").html("사용 가능한 아이디입니다.");
+				 			$("#mem_id").parents(".form-group").find(".error").html("사용 가능한 아이디입니다.");
 				 			idConfirm = 2;
 				 		}
 				 	}
@@ -67,9 +67,9 @@ $(function(){
 		}
 	});
 	
-	//회원수정 테스트
-	$("#modifyBtn").click(function(){
-		location.href="/member/modify";
+	//수정화면에서 취소버튼시 로그인화면으로
+	$("#joinCancel").click(function(){
+		location.href="/member/login";
 	}); 
 	
 	//확인 버튼 클릭 시 처리 이벤트
@@ -81,14 +81,14 @@ $(function(){
 		else if(!inputVerify(1, '#mem_pwd', '.error:eq(1)')) return;
 		else if(!idPwdCheck()) return;
 		
-		else if(!formCheck($('#mem_pwdCheck'), $('.error:eq(2)'), "비밀번호 확인을")) return;
-		else if(!inputVerify(1, '#mem_pwdCheck', '.error:eq(2)')) return;
+		else if(!formCheck($('#userPwdCheck'), $('.error:eq(2)'), "비밀번호 확인을")) return;
+		else if(!inputVerify(1, '#userPwdCheck', '.error:eq(2)')) return;
 		else if(!passwordCheck()) return;
 		
 		else if(!formCheck($('#mem_phone'), $('.error:eq(3)'), "전화번호를")) return;
 		else if(!inputVerify(2, '#mem_phone', '.error:eq(3)')) return;
 		else if(!formCheck($('#mem_name'), $('.error:eq(5)'), "이름을")) return;
-		else if(!formCheck($('#mem_email'), $('.error:eq(6)'), "이름을")) return;
+		else if(!formCheck($('#emailName'), $('.error:eq(6)'), "이메일을")) return;
 		else if(idConfirm!=2) {
 			alert("아이디 중복 체크를 해주세요");
 			return;
@@ -103,9 +103,9 @@ $(function(){
 		}
 	});
 	
-	$("#joinCancel").click(function(){
+	/*$("#joinCancel").click(function(){
 		location.href-"/member/login";
-	});
+	});*/
 	
 	$("#joinReset").click(function(){
 		$("#memberForm").each(function(){

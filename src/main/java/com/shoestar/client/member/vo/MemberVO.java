@@ -14,7 +14,7 @@ public class MemberVO extends LoginVO{
 	/*private String mem_id;
 	private String mem_pwd;
 	private String mem_name;*/
-	private int mem_birth;
+	private Date mem_birth;
 	private String mem_sex;
 	private String mem_addr1;
 	private String mem_addr2;
@@ -25,7 +25,6 @@ public class MemberVO extends LoginVO{
 	private Date mem_rdate;
 	private int mem_no;
 	
-	private int idx;
 	private String oldUserpwd;
 	private String pinno;
 	private Timestamp joinDate;

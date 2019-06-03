@@ -12,9 +12,9 @@ $(function(){
 	});
 	
 	$("#oldUserPwd, #mem_pwd, #mem_pwdCheck, #mem_phone").bind("focus", function(){ 
-		var idx = $("#oldUserPwd, #mem_pwd, #mem_pwdCheck, #mem_phone").index(this);
-		//console.log("대상: "+ idx):
-		$(this).parents(".form-group").find(".error").html(message[idx]);
+		var mem_no = $("#oldUserPwd, #mem_pwd, #mem_pwdCheck, #mem_phone").index(this);
+		//console.log("대상: "+ mem_no):
+		$(this).parents(".form-group").find(".error").html(message[mem_no]);
 	});
 	
 	//확인버튼 클릭시 처리 이벤트

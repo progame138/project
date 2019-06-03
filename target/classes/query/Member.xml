@@ -3,18 +3,18 @@
 <mapper namespace="com.shoestar.client.member.dao.MemberDao">
 	
 	<select id="memberSelect" parameterType="String" resultType="member">
-		select mem_id, mem_pwd, mem_name, mem_birth, mem_email, mem_phone
+		select mem_no, mem_id, mem_pwd, mem_name, mem_birth, mem_email, mem_phone
 		from member
 		where mem_id = #{mem_id}
 	</select>
 	
 	<insert id="memberInsert" parameterType="member">
 		/*member - memberInsert*/
-		<selectKey keyProperty="idx" resultType="int" order="BEFORE">
+		<selectKey keyProperty="mem_no" resultType="int" order="BEFORE">
 			select member_seq.nextval from dual
 		</selectKey>
-		insert into member(mem_id, mem_pwd, mem_name, mem_birth, mem_email, mem_phone)
-		values(#{mem_id}, #{mem_pwd}, #{mem_name}, #{mem_birth}, #{mem_email}, #{mem_phone})
+		insert into member(mem_no, mem_id, mem_pwd, mem_name, mem_birth, mem_email, mem_phone)
+		values(#{mem_no}, #{mem_id}, #{mem_pwd}, #{mem_name}, #{mem_birth}, #{mem_email}, #{mem_phone})
 	</insert>
 	
 	<update id="memberUpdate" parameterType="member">
@@ -22,7 +22,7 @@
 		<if test="mem_pwd != null and mem_pwd != ''">
 			mem_pwd=#{mem_pwd},
 		</if>
-			mem_phone=#{phone}, mem_email=#{mem_email}
+			mem_phone=#{mem_phone}, mem_email=#{mem_email}
 			where mem_id=#{mem_id}
 	</update>
 	

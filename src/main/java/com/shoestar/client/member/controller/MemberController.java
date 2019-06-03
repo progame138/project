@@ -68,7 +68,7 @@ import lombok.extern.log4j.Log4j;
 					mav.addObject("codeNumber", 1); //유저 아이디가 이미 존재함
 					mav.setViewName("client/member/join");
 					break;
-			case 2:
+			case 3:
 					mav.addObject("codeNumber", 3);
 					mav.setViewName("client/member/join_success"); //새로운 맴버 추가시, 로그인페이지 이동
 					break;
@@ -120,7 +120,7 @@ import lombok.extern.log4j.Log4j;
 				}
 				
 				memberService.memberUpdate(mvo);
-				mav.setViewName("redirect/member/logout");
+				mav.setViewName("redirect:/member/logout");
 				return mav;
 			}
 			

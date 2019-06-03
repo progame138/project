@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="contextPath"  value="${pageContext.request.contextPath}" />
+<%-- <c:set var="contextPath"  value="${pageContext.request.contextPath}" /> --%>
 <!DOCTYPE html>
    <html>
       <head>
@@ -27,7 +27,7 @@
            <script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
            <script type="text/javascript" src="/resources/include/js/jquery.form.min.js"></script>
            <script type="text/javascript" src="/resources/include/js/join.js"></script>
-           <script type="text/javascript" src="/resources/include/js/login.js"></script>
+          <!--  <script type="text/javascript" src="/resources/include/js/login.js"></script> -->
            <script type="text/javascript" src="/resources/include/js/pwdPattern.js"></script>
            <script type="text/javascript" src="/resources/include/js/html5shiv.js"></script>
            <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
@@ -49,14 +49,12 @@
             </style>
            <script type="text/javascript">
            
-         //회원수정 테스트
-       	$("#modifyBtn").click(function(){
-       		location.href="/member/modify";
-       	}); 
+        
            function codeCheck(){
         	   var codeNumber = '<c:out value="${codeNumber}"/>';
         	   if(codeNumber !=''){
         		   switch(parseInt(codeNumber)){
+        		   
         		   case 1:
         			   		alert("이미 가입된 회원입니다");
         			   		break;
@@ -183,9 +181,9 @@
 					</div>
 					
 					<div class="form-group form-group-sm">
-						<label for="mem_pwdCheck" class="col-sm-2 control-label">비밀번호 확인</label>
+						<label for="userPwdCheck" class="col-sm-2 control-label">비밀번호 확인</label>
 							<div class="col-sm-3">
-								<input type="password" id="mem_pwdCheck" name="mem_pwdCheck" 
+								<input type="password" id="userPwdCheck" name="userPwdCheck" 
 								class="form-control" maxlength="15" placeholder="비밀번호확인">
 							</div>
 							
@@ -195,7 +193,7 @@
 					</div>
 					
 					<div class="form-group form-group-sm">
-						<label for="phone" class="col-sm-2 control-label">휴대폰번호</label>
+						<label for="mem_phone" class="col-sm-2 control-label">휴대폰번호</label>
 							<div class="col-sm-3">
 								<input type="text" id="mem_phone" name="mem_phone" maxlength="15" 
 								class="form-control" placeholder="휴대폰 번호">
@@ -236,9 +234,9 @@
 					</div>
 					
 					<div class="form-group form-group-sm">
-						<label for="mem_name" class="col-sm-2 control-label">이메일</label>
+						<label for="emailName" class="col-sm-2 control-label">이메일</label>
 							<div class="col-sm-3">
-								<input type="text" id="mem_email" name="mem_email" maxlength="60"
+								<input type="text" id="emailName" name="emailName" maxlength="60"
 								class="form-control" placeholder="이메일주소">
 							</div>	
 							
@@ -269,7 +267,7 @@
 					<div class="form-group form-group-sm">
 						<label for="phone" class="col-sm-2 control-label">주소</label>
 							<div class="col-sm-3">
-								 <label>우편번호<input type="text" id="mem_zip" name="mem_zip" size="10" ></label> <a href="javascript:execDaumPostcode()">주소검색</a>
+								 <label>우편번호<br><input type="text" id="mem_zip" name="mem_zip" size="10" ><a href="javascript:execDaumPostcode()">&nbsp;&nbsp;주소검색</a></label> 
 								<label>도로명주소 <input type="text" id="mem_addr1" name="mem_addr1" size="50" /></label>
 								 <label>지번주소<input type="text" id="mem_addr2" name="mem_addr2" size="50" /></label> 
 							</div>
@@ -278,8 +276,8 @@
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-6">
 								<input type="button" value="가입하기" id="joinInsert" class="btn btn-default"/>
-								<input type="button" value="초기화" id="joinReset" class="btn btn-default"/>
-								<input type="button" value="회원수정테스트" id="modifyBtn" class="btn btn-default"/>
+								<input type="button" value="재작성" id="joinReset" class="btn btn-default"/>
+								<input type="button" value="취소" id="joinCancel" class="btn btn-default"/>
 						</div>
 					</div>
 					
