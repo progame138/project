@@ -2,16 +2,16 @@ package com.shoestar.client.cscenter.controller;
 
 import java.util.List;
 
-import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
+
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
+
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 import com.shoestar.client.cscenter.service.FAQService;
 import com.shoestar.client.cscenter.vo.FAQVO;
@@ -54,7 +54,7 @@ public class FAQController {
 	}
 	
 	
-	//고개센터 링크
+	//고객센터 링크
 	@GetMapping("/")
 	public String csMain() {
 		return "client/cscenter/csMain";

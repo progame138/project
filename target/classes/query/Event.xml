@@ -18,6 +18,8 @@
 				<![CDATA[
 					ev_edate >= trunc(sysdate) or ev_edate is null
 				]]>
+				order by ev_date asc
+				
 	</select>
 	
 	<!-- 관리자 이벤트 조회 -->

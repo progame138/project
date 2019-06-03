@@ -18,13 +18,13 @@
 <script type="text/javascript">
 	$(function() {
 		
-		$("#AventPreviewBtn").click(function() {
+		$(".AventPreviewBtn").click(function() {
 			   var ev_no = $(this).parents("tr").attr("data-num");
 		         $("#ev_no").val(ev_no);
 		
 		         $("#AventListForm").attr({
 		            "method" : "get",
-		            "action" : "/client/event/detail"
+		            "action" : "/event/detail"
 		         });
 		         $("#AventListForm").submit();
 	      });
@@ -98,10 +98,10 @@
 									</div>
 								</td>
 								<td class="Avent_td">
-									<button type="button" id="AventPreviewBtn">미리보기</button>
+									<button type="button" class="AventPreviewBtn">미리보기</button>
 								</td>
 								<td class="Avent_td">
-									<button type="button" id="AventUpdateBtn">수정</button>
+									<button type="button" class="AventUpdateBtn">수정</button>
 							</tr>
 							
 						</c:forEach>

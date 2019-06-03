@@ -9,7 +9,7 @@
 
     <!-- 스타일 -->
     <link href="/resources/include/dist/css/bootstrap-ko.css" rel="stylesheet">
-    
+     <link href="/resources/include/dist/css/bootstrap-responsive.css" rel="stylesheet">
     
     <script ></script>
     <style type="text/css">
@@ -62,28 +62,7 @@
   </head>
 
   <body>
-  <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container-fluid">
-          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="brand" href="#">ShoeStar</a>
-          <div class="nav-collapse collapse">
-            <p class="navbar-text pull-right">
-              <a href="#" class="navbar-link"></a>
-            </p>
-            <ul class="nav">
-              <li class="active"><a href="#">남자</a></li>
-              <li><a href="#about">여자</a></li>
-              <li><a href="#contact">고객센터</a></li>
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div>
-      </div>
-    </div>
+ 
     <div class="container-fluid">
       <div class="row-fluid">
         <div class="span3">
@@ -95,7 +74,7 @@
               <li><a href="/cscenter/faqList?fc_no=3">-상품/배송</a></li>
               <li><a href="/cscenter/faqList?fc_no=4">-이벤트</a></li>
               <li><a href="/cscenter/faqList?fc_no=5">-기타</a><hr></li>
-              <li class="nav-header"><a>1:1 게시판</a><hr></li>
+              <li class="nav-header"><a href="/cscenter/qnaBoard">1:1 게시판</a><hr></li>
               <li class="nav-header"><a href="/cscenter/provision?p_no=2">개인정보처리지침</a><hr></li>
               <li class="nav-header"><a href="/cscenter/provision?p_no=1">이용약관</a></li>
             </ul>
@@ -128,7 +107,7 @@
 	          <div class="entry">
 	          	<figure>	
 	           		<img src="/resources/images/cscenter/one_one.png" class="img-polaroid">
-	          		<figcaption><a href="#">1:1문의</a></figcaption>
+	          		<figcaption><a href="/cscenter/qnaBoard">1:1문의</a></figcaption>
 	          	</figure>
 	          </div> 	
            	

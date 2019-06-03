@@ -16,10 +16,12 @@
 	.Dblock{display: inline-block;}
 	#ev_title{font-size: 20px; font-weight: bold;}
 	#EDetail_title{margin-bottom: 10px; margin-top: 20px;}
+	.Eventimage{width: 80%; height: 80%;}
 	
 	#Event_note{ }
 	#Event_note_title{font-size: 20px; font-weight: bold;}
 	#Event_note_title:{}
+	#ev_img{size: 500px;}
 	hr {color: black; width: 70%; float: left;}
 	#ev_content{float: left;}
 </style>
@@ -32,7 +34,13 @@
 		$("#Event_note_title").click(function(){
 			$("#ev_content").css("visibility", "visible");
 		});
-	})
+		
+		var img = $("<img>");
+			img.attr({"src":"/shoestarStorage/event/${detail.ev_img}",
+					  "alt":"${detail.ev_title}"});
+			img.addClass("Eventimage");
+			$("#ev_img").append(img);
+	});
 </script>
 </head>
 <body>
@@ -45,18 +53,18 @@
 			</div>
 				 <span class="gray" style="font-size: 20px">|</span> 
 			<div id="ev_date" class="Dinline">
-				<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${detail.ev_date}" />
+				<fmt:formatDate pattern="yyyy-MM-dd" value="${detail.ev_date}" />
 			</div>
 				 ~ 
 			<div id="ev_edate" class="Dblock">
-				<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${detail.ev_edate}" />
+				<fmt:formatDate pattern="yyyy-MM-dd" value="${detail.ev_edate}" />
 			</div>
 		</div>
 		</div>
 		
 		
 		<div id="ev_img">
-			${detail.ev_img}
+		
 		</div>
 		
 		<br />
@@ -67,9 +75,8 @@
 			</div>
 			
 			<hr />
-			
+			<br />
 			<div id="ev_content">
-				
 					${detail.ev_content}
 			</div>
 			
