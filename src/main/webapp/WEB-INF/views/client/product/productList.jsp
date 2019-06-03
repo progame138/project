@@ -17,7 +17,7 @@
 				
 				showProductList();
 				showProductCategory();
-				resetPriceList($("#priceList"), defaultRequest);
+				resetPriceList($("#priceList"));
 			});
 			
 			function showProductList() {
@@ -127,15 +127,11 @@
 					</div>
 					<!-- 가격 리스트 -->
 					<ul class="menuList collapse in" id="priceList">
-						<li><a class="priceFilter" href="#" data-pricet="30000">30,000원 미만</a></li>
-						<li><a class="priceFilter" href="#" data-priceb="30000" data-pricet="60000">30,000 ~ 60,000</a></li>
-						<li><a class="priceFilter" href="#" data-priceb="60000" data-pricet="100000">60,000 ~ 100,000</a></li>
-						<li><a class="priceFilter" href="#" data-priceb="100000" >100,000원 이상</a></li>
+						<li><button type="button" data-toggle="button"  class="priceFilter" data-pricet="30000">30,000원 미만</button></li>
+						<li><a class="priceFilter" data-priceb="30000" data-pricet="60000">30,000 ~ 60,000</a></li>
+						<li><a class="priceFilter" data-priceb="60000" data-pricet="100000">60,000 ~ 100,000</a></li>
+						<li><a class="priceFilter" data-priceb="100000" >100,000원 이상</a></li>
 					</ul>
-				</div>
-				<!-- 필터 적용을 위한 폼 -->
-				<div class="sumbitSection">
-					필터 선택 적용을 위한 자리
 				</div>
 			</div>
 			

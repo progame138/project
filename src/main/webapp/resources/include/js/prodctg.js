@@ -37,19 +37,20 @@ function createProdCtgLink(prodCtgVO, requestParam) {
 }
 
 /**
- * 추가할 요청값을 조각내고 성별과 나이 정보만 가져오는 함수
- * @param requestParam 요청값
- * @param appendAmp &를 붙일지 말지 여부
+ * 요청값에서 명시된 요청만 남겨서 돌려주는 함수
+ * @param requestParam 요청값 전체
+ * @param allowThese 가져올 요청 파라미터
  * @returns
  */
-function splitRequest(requestParam, appendAmp) {
+function splitRequest(requestParam, ...allowThese) {
 	var requestToAppend = "";
 	
 	$.each(requestParam.replace("?","").split("&"), function(index, stack) {
-		if(stack.toLowerCase().startsWith("pd_sex=")) {
-			requestToAppend = requestToAppend + "&" + stack;
-		} else if(stack.toLowerCase().startsWith("pd_age=")) {
-			requestToAppend = requestToAppend + "&" + stack;
+		for(var paramIndex in allowThese) {
+			if(stack.toLowerCase().startsWith(allowThese[paramIndex])) {
+				requestToAppend = requestToAppend + "&" + stack;
+				break;
+			}
 		}
 	});
 	
@@ -61,18 +62,18 @@ function splitRequest(requestParam, appendAmp) {
 }
 
 /**
- * 가격 필터를 포함한 링크를 필터리스트 내에 존재하는 a tag의 href 속성에 명시
+ * 가격 필터를 포함한 링크를 필터리스트 내에 존재하는 버튼의 속성에 명시
  * @param target 목표로 할 ul
- * @param defaultRequest 요청의 기본값. 주소와 더불어 성별/나이 요청값이 들어간다.
  */
-function resetPriceList(target, defaultRequest) {
+function resetPriceList(target) {
 	target.children("li").each(function() {
-		var atag = $(this).find(".priceFilter");
+		var targetBtn = $(this).find(".priceFilter");
 		
-		var priceBottom = atag.attr("data-priceb");
-		var priceTop = atag.attr("data-pricet");
-		
-		atag.attr("href", defaultRequest + createPriceFilterRequest(priceBottom, priceTop));
+		//targetBtn.attr("href", createPriceFilterRequest(priceBottom, priceTop));
+		targetBtn.click(function(event) {
+			var pb = targetBtn.attr("data-priceb");
+			var pt = targetBtn.attr("data-pricet");
+		});
 	});
 }
 
@@ -93,4 +94,9 @@ function createPriceFilterRequest(priceBottom, priceTop) {
 	}
 	
 	return requestString;
+}
+
+
+function toggleSubmitButton(targetForm) {
+	
 }
