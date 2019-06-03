@@ -27,4 +27,11 @@ public class ProdCtgController {
 		
 		return result;
 	}
+	
+	@RequestMapping(value="/getSize", method=RequestMethod.GET, produces={MediaType.APPLICATION_JSON_UTF8_VALUE})
+	public List<Integer> getAvailableSize(ProdCtgVO pcvo) {
+		List<Integer> result = prodCtgService.getAvailableSize(pcvo);
+		
+		return result;
+	}
 }

@@ -39,12 +39,11 @@ body > .container {
 
 .menuList > li {
 	list-style: none;
-	padding-left: 15px;
+	margin-left: 15px;
 }
 
 #sideMenuBar a {
 	color: #333;
-	display: block;
 }
 
 #sideMenuBar a:hover {
@@ -56,7 +55,37 @@ span.ctgCount {
 	color: #aaa;
 }
 
+#sizeList {
+	margin-bottom: 10px;
+}
+
+#sizeList > li {
+	border: 1px solid #ddd;
+	display: inline-block;
+	margin: 0 5px 10px 0;
+}
+
+#sizeList > li > a {
+	display: block;
+	padding: 5px 10px;
+	font-size: 1.2em;
+}
+
+#sizeList > li:hover {
+	border: 1px solid black;
+}
+
+#sizeList > li:last-child {
+	clear: right;
+}
+
 a#resetCategory {
 	font-size: 1.2em;
 	font-weight: bold;
+}
+
+.filterToggled {
+	font-weight: bold;
+	border-bottom: 2px double #666;
+	color: #1c3d62;
 }

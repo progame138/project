@@ -7,4 +7,6 @@ import com.shoestar.client.prod.vo.ProdCtgVO;
 public interface ProdCtgService {
 	
 	public List<ProdCtgVO> getProdCtgList(ProdCtgVO pcvo);
+	
+	public List<Integer> getAvailableSize(ProdCtgVO pcvo);
 }

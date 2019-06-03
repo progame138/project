@@ -20,7 +20,7 @@ function createProdCtgLink(prodCtgVO, requestParam) {
 		if(requestParam.startsWith("&") || requestParam == "") {
 			requestToAppend = requestParam;
 		} else {
-			requestToAppend = "&" + splitRequest(requestParam);
+			requestToAppend = "&" + splitRequest(requestParam, "pd_sex", "pd_age");
 		}
 	} catch (e) {
 	}
@@ -29,6 +29,11 @@ function createProdCtgLink(prodCtgVO, requestParam) {
 	var pca = $("<a>").attr({
 		"href" : PROD_LIST_URL + "?pct_no=" + prodCtgVO.pct_no + requestToAppend,
 	}).text(prodCtgVO.pct_name);
+	
+	if(getRequestValue("pct_no") == prodCtgVO.pct_no) {
+		pca.addClass("filterToggled");
+	}
+	
 	var pcnt = $("<span>").text(" (" + prodCtgVO.pd_count + ")").addClass("ctgCount");
 	
 	pcli.append(pca.append(pcnt));
@@ -47,7 +52,7 @@ function splitRequest(requestParam, ...allowThese) {
 	
 	$.each(requestParam.replace("?","").split("&"), function(index, stack) {
 		for(var paramIndex in allowThese) {
-			if(stack.toLowerCase().startsWith(allowThese[paramIndex])) {
+			if(stack.toLowerCase().startsWith(allowThese[paramIndex].toLowerCase())) {
 				requestToAppend = requestToAppend + "&" + stack;
 				break;
 			}
@@ -61,19 +66,31 @@ function splitRequest(requestParam, ...allowThese) {
 	return requestToAppend;
 }
 
+
+function getRequestValue(targetRequest) {
+	var paramReg = new RegExp(".*&?"+targetRequest+"=(\\d+).*", "g");
+	var regResult = paramReg.exec(window.location.search);
+	return regResult != null ? regResult[1] : null;
+}
+
 /**
- * 가격 필터를 포함한 링크를 필터리스트 내에 존재하는 버튼의 속성에 명시
+ * 가격 필터를 포함한 링크를 필터리스트 내에 존재하는 a 태그의 속성에 명시
  * @param target 목표로 할 ul
  */
 function resetPriceList(target) {
 	target.children("li").each(function() {
-		var targetBtn = $(this).find(".priceFilter");
+		var targetFilter = $(this).find(".priceFilter");
 		
-		//targetBtn.attr("href", createPriceFilterRequest(priceBottom, priceTop));
-		targetBtn.click(function(event) {
-			var pb = targetBtn.attr("data-priceb");
-			var pt = targetBtn.attr("data-pricet");
-		});
+		var priceBottom = targetFilter.attr("data-priceb");
+		var priceTop = targetFilter.attr("data-pricet");
+		
+		var requestTo = PROD_LIST_URL + "?" + splitRequest(window.location.search, "pd_sex", "pd_age", "pct_no", "color", "size");
+		var priceFilter = createPriceFilterRequest(priceBottom, priceTop);
+		
+		targetFilter.attr("href", requestTo + priceFilter);
+		if(priceFilter == "") {
+			targetFilter.addClass("filterToggled");
+		}
 	});
 }
 
@@ -86,17 +103,43 @@ function resetPriceList(target) {
 function createPriceFilterRequest(priceBottom, priceTop) {
 	var requestString = "";
 	
+	requestBottom = getRequestValue("priceBottom");
+	requestTop = getRequestValue("priceTop");
+	
 	if(!jQuery.isEmptyObject(priceBottom) && priceBottom != "" && !isNaN(priceBottom)) {
-		requestString = requestString + "&priceBottom=" + priceBottom;
+		if(requestBottom != priceBottom)
+			requestString = requestString + "&priceBottom=" + priceBottom;
 	}
 	if(!jQuery.isEmptyObject(priceTop) && priceTop != "" && !isNaN(priceTop)) {
-		requestString = requestString + "&priceTop=" + priceTop;
+		if(requestTop != priceTop)
+			requestString = requestString + "&priceTop=" + priceTop;
 	}
 	
 	return requestString;
 }
 
-
-function toggleSubmitButton(targetForm) {
+/**
+ * 사이즈 필터를 적용할 li 생성 함수
+ * @param pSize 생성할 사이즈
+ * @returns jQuery li 태그
+ */
+function createSizeLink(pSize) {
+	var reqSize = getRequestValue("size");
 	
+	var psli = $("<li>");
+	var psa = $("<a>").attr({
+		"href" : PROD_LIST_URL + "?" + splitRequest(window.location.search, "pd_sex", "pd_age", "pct_no",
+				"color", "priceBottom", "priceTop")
+	}).text(pSize);
+	
+	var sizeReqChunk = "&size=" + pSize;
+	if(reqSize != null && reqSize == pSize) {
+		sizeReqChunk = "";
+		psa.addClass("filterToggled");
+	}
+	psa.attr("href", psa.attr("href") + sizeReqChunk);
+	
+	psli.append(psa.append());
+	
+	return psli;
 }

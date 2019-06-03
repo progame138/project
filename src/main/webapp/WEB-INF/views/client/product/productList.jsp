@@ -10,13 +10,14 @@
 		<script type="text/javascript" src="/resources/include/js/product.js"></script>
 		<script type="text/javascript" src="/resources/include/js/prodctg.js"></script>
 		<script type="text/javascript">
-			var defaultRequest = "/product/showList?" + splitRequest(window.location.search);
+			var defaultRequest = "/product/showList?" + splitRequest(window.location.search, "pd_sex", "pd_age");
 			
 			$(function() {
 				$("#resetCategory").attr("href", defaultRequest);
 				
 				showProductList();
 				showProductCategory();
+				showSizeCategory();
 				resetPriceList($("#priceList"));
 			});
 			
@@ -51,16 +52,17 @@
 				$("#ctgList").html("");
 				
 				$.ajax({
-					url: "/pctg/getList" + window.location.search,
+					url: "/pctg/getList?" + splitRequest(window.location.search, "pd_sex", "pd_age"),
 					type: "get",
 					dataType: "json",
 					error: function() {
-						alert("상품 분류 정보를 불러올 수 없었습니다.");
+						var cont = $("<li>").text("상품 분류 정보를 불러올 수 없었습니다.").css({"color":"grey"});
+						$("#ctgList").append(cont);
 					},
 					success: function(data) {
 						if(!jQuery.isEmptyObject(data)) {
 							// 요청값 분석
-							var requestParam = splitRequest(window.location.search);
+							var requestParam = splitRequest(window.location.search, "pd_sex", "pd_age");
 							// li 태그 생성 및 추가
 							$.each(data, function(index, stack) {
 								$("#ctgList").append(createProdCtgLink(stack, requestParam));
@@ -72,14 +74,36 @@
 					}
 				});
 			}
+			
+			function showSizeCategory() {
+				$("#sizeList").html("");
+				
+				$.ajax({
+					url: "/pctg/getSize?" + splitRequest(window.location.search, "pd_sex", "pd_age"),
+					type: "get",
+					dataType: "json",
+					error: function() {
+						var cont = $("<li>").text("사이즈 정보를 불러올 수 없었습니다.").css({"color":"grey"});
+						$("#sizeList").append(cont);
+					},
+					success: function(data) {
+						if(!jQuery.isEmptyObject(data)) {
+							// li 태그 생성 및 추가
+							$.each(data, function(index, stack) {
+								$("#sizeList").append(createSizeLink(stack));
+							});
+						} else {
+							var cont = $("<li>").text("분류가 없습니다.").css({"color":"grey"});
+							$("#sizeList").append(cont);
+						}
+					}
+				});
+			}
 		</script>
 	</head>
 	
 	<body>
 		<div id="mainFrame">
-			
-			<!-- ############################## 카테고리 경로 ############################## -->
-			<div id="breadcrumbs">카테고리 경로 표시 자리</div>
 			
 			<!-- ############################## 메뉴란 ############################## -->
 			<div id="sideMenuBar" class="col-md-2">
@@ -94,8 +118,7 @@
 						href="#ctgList" aria-controls="ctgList">분류</a></h3>
 					</div>
 					<!-- 카테고리 리스트 -->
-					<ul class="menuList collapse in" id="ctgList">
-					</ul>
+					<ul class="menuList collapse in" id="ctgList"></ul>
 				</div>
 				<div class="menuSection">
 					<!-- 사이즈 필터 -->
@@ -104,10 +127,7 @@
 						href="#sizeList" aria-controls="sizeList">사이즈</a></h3>
 					</div>
 					<!-- 사이즈 리스트 -->
-					<ul class="menuList collapse in" id="sizeList"><!-- 코어태그로 나이별 처리하기 -->
-						<li><a href="#">jQuery</a></li>
-						<li><a href="#">BootStrap</a></li>
-					</ul>
+					<ul class="menuList collapse in" id="sizeList"></ul>
 					
 					<!-- 컬러 필터 -->
 					<div class="menuTitle">
@@ -127,7 +147,7 @@
 					</div>
 					<!-- 가격 리스트 -->
 					<ul class="menuList collapse in" id="priceList">
-						<li><button type="button" data-toggle="button"  class="priceFilter" data-pricet="30000">30,000원 미만</button></li>
+						<li><a class="priceFilter" data-pricet="30000">30,000원 미만</a></li>
 						<li><a class="priceFilter" data-priceb="30000" data-pricet="60000">30,000 ~ 60,000</a></li>
 						<li><a class="priceFilter" data-priceb="60000" data-pricet="100000">60,000 ~ 100,000</a></li>
 						<li><a class="priceFilter" data-priceb="100000" >100,000원 이상</a></li>

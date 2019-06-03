@@ -22,4 +22,11 @@ public class ProdCtgServiceImpl implements ProdCtgService {
 		
 		return result;
 	}
+
+	@Override
+	public List<Integer> getAvailableSize(ProdCtgVO pcvo) {
+		List<Integer> result = prodCtgDao.getAvailableSize(pcvo);
+		
+		return result;
+	}
 }

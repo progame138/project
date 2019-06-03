@@ -93,7 +93,7 @@
 								prod_ins
 							WHERE
 							<trim>
-								pd_no = prodlist.pd_no
+								pd_no = prod.pd_no
 								<if test="size != 0">
 								AND pi_size = #{size}
 								</if>

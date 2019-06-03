@@ -2,6 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shoestar.client.prod.dao.ProdCtgDao">
 	
+	<!-- 성별 -->
+	<sql id="sexReq">
+		<if test='pd_sex != null and pd_sex != ""'>
+			pd_sex = #{pd_sex}
+		</if>
+	</sql>
+	
+	<!-- 연령 -->
+	<sql id="ageReq">
+		<choose>
+			<when test='pd_age == null'> <!-- default -->
+				pd_age = 'a'
+			</when>
+			<when test='pd_age == "all"'> <!-- all -->
+			</when>
+			<otherwise>
+				pd_age = #{pd_age}
+			</otherwise>
+		</choose>
+	</sql>
+	
 	<select id="getProdCtgList" parameterType="prodctg" resultType="prodctg">
 		SELECT
 			/*+ INDEX_DESC(prod_ctg prod_ctg_pk)*/
@@ -13,25 +34,29 @@
 			ON
 				prod_ctg.pct_no = prod.pct_no
 		<where>
-			<!-- 성별 -->
-			<if test='pd_sex != null and pd_sex != ""'>
-				pd_sex = #{pd_sex}
-			</if>
-			<!-- 연령 -->
-			<trim prefix="AND"><choose>
-				<when test='pd_age == null'> <!-- default -->
-					pd_age = 'a'
-				</when>
-				<when test='pd_age == "all"'> <!-- all -->
-				</when>
-				<otherwise>
-					pd_age = #{pd_age}
-				</otherwise>
-			</choose></trim>
+			<include refid="sexReq"></include>
+			<trim prefix="AND"><include refid="ageReq"></include></trim>
 		</where>
 		GROUP BY
 			prod_ctg.pct_no, pct_name
 		ORDER BY
 			1 ASC
+	</select>
+	
+	<select id="getAvailableSize" parameterType="prodctg" resultType="java.lang.Integer">
+		SELECT DISTINCT
+			pi_size
+		FROM
+			prod_ins pi
+			INNER JOIN
+				prod p
+			ON
+				p.pd_no = pi.pd_no
+		<where>
+			<include refid="sexReq"></include>
+			<trim prefix="AND"><include refid="ageReq"></include></trim>
+		</where>
+		ORDER BY
+			1
 	</select>
 </mapper>
