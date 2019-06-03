@@ -8,10 +8,16 @@
 		<link rel="stylesheet" href="/resources/include/css/prodctg.css" />
 		<link rel="stylesheet" href="/resources/include/css/product.css" />
 		<script type="text/javascript" src="/resources/include/js/product.js"></script>
+		<script type="text/javascript" src="/resources/include/js/prodctg.js"></script>
 		<script type="text/javascript">
+			var defaultRequest = "/product/showList?" + splitRequest(window.location.search);
+			
 			$(function() {
+				$("#resetCategory").attr("href", defaultRequest);
+				
 				showProductList();
 				showProductCategory();
+				resetPriceList($("#priceList"), defaultRequest);
 			});
 			
 			function showProductList() {
@@ -42,7 +48,29 @@
 			}
 			
 			function showProductCategory() {
+				$("#ctgList").html("");
 				
+				$.ajax({
+					url: "/pctg/getList" + window.location.search,
+					type: "get",
+					dataType: "json",
+					error: function() {
+						alert("상품 분류 정보를 불러올 수 없었습니다.");
+					},
+					success: function(data) {
+						if(!jQuery.isEmptyObject(data)) {
+							// 요청값 분석
+							var requestParam = splitRequest(window.location.search);
+							// li 태그 생성 및 추가
+							$.each(data, function(index, stack) {
+								$("#ctgList").append(createProdCtgLink(stack, requestParam));
+							});
+						} else {
+							var cont = $("<li>").text("분류가 없습니다.").css({"color":"grey"});
+							$("#ctgList").append(cont);
+						}
+					}
+				});
 			}
 		</script>
 	</head>
@@ -55,47 +83,54 @@
 			
 			<!-- ############################## 메뉴란 ############################## -->
 			<div id="sideMenuBar" class="col-md-2">
+				<!-- 전체보기 -->
+				<div class="menuSection">
+					<a href="#" id="resetCategory">전체보기</a>
+				</div>
 				<!-- 카테고리 선택란 -->
 				<div class="menuSection">
 					<div class="menuTitle">
-						<h3 class="menuTitleBody">분류</h3>
+						<h3 class="menuTitleBody"><a data-toggle="collapse" aria-expanded="true"
+						href="#ctgList" aria-controls="ctgList">분류</a></h3>
 					</div>
 					<!-- 카테고리 리스트 -->
-					<ul class="menuList" id="ctgList">
-						<li class=""><a href="#">HTML</a></li>
-						<li class=""><a href="#">CSS</a></li>
-						<li class=""><a href="#">ECMAScript5</a></li>
+					<ul class="menuList collapse in" id="ctgList">
 					</ul>
 				</div>
 				<div class="menuSection">
 					<!-- 사이즈 필터 -->
 					<div class="menuTitle">
-						<h3 class="menuTitleBody">사이즈</h3>
+						<h3 class="menuTitleBody"><a data-toggle="collapse" aria-expanded="true"
+						href="#sizeList" aria-controls="sizeList">사이즈</a></h3>
 					</div>
 					<!-- 사이즈 리스트 -->
-					<ul class="menuList" id="sizeList"><!-- 코어태그로 나이별 처리하기 -->
-						<li class=""><a href="#">jQuery</a></li>
-						<li class=""><a href="#">BootStrap</a></li>
+					<ul class="menuList collapse in" id="sizeList"><!-- 코어태그로 나이별 처리하기 -->
+						<li><a href="#">jQuery</a></li>
+						<li><a href="#">BootStrap</a></li>
 					</ul>
 					
 					<!-- 컬러 필터 -->
 					<div class="menuTitle">
-						<h3 class="menuTitleBody">색상</h3>
+						<h3 class="menuTitleBody"><a data-toggle="collapse" aria-expanded="true"
+						href="#colorList" aria-controls="colorList">색상</a></h3>
 					</div>
 					<!-- 색상 리스트 -->
-					<ul class="menuList" id="colorList">
-						<li class=""><a href="#">About</a></li>
-						<li class=""><a href="#">Help</a></li>
+					<ul class="menuList collapse in" id="colorList">
+						<li><a href="#">About</a></li>
+						<li><a href="#">Help</a></li>
 					</ul>
 					
 					<!-- 가격 필터 -->
 					<div class="menuTitle">
-						<h3 class="menuTitleBody">가격대</h3>
+						<h3 class="menuTitleBody"><a data-toggle="collapse" aria-expanded="true"
+						href="#priceList" aria-controls="priceList">가격대</a></h3>
 					</div>
 					<!-- 가격 리스트 -->
-					<ul class="menuList" id="priceList">
-						<li class=""><a href="#">About</a></li>
-						<li class=""><a href="#">Help</a></li>
+					<ul class="menuList collapse in" id="priceList">
+						<li><a class="priceFilter" href="#" data-pricet="30000">30,000원 미만</a></li>
+						<li><a class="priceFilter" href="#" data-priceb="30000" data-pricet="60000">30,000 ~ 60,000</a></li>
+						<li><a class="priceFilter" href="#" data-priceb="60000" data-pricet="100000">60,000 ~ 100,000</a></li>
+						<li><a class="priceFilter" href="#" data-priceb="100000" >100,000원 이상</a></li>
 					</ul>
 				</div>
 				<!-- 필터 적용을 위한 폼 -->
