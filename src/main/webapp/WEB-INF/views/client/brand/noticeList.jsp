@@ -19,8 +19,10 @@
 		<![endif] -->
 		<link href="/resources/include/dist/css/bootstrap-responsive.css" rel="stylesheet">
 		<link href="/resources/include/dist/css/bootstrap-ko.css" rel="stylesheet">
+		
     	<script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
-      	<script type="text/javascript" src="/resources/include/js/common.js"></script>
+      	<script type="text/javascript" src="/resources/include/js/searchNotice.js"></script>
+      	
       	<!-- <link rel="stylesheet" type="text/css" href="/resources/include/css/bootstrap.css"/> -->
      	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
      	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
@@ -90,6 +92,7 @@
 		
 		<script type="text/javascript">
 			$(function () {
+				
 				//제목 클릭 시 상세 페이지 이동을 위한 처리 이벤트
 				$(".goDetail").click(function(){
 					var no_no = $(this).parents("tr").attr("data-num")
@@ -106,11 +109,45 @@
 				/* 검색 버튼 클릭 시 처리 이벤트 */
 	    		$("#searchData").click(function(){
 	    			if($("#search").val()!="all"){
-	    				if(!chkData("#keyword","검색어를")) return;
+	    				if($("#keyword").val().replace(/\s/g,"")==""){
+	    					alert("검색어를 입력해 주세요.");
+	    					$("#keyword").val("");
+	    					$("#keyword").focus();
+	    				}
+	    					return false;
 	    			}
 	    			goPage();
-	    		
 	    		});
+				
+	    		/* 검색대상이 변경될 때마다 처리 이벤트 */
+	    		$("#search").change(function(){
+	    			if($("#search").val()=="all"){
+	    				$("#keyword").val("전체 데이터 조회합니다.");
+	    			}else if($("#searh").val()!="all"){
+	    				$("#keyword").val("");
+	    				$("#keyword").focus();
+	    			}
+	    		});
+	    		
+	    		/* 검색 버튼 클릭 시 처리 이벤트 */
+	    		$("#searchData").click(function(){
+	    			if($("#search").val()=="all"){
+	    				if(!chkData("#keyword","검색어를")) return;
+	    			}
+	    			return;
+	    		});
+	    		
+	    		/* 검색을 위한 실질적 처리 함수 */
+    	    	function goPage(){
+    	    		if($("#search").val()=="all"){
+    	    			$("#keyword").val("");
+    	    		}
+    	    		$("#f_search").attr({
+    	    			"method":"get",
+    	    			"action":"/brand/noticeList"
+    	    		});
+    	    		$("#f_search").submit();
+    	    	}
 				
 			}); /* 최상위 fun 종료*/
 				
@@ -148,18 +185,18 @@
 			<!-- 검색기능 시작 -->
 			<div id="boardsearch" class="text-right">
 				<form id="f_search" name="f_search" class="form-inline"> 
-				<input type="hidden" name="pageNum" value="${pageMaker.cvo.pageNum}"> <!-- (pageDTO) 글번호 가져오기 -->
-				<input type="hidden" name="amount" value="${pageMaker.cvo.amount}">
-					<div class="form-group">
-						<label style="font-size:16px">검색조건</label>
-						<select id="search" name="search" class="form-control">
-							<option value="all" id="goDetail">전체</option>
-							<option value="b_title" id="goDetail">제목</option>
-							<option value="b_content" id="goDetail">내용</option>
-							<option value="b_name" id="goDetail">말머리</option>
-						</select>
+					<%-- <input type="hidden" name="pageNum" value="${pageMaker.nvo.pageNum}"> <!-- (pageDTO) 글번호 가져오기 -->
+					<input type="hidden" name="amount" value="${pageMaker.nvo.amount}"> --%>
+						<div class="form-group">
+							<label style="font-size:16px">검색조건</label>
+							<select id="search" name="search" class="form-control">
+								<option value="all" id="goDetail">전체</option>
+								<option value="b_title" id="goDetail">제목</option>
+								<option value="b_content" id="goDetail">내용</option>
+								<option value="b_name" id="goDetail">말머리</option>
+							</select>
 						<input type="text" name="keyword" id="keyword" value="검색어를 입력하세요"  class="form-control" width="5px">
-						 <button type="button" id="searchData"class="btn btn-success">검색</button>
+						<button type="button" id="searchData"class="btn btn-success">검색</button>
 					</div>
 				</form>
 			</div>
