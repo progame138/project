@@ -55,9 +55,13 @@
 	
 	<select id="getAvailableSize" parameterType="prodctg" resultType="java.lang.Integer">
 		SELECT DISTINCT
-			pi_size
+			ps_size
 		FROM
-			prod_ins pi
+			prod_stock ps
+			INNER JOIN
+				prod_ins pi
+			ON
+				ps.pi_no = pi.pi_no
 			INNER JOIN
 				prod p
 			ON

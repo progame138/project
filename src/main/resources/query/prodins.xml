@@ -4,7 +4,7 @@
 	
 	<select id="getDetailList" parameterType="prodins" resultType="prodins">
 		SELECT
-			pi_no, pd_no, pi_size, pi_qty, pi_status, pcl_no,
+			pi_no, pd_no, pcl_no,
 			(
 			SELECT
 				pim_file
@@ -17,17 +17,9 @@
 			) AS mainImage
 		FROM
 			prod_ins
-		<where><trim prefixOverrides="AND" suffixOverrides="AND">
+		WHERE
 			pd_no = #{pd_no}
-			<choose>
-				<when test="includeAbnormal == false">
-					AND pi_status IS NULL
-				</when>
-				<otherwise><if test='pi_status != null OR pi_status != ""'>
-					AND pi_status = #{pi_status}
-				</if></otherwise>
-			</choose>
-		</trim></where>
+		WHERE
 		ORDER BY
 			pi_size ASC
 	</select>

@@ -95,11 +95,15 @@
 								1
 							FROM
 								prod_ins
+								INNER JOIN
+									prod_stock
+								ON
+									prod_ins.pi_no = prod_stock.pi_no
 							WHERE
 							<trim>
 								pd_no = prod.pd_no
 								<if test="size != 0">
-								AND pi_size = #{size}
+								AND ps_size = #{size}
 								</if>
 								<if test="color != 0">
 								AND pcl_no = #{color}
