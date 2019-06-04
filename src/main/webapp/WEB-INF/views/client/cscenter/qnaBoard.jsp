@@ -66,34 +66,50 @@
       <div class="row-fluid">
         <div class="span9">
           <!-- 리스트시작 -->
-          <div id="provisionList"> 	
-	          <div class="row-fluid">     
-			          <c:choose>
-			          	<c:when test="${not empty faqList}">
-			          		<c:forEach var="faq" items="${faqList}" varStatus="status">
-			          			<div class="span4" data-num="${faq.faq_no}" data-value="${faq.fc_no}">
-			          				<h2>${faq.faq_title}</h2>
-			          				<p>${faq.faq_content}</p>
-			          				<p><button class="detailGo" >자세히보기</button></p>
-			          			</div>
-			          		</c:forEach>
-			          	</c:when>
-			          	<c:otherwise>
-			        		<div class="span4">
-			        			<h2>게시글이 존재하지 않습니다</h2>
-			        		</div>
-			          	</c:otherwise>
-			          </c:choose>
-	            
-	          </div><!--/row-->
-	        </div><!--/span-->
-	      </div><!--/row-->
-		</div><!--/faqList  -->
+         <div id="boardList">
+         <table summary="게시판리스트" class="table table-striped">
+            <colgroup>
+               <col width="10%" />
+               <col width="62%" />
+               <col width="15%" />
+               <col width="13%" />
+            </colgroup>
+            <thead>
+               <tr>
+                  <th data-value="qna_ctgr" class="order">분류</th>
+                  <th>글제목</th>
+                  <th data-value="qna_date" class="order">작성일</th>
+                  <th data-value="mem_name">작성자</th>
+               </tr>
+            </thead>
+            <tbody id="list">
+               <!-- 데이터 출력 -->
+               <c:choose>
+                  <c:when test="${not empty qnaList}">
+                     <c:forEach var="qna" items="${qnaList}" varStatus="status">
+                        <tr class="tac" data-num="${qna.qna_no}" data-num2="${qna.mem_no}">
+                           <td>${qna.qna_ctgr}</td>
+                           <td class="goDetail tal">${qna.qna_title}</td>          
+                           <td>${qna.qna_date}</td>
+                           <td class="name">${qna.mem_id}</td>
+                        </tr>
+                     </c:forEach>
+                  </c:when>
+                  <c:otherwise>
+                     <tr>
+                        <td colspan="4" class="tac">등록된 게시물이 없습니다.</td>
+                     </tr>
+                  </c:otherwise>
+               </c:choose>
+            </tbody>
+         </table>
+      </div>
+   </div>
       <div class="contentBtn text-right">
       		<input type="button" value="글쓰기" id="insertFormBtn" class="btn btn-primary">
   	  </div>
       <hr>
-      
+     </div> 
     </div><!--/.fluid-container-->
 	</div>
 	</div>
