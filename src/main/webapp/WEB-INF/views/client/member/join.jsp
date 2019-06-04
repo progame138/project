@@ -91,9 +91,9 @@
                        }
 
                        // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                       document.getElementById('sample4_postcode').value = data.zonecode;
-                       document.getElementById("sample4_roadAddress").value = roadAddr;
-                       document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+                       document.getElementById('mem_zip').value = data.zonecode;
+                       document.getElementById("mem_addr1").value = roadAddr;
+                       document.getElementById("mem_addr2").value = data.jibunAddress;
                        
                        // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
                        if(roadAddr !== ''){
@@ -131,8 +131,8 @@
 				<form id="memberForm" class="form-horizontal">
 				
 				
-					<input type="hidden" name="mem_email" id="mem_email">
-					<input type="hidden" name="mem_birth" id="mem_birth">
+					<!-- <input type="hidden" name="mem_email" id="mem_email">
+					<input type="hidden" name="mem_birth" id="mem_birth"> -->
 					
 					<div class="form-group form-group-sm">
 						<label for="mem_id" class="col-sm-2 control-label">아이디</label>
@@ -193,7 +193,7 @@
 							</div>	
 							
 							<div class="col-sm-1">
-								<input type="text" id="gender" name="gender" maxlength="1"
+								<input type="text" id="mem_sex" name="mem_sex" maxlength="1"
 								class="form-control" placeholder="앞1자리"/>
 							</div>	
 							
@@ -220,23 +220,16 @@
 								<input type="text" id="mem_email" name="mem_email" maxlength="60"
 								class="form-control" placeholder="이메일주소">
 							</div>	
-							
-							
+						
 							
 							<div class="col-sm-2">
 								<select id="emailDomain" class="form-control">
 									<option value="non">직접입력</option>
-									<option value="hanmail.net">hanmail.net</option>
-									<option value="naver.com">naver.com</option>
-									<option value="yahoo.co.kr">yahoo.co.kr</option>
-									<option value="hotmail.com">hotmail.com</option>
-									<option value="paran.com">paran.com</option>
-									<option value="nate.com">nate.com</option>
-									<option value="google.com">google.com</option>
-									<option value="gmail.com">gmail.com</option>
-									<option value="empal.com">empal.com</option>
-									<option value="korea.com">korea.com</option>
-									<option value="freechal.com">freechal.com</option>
+									<option value="naver.com">네이버</option>
+									<option value="hanmail.net">다음</option>
+									<option value="nate.com">네이트</option>
+									<option value="google.com">구글</option>
+									<option value="gmail.com">Gmail</option>
 								</select>
 							</div>
 							
@@ -245,22 +238,22 @@
 							</div>
 					</div>
 					
-					
+						
 					
 					
 					
 					<div class="form-group form-group-sm">
 						<label for="phone" class="col-sm-2 control-label">주소</label>
 							<div class="col-sm-6">
-								<input type="text" id="sample4_postcode" placeholder="우편번호">
+								<input type="text" id="mem_zip" name="mem_zip" placeholder="우편번호">
 								<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-								<input type="text" id="sample4_roadAddress" placeholder="도로명주소">
-								<input type="text" id="sample4_jibunAddress" placeholder="지번주소"><br>
+								<input type="text" id="mem_addr1" name="mem_addr1" placeholder="도로명주소">
+								<input type="text" id="mem_addr2" name="mem_addr2" placeholder="지번주소"><br>
 								<span id="guide" style="color:#999;display:none"></span>
-								<input type="text" id="sample4_detailAddress" placeholder="상세주소">
+								<input type="text" id="mem_addr3" name="mem_addr3" placeholder="상세주소">
 								<input type="text" id="sample4_extraAddress" placeholder="참고항목">
 							</div>
-						</div>	
+					</div>	
 							
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-6">
