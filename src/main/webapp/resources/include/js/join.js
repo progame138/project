@@ -76,7 +76,7 @@ $(function(){
 	//확인 버튼 클릭 시 처리 이벤트
 	$("#joinInsert").click(function(){
 		//입력값 체크
-		if(!formCheck($('#mem_id'), $('.error:eq(0)'), "아이디를")) return;
+		/*if(!formCheck($('#mem_id'), $('.error:eq(0)'), "아이디를")) return;
 		else if(!inputVerify(0, '#mem_id', '.error:eq(0)')) return;
 		else if(!formCheck($('#mem_pwd'), $('.error:eq(1)'), "비밀번호를")) return;
 		else if(!inputVerify(1, '#mem_pwd', '.error:eq(1)')) return;
@@ -93,9 +93,10 @@ $(function(){
 		else if(idConfirm!=2) {
 			alert("아이디 중복 체크를 해주세요");
 			return;
-		}else {
+		}else {*/
 			
-			$("#mem_email").val()+"@"+$("#emailDomain").val();
+			$("#mem_email").val($("#mem_email").val()+"@"+$("#emailDomain").val());
+			console.log($("#mem_email").val());
 			/*$("#mem_email").val($("#emailName").val()+"@"+$("#emailDomain").val());*/
 			
 			/*$("#mem_birth").val()+"-"+$("#gender").val();
@@ -104,8 +105,8 @@ $(function(){
 				"method":"post",
 				"action":"/member/join"
 			});
-			$("#memberForm").submit();
-		}
+			//$("#memberForm").submit();
+		//}
 	});
 	
 	$("#joinCancel").click(function(){
