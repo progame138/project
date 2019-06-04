@@ -36,7 +36,7 @@ $(function(){
 				if($('#mem_pwd').val()!="" && $('#userPwdCheck').val()!="") {
 					if(!passwordCheck()) return;
 				}
-				$("#mem_email").val($("#mem_email").val()+"@"+$("emailDomain").val());
+				$("#mem_email").val($("#mem_email").val()+"@"+$("#emailDomain").val());
 				$("#memberForm").attr({
 					"method":"post",
 					"action":"/member/modify"

@@ -135,8 +135,9 @@
 						<label for="mem_email" class="col-sm-2 control-label">이메일</label>
 							<div class="col-sm-3">
 								<input type="text" id="mem_email" name="mem_email" maxlength="60" 
-								class="form-control" value="${email[0]}">
+								class="form-control">
 							</div>
+							 <%-- value="${email[0]}" --%>
 							
 							<div class="col-sm-2">
 								<select id="emailDomain" class="form-control">
@@ -145,9 +146,7 @@
 									<option value="hanmail.net">다음</option>
 									<option value="nate.com">네이트</option>
 									<option value="google.com">구글</option>
-									<option value="gmail.com">gmail</option>
-									
-									
+									<option value="gmail.com">Gmail</option>
 								</select>
 							</div>
 							
@@ -158,7 +157,7 @@
 					
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-6">
-							<input type="button" value="확인" id="modify" class="btn btn-default"/>
+							<input type="button" value="확인" id="modify"  class="btn btn-default"/>
 							<input type="button" value="재작성" id="modifyReset" class="btn btn-default"/>
 							<input type="button" value="취소" id="modifyCancel" class="btn btn-default"/>
 						</div>
