@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>상품 리스트</title>
+		<title>슈즈 스타 - 상품 리스트</title>
 		
 		<link rel="stylesheet" href="/resources/include/css/prodctg.css" />
 		<link rel="stylesheet" href="/resources/include/css/product.css" />
@@ -18,6 +18,7 @@
 				showProductList();
 				showProductCategory();
 				showSizeCategory();
+				showColorCategory();
 				resetPriceList($("#priceList"));
 			});
 			
@@ -56,7 +57,7 @@
 					type: "get",
 					dataType: "json",
 					error: function() {
-						var cont = $("<li>").text("상품 분류 정보를 불러올 수 없었습니다.").css({"color":"grey"});
+						var cont = $("<li>").text("상품 분류 정보를 불러올 수 없었습니다.").css({"color":"grey"}).addClass("listHasError");
 						$("#ctgList").append(cont);
 					},
 					success: function(data) {
@@ -65,10 +66,10 @@
 							var requestParam = splitRequest(window.location.search, "pd_sex", "pd_age");
 							// li 태그 생성 및 추가
 							$.each(data, function(index, stack) {
-								$("#ctgList").append(createProdCtgLink(stack, requestParam));
+								$("#ctgList").append(createProdCtgLink(stack));
 							});
 						} else {
-							var cont = $("<li>").text("분류가 없습니다.").css({"color":"grey"});
+							var cont = $("<li>").text("분류가 없습니다.").css({"color":"grey"}).addClass("listHasError");
 							$("#ctgList").append(cont);
 						}
 					}
@@ -83,7 +84,7 @@
 					type: "get",
 					dataType: "json",
 					error: function() {
-						var cont = $("<li>").text("사이즈 정보를 불러올 수 없었습니다.").css({"color":"grey"});
+						var cont = $("<li>").text("사이즈 정보를 불러올 수 없었습니다.").css({"color":"grey"}).addClass("listHasError");
 						$("#sizeList").append(cont);
 					},
 					success: function(data) {
@@ -93,8 +94,33 @@
 								$("#sizeList").append(createSizeLink(stack));
 							});
 						} else {
-							var cont = $("<li>").text("분류가 없습니다.").css({"color":"grey"});
+							var cont = $("<li>").text("분류가 없습니다.").css({"color":"grey"}).addClass("listHasError");
 							$("#sizeList").append(cont);
+						}
+					}
+				});
+			}
+			
+			function showColorCategory() {
+				$("#colorList").html("");
+				
+				$.ajax({
+					url: "/pctg/getColor?" + splitRequest(window.location.search, "pd_sex", "pd_age"),
+					type: "get",
+					dataType: "json",
+					error: function() {
+						var cont = $("<li>").text("색상 정보를 불러올 수 없었습니다.").css({"color":"grey"}).addClass("listHasError");
+						$("#colorList").append(cont);
+					},
+					success: function(data) {
+						if(!jQuery.isEmptyObject(data)) {
+							// li 태그 생성 및 추가
+							$.each(data, function(index, stack) {
+								$("#colorList").append(createColorLink(stack));
+							});
+						} else {
+							var cont = $("<li>").text("분류가 없습니다.").css({"color":"grey"}).addClass("listHasError");
+							$("#colorList").append(cont);
 						}
 					}
 				});

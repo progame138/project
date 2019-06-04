@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shoestar.client.prod.service.ProdCtgService;
+import com.shoestar.client.prod.vo.ProdColorVO;
 import com.shoestar.client.prod.vo.ProdCtgVO;
 
 import lombok.Setter;
@@ -31,6 +32,13 @@ public class ProdCtgController {
 	@RequestMapping(value="/getSize", method=RequestMethod.GET, produces={MediaType.APPLICATION_JSON_UTF8_VALUE})
 	public List<Integer> getAvailableSize(ProdCtgVO pcvo) {
 		List<Integer> result = prodCtgService.getAvailableSize(pcvo);
+		
+		return result;
+	}
+	
+	@RequestMapping(value="/getColor", method=RequestMethod.GET, produces={MediaType.APPLICATION_JSON_UTF8_VALUE})
+	public List<ProdColorVO> getAvailableColor(ProdCtgVO pcvo) {
+		List<ProdColorVO> result = prodCtgService.getAvailableColor(pcvo);
 		
 		return result;
 	}

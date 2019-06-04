@@ -10,4 +10,5 @@ public class ProdCtgFilterVO {
 	
 	// 검색 후 정보 표시를 위한 변수
 	private int pd_count; // 상품의 수
+	private boolean includeItemless = false; // 상품 개체가 없는 상품도 검색할지 여부
 }

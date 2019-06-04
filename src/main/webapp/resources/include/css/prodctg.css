@@ -55,14 +55,23 @@ span.ctgCount {
 	color: #aaa;
 }
 
-#sizeList {
+#sizeList, #colorList {
 	margin-bottom: 10px;
+	margin-left: 15px;
 }
 
-#sizeList > li {
+#sizeList > li, #colorList > li {
 	border: 1px solid #ddd;
 	display: inline-block;
-	margin: 0 5px 10px 0;
+	margin: 0 8px 10px 0;
+}
+
+#sizeList > .listHasError, #colorList > .listHasError {
+	border: none;
+}
+
+#sizeList > .listHasError:hover, #colorList > .listHasError:hover {
+	border: none;
 }
 
 #sizeList > li > a {
@@ -71,11 +80,22 @@ span.ctgCount {
 	font-size: 1.2em;
 }
 
-#sizeList > li:hover {
+#colorList > li > a {
+	display: block;
+	padding: 15px 15px;
+	border: 1px solid #ddd;
+}
+
+#colorList .filterToggled {
+	border-bottom: 1px solid #ddd;
+	box-shadow: 1px 0 1px #666, 0 1px 1px #666, -1px 0 1px #666, 0 -1px 1px #666;
+}
+
+#sizeList > li:hover, #colorList > li:hover {
 	border: 1px solid black;
 }
 
-#sizeList > li:last-child {
+#sizeList > li:last-child, #colorList > li:last-child {
 	clear: right;
 }
 

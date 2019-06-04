@@ -27,6 +27,26 @@
 		)
 	</sql>
 	
+	<sql id="prodInfo">
+		pd_no, pd_name, pd_sex, pd_age, pct_no, co_no, pd_price,
+		pd_fabric, pd_country, pd_year, pd_manu, pd_import, pi_no, pd_date, pd_status, pim_main,
+		<!-- 카테고리 이름 받기 -->
+		(
+		SELECT
+			pct_name
+		FROM
+			prod_ctg
+		WHERE
+			pct_no = prod.pct_no
+		) AS pct_name,
+		<!-- 할인율 계산 하기 -->
+		(
+		NVL((
+			<include refid="dcmax"></include>
+		), 0)
+		) AS pd_discount
+	</sql>
+	
 	<!-- 전체 검색 -->
 	<select id="prodList" parameterType="prod" resultType="prod">
 		SELECT
@@ -36,31 +56,15 @@
 			SELECT
 				/*+ INDEX_DESC(prod prod_pk)*/
 				rownum rn, rowid ri,
-				pd_no, pd_name, pd_sex, pd_age, pct_no, co_no, pd_price,
-				pd_fabric, pd_country, pd_year, pd_manu, pd_import, pi_no, pd_date, pd_status, pim_main,
-				<!-- 카테고리 이름 받기 -->
-				(
-				SELECT
-					pct_name
-				FROM
-					prod_ctg
-				WHERE
-					pct_no = prod.pct_no
-				) AS pct_name,
-				<!-- 할인율 계산 하기 -->
-				(
-				NVL((
-					<include refid="dcmax"></include>
-				), 0)
-				) AS pd_discount
+				<include refid="prodInfo"></include>
 			FROM
 				prod
 			WHERE
-				<!-- 성별 -->
 				<trim prefixOverrides="AND">
-					<if test='pd_sex != null and pd_sex != ""'>
-						AND pd_sex = #{pd_sex}
-					</if>
+					<!-- 성별 -->
+					<trim prefix="AND" suffix="OR pd_sex = 'u'"><if test='pd_sex != null and pd_sex != ""'>
+						pd_sex = #{pd_sex}
+					</if></trim>
 					<!-- 연령 -->
 					<trim prefix="AND"><choose>
 						<when test='pd_age == null'> <!-- default -->
@@ -120,13 +124,22 @@
 			) prodlist
 		WHERE
 			<![CDATA[rn > (#{pageNum} - 1) * #{amount}]]>
-
+			<if test="includeItemless == false">
+				AND (
+					SELECT DISTINCT
+						pd_no
+					FROM
+						prod_ins
+					WHERE
+						pd_no = prodlist.pd_no
+				) IS NOT NULL
+			</if>
 	</select>
 	
 	<!-- 상품 검색 -->
 	<select id="prodDetail" parameterType="prod" resultType="prod">
 		SELECT
-			*
+			<include refid="prodInfo"></include>
 		FROM
 			prod
 		WHERE
