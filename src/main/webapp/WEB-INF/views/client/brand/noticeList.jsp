@@ -71,6 +71,11 @@
 					float:right;}
 					.cnt{color:red;}
 				h3{
+					text-align: center;
+				}
+				th{
+					text-align: center;
+				}
 					
 				#boardsearch{
 					float:right;}
@@ -84,18 +89,32 @@
 			</style>
 		
 		<script type="text/javascript">
-			//제목 클릭 시 상세 페이지 이동을 위한 처리 이벤트
-			$(".goDetail").click(function(){
-				var b_num = $(this).parents("tr").attr("data-num")
-				$("#b_num").val(b_num);
-				console.log("글번호 : "+b_num);
-				//상세 페이지로 이동하기 위해 form추가 (id=detailForm)
-				$("#detailForm").attr({
-					"method" : "get",
-					"action" : "/board/boardDetail"
+			$(function () {
+				//제목 클릭 시 상세 페이지 이동을 위한 처리 이벤트
+				$(".goDetail").click(function(){
+					var no_no = $(this).parents("tr").attr("data-num")
+					$("#no_no").val(no_no);
+					console.log("글번호 : "+no_no);
+					//상세 페이지로 이동하기 위해 form추가 (id=detailForm)
+					$("#detailForm").attr({
+						"method" : "get",
+						"action" : "/brand/noticeDetail"
+					});
+					$("#detailForm").submit();
 				});
-				$("#detailForm").submit();
-			});
+				
+				/* 검색 버튼 클릭 시 처리 이벤트 */
+	    		$("#searchData").click(function(){
+	    			if($("#search").val()!="all"){
+	    				if(!chkData("#keyword","검색어를")) return;
+	    			}
+	    			goPage();
+	    		
+	    		});
+				
+			}); /* 최상위 fun 종료*/
+				
+				
 		</script>
 		
 	</head>
@@ -117,13 +136,13 @@
 			  <a href="/brand/collectionIntro">컬렉션 소개</a>
 			  <a href="/brand/noticeList">공지사항</a>
 			</div>
-			<div class="contentTit"><h3>게시판 리스트</h3></div>
+			<div class="contentTit"><h3>공지사항</h3></div>
 			
 			<form id="detailForm">
-				<input type="hidden" id="b_num" name="b_num"/>
+				<input type="hidden" id="no_no" name="no_no"/>
 				<!-- 상세페이지에서 리스트 이동시 보던 전 페이지로 이동하기 -->
-				<input type="hidden" name="pageNum" id="pageNum" value="${pageMaker.cvo.pageNum}"> <!-- (pageDTO) 글번호 가져오기 -->
-				<input type="hidden" name="amount" id="amount" value="${pageMaker.cvo.amount}">
+				<%--<input type="hidden" name="pageNum" id="pageNum" value="${pageMaker.cvo.pageNum}">--%> <!-- (pageDTO) 글번호 가져오기 -->
+				<%--<input type="hidden" name="amount" id="amount" value="${pageMaker.cvo.amount}">--%>
 			</form>
 			
 			<!-- 검색기능 시작 -->
@@ -134,10 +153,10 @@
 					<div class="form-group">
 						<label style="font-size:16px">검색조건</label>
 						<select id="search" name="search" class="form-control">
-							<option value="all">전체</option>
+							<option value="all" id="goDetail">전체</option>
 							<option value="b_title" id="goDetail">제목</option>
-							<option value="b_content">내용</option>
-							<option value="b_name">말머리</option>
+							<option value="b_content" id="goDetail">내용</option>
+							<option value="b_name" id="goDetail">말머리</option>
 						</select>
 						<input type="text" name="keyword" id="keyword" value="검색어를 입력하세요"  class="form-control" width="5px">
 						 <button type="button" id="searchData"class="btn btn-success">검색</button>
@@ -150,31 +169,33 @@
 			<table class="table-striped" summary="게시판 리스트">
 				<thead>
 					<tr>
-						<th data-value="no_no" class="order">공지사항 번호</th>
-						<th>공지사항 말머리</th>
-						<th data-value="no_subject" class="order">공지사항 제목</th>
-						<th class="borcle">공지사항 내용</th>
-						<th>공지사항 작성일</th>
+						<th data-value="no_no" class="order"> 번호</th>
+						<th>말머리</th>
+						<th data-value="no_subject" class="order">제목</th>
+						<th class="borcle">내용</th>
+						<th>작성자</th>
+						<th>작성일</th>
 					</tr>
 				</thead>
 				
 				<tbody id="list">
 					<!-- 데이터출력 -->
 					<c:choose>
-						<c:when test="${not empty noticeList}">
+						<c:when test="${not empty notice}">
 							<c:forEach var="notice" items="${notice}" varStatus="status">
 								<tr class="tac" data-num="${notice.no_no}">
 									<td>${notice.no_no}</td>
 									<td>${notice.no_kind}</td>
-									<td class="goDetail tal">${notice.no_subject}</td>
-									<td>${notice.no_content}</td>
-									<td class="name">${notice.no_date}</td>
+									<td class="goDetail tal" id="goDetail">${notice.no_subject}</td>
+									<td id="goDetail" class="goDetail">${notice.no_content}</td>
+									<td id="goDetail" class="goDetail">${notice.adm_no}</td>
+									<td class="name" id="goDetail">${notice.no_date}</td>
 								</tr>
 							</c:forEach>
 						</c:when>
 						<c:otherwise>
 							<tr>
-								<td colspan="5" class="tac"> 등록된 게시물이 존재하지 않습니다.</td>
+								<td colspan="6" class="tac"> 등록된 게시물이 존재하지 않습니다.</td>
 							</tr>
 						</c:otherwise>
 					</c:choose>
