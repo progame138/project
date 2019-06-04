@@ -1,5 +1,5 @@
 
-hr{color: gray;}
+hr{color: gray; width: 1355px; float: left;}
 
 #EvconTitle{text-align: center; margin: 40px;}
 
@@ -18,7 +18,19 @@ hr{color: gray;}
 
 
 /* Admin */
-.Acaption{text-align: left; margin-bottom: 10px;}
+.Acaption{text-align: left; margin-bottom: 10px; font-weight: bold;}
 .table{border-collapse: collapse;}
 .Avent_td, .Avent_tdInput{border: 1px solid black; padding: 7px;}
 #AventSearchBtn{margin: 5px;}
+.gray {background-color: #EDF0F5; font-weight: bold;}
+.bgray {background-color: #B1BDC7; color: white; font-weight: bold;}
+#AventListTable, #AvnetViewTable{width: 80%;}
+#AvnetViewTable tr{height: 50px;}
+.Avent_tdInput {
+    width: 1230px;
+}
+.AventPreviewBtn{width: 5px;}
+.tdW, .AventUpdateBtn, .AventPreviewBtn{width: 70px;}
+
+
+#insertFormBtn{margin-left: 1130px;}
