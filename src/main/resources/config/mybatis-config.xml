@@ -9,5 +9,7 @@
 		<typeAlias type="com.shoestar.client.member.vo.MemberVO" alias="member"/>
 		<typeAlias type="com.shoestar.client.event.vo.EventVO" alias="event" />
 		<typeAlias type="com.shoestar.client.prod.vo.ProdColorVO" alias="prodcolor" />
+		<typeAlias type="com.shoestar.client.prod.vo.ProdInsVO" alias="prodins" />
+		<typeAlias type="com.shoestar.client.notice.vo.NoticeVO" alias="notice" />
 	</typeAliases>
 </configuration>

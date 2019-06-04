@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shoestar.client.prod.dao.ProdCtgDao;
+import com.shoestar.client.prod.vo.ProdColorVO;
 import com.shoestar.client.prod.vo.ProdCtgVO;
 
 import lombok.Setter;
@@ -27,6 +28,12 @@ public class ProdCtgServiceImpl implements ProdCtgService {
 	public List<Integer> getAvailableSize(ProdCtgVO pcvo) {
 		List<Integer> result = prodCtgDao.getAvailableSize(pcvo);
 		
+		return result;
+	}
+
+	@Override
+	public List<ProdColorVO> getAvailableColor(ProdCtgVO pcvo) {
+		List<ProdColorVO> result = prodCtgDao.getAvailableColor(pcvo);
 		return result;
 	}
 }

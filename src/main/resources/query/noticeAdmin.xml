@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.shoestar.admin.notice.dao.shoestarDao">
+
+
+		<!-- 게시판 리스트 -->
+	<select id="noticeList" parameterType="com.shoestar.client.notice.vo.NoticeVO" resultType="com.shoestar.client.notice.vo.NoticeVO">
+		select 
+    		no_no, no_kind, no_subject, no_content, to_char(no_date, 'YYYY-MM-DD') as no_date 
+    	from notice 
+    	order by no_no desc
+	</select>
+	
+	<!-- 상세페이지를 위한 게시물 조회 -->
+	<select id="noticeDetail" parameterType="com.shoestar.client.notice.vo.NoticeVO" resultType="com.shoestar.client.notice.vo.NoticeVO">
+		select 
+    		no_no, no_kind, no_subject, no_content, to_char(no_date, 'YYYY-MM-DD') as no_date 
+    	from notice 
+    	order by no_no desc
+	</select>
+	
+		<!-- 공지사항 검색 -->
+	<sql id="noticeSearch">
+		<if test="search=='no_title'">
+			<![CDATA[no_title LIKE '%'|| #{keyword} ||'%']]>
+		</if>
+		<if test="search=='no_kind'">
+			<![CDATA[no_kind LIKE '%' || #{keyword} ||'%']]>
+		</if>
+		<if test="search=='no_content'">
+			<![CDATA[no_content LIKE '%' || #{keyword} ||'%']]>
+		</if>
+	</sql>
+	
+	<!-- 공지사항 등록 -->
+	<insert id="noticeInsert" parameterType="com.shoestar.client.notice.vo.NoticeVO">
+		<selectKey keyProperty="no_no" resultType="int" order="BEFORE">
+			select notice_seq.nextval from dual
+		</selectKey>
+		
+		insert into notice(no_no, no_kind, no_subject, no_content, adm_no, no_date)
+		values(#{no_no}, #{no_kind}, #{no_subject}, #{no_content},  #{adm_no}, #{no_date})
+	</insert>
+	
+	<!-- 공지사항 수정 -->
+	<update id="noticeUpdate" parameterType="com.shoestar.client.notice.vo.NoticeVO">
+		/* Notice - noticeUpdate */
+		update notice
+			set no_kind = #{no_kind},
+			no_subject = #{no_subject},
+			no_content = #{no_content},
+			no_date = sysdate
+		where no_no = #{no_no}
+	</update>
+	
+	<!-- 공지사항 삭제 -->
+	<delete id="noticeDelete" parameterType="com.shoestar.client.notice.vo.NoticeVO">
+		/* Notice - NoticeDelete */
+		delete from notice where no_no = #{no_no}
+	</delete>
+	
+	<!-- 전체 레코드 수 조회 -->
+	<select id="noticeListCnt" parameterType="com.shoestar.client.notice.vo.NoticeVO" resultType="int">
+		select count(*) from notice
+		<trim prefix=" where (" suffix=")">
+			<include refid="noticeSearch"></include>
+		</trim>
+	</select>
+</mapper>

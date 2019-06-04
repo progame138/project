@@ -58,11 +58,15 @@ public class ProdController {
 	 * @throws 검색 결과가 없을 경우 404 에러
 	 */
 	@RequestMapping(value="/prod", method=RequestMethod.GET)
-	public String showDetail(ProdVO pvo, Model model) throws ResourceNotFoundException {
+	public String showDetail(ProdVO pvo, String color, Model model) throws ResourceNotFoundException {
 		ProdVO result = prodService.prodDetail(pvo);
 		
 		if(result == null) {
 			throw new ResourceNotFoundException("해당 제품을 찾을 수 없습니다.");
+		}
+		
+		if(color == null) {
+			
 		}
 		
 		model.addAttribute(result);

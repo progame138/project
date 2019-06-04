@@ -37,7 +37,7 @@ public class NoticeController {
 		}
 	
 	// 공지사항 상세조회
-	/*@RequestMapping(value="/client/noticeDetail", method=RequestMethod.GET)
+	@RequestMapping(value="/client/noticeDetail", method=RequestMethod.GET)
 	
 	public String NoticeDetail(@ModelAttribute("data") NoticeVO nvo, Model model){
 		log.info("noticeDetail 호출");
@@ -46,7 +46,7 @@ public class NoticeController {
 		model.addAttribute("detail", detail);
 		
 		return "notice/noticeDetail";
-	}*/
+	}
 	
 	
 
