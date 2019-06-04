@@ -36,7 +36,6 @@ public class QNAController {
 			
 			List<QNAVO> qnaList = qnaService.qnaList(qvo); 
 			model.addAttribute("qnaList", qnaList);
-			model.addAttribute("mem_id", "mem_id");
 			return "client/cscenter/qnaBoard"; 
 		}
 		
