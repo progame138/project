@@ -37,12 +37,13 @@ $(function(){
 		$('.error').eq(index).html(message[index]);
 	});
 	
-	$('#mem_id, #mem_pwd, #userPwdCheck, #mem_phone').bind("focus", function(){
+	$('#mem_id, #mem_pwd, #userPwdCheck, #phone').bind("focus", function(){
 		var mem_no = $("#mem_id, #mem_pwd, #userPwdCheck, #mem_phone").index(this);
 		//console.log("대상 : " + dix);
 		$(this).parents(".form-group").find(".error").html(message[mem_no]);
 	});
 	
+	//아이디 중복체크
 	$("#idConfirmBtn").click(function(){
 		if(!formCheck($('#mem_id'), $('.error:eq(0)'), "아이디를"))  return;
 		else if(!inputVerify(0,'#mem_id', '.error:eq(0)')) return;
@@ -55,7 +56,7 @@ $(function(){
 				 		alert('사이트 접속문제로 정상접속이 되지 않았습니다.\n잠시 후 다시 시도해 주세요~');
 				 	},
 				 	success: function(resultData){
-				 		console.log("resultData : "+ resultData);
+				 		console.log("resultData "+ resultData);
 				 		if(resultData=="1") {
 				 			$("#mem_id").parents(".form-group").find(".error").html("현재 사용중인 아이디입니다.");
 				 		}else if(resultData=="2") {
@@ -67,9 +68,9 @@ $(function(){
 		}
 	});
 	
-	//수정화면에서 취소버튼시 로그인화면으로
-	$("#joinCancel").click(function(){
-		location.href="/member/login";
+	//회원수정 테스트
+	$("#modifyBtn").click(function(){
+		location.href="/member/modify";
 	}); 
 	
 	//확인 버튼 클릭 시 처리 이벤트
@@ -88,13 +89,17 @@ $(function(){
 		else if(!formCheck($('#mem_phone'), $('.error:eq(3)'), "전화번호를")) return;
 		else if(!inputVerify(2, '#mem_phone', '.error:eq(3)')) return;
 		else if(!formCheck($('#mem_name'), $('.error:eq(5)'), "이름을")) return;
-		else if(!formCheck($('#emailName'), $('.error:eq(6)'), "이메일을")) return;
+		else if(!formCheck($('#mem_email'), $('.error:eq(6)'), "이메일을")) return;
 		else if(idConfirm!=2) {
 			alert("아이디 중복 체크를 해주세요");
 			return;
 		}else {
-			$("#mem_email").val($("#emailName").val()+"@"+$("#emailDomain").val());
-			$("#mem_birth").val($("#birth").val()+"-"+$("#gender").val());
+			$("#mem_email").val();
+			/*$("#mem_email").val()+"@"+$("#emailDomain").val();*/
+			/*$("#mem_email").val($("#emailName").val()+"@"+$("#emailDomain").val());*/
+			$("#mem_birth").val();
+			/*$("#mem_birth").val()+"-"+$("#gender").val();*/
+			/*$("#mem_birth").val($("#pinno").val()+"-"+$("#gender").val());*/
 			$("#memberForm").attr({
 				"method":"post",
 				"action":"/member/join"
@@ -103,9 +108,9 @@ $(function(){
 		}
 	});
 	
-	/*$("#joinCancel").click(function(){
+	$("#joinCancel").click(function(){
 		location.href-"/member/login";
-	});*/
+	});
 	
 	$("#joinReset").click(function(){
 		$("#memberForm").each(function(){

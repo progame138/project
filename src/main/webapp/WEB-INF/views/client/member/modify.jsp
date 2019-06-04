@@ -94,9 +94,9 @@
 					</div>
 					
 					<div class="form-group form-group-sm">
-						<label for="mem_pwdCheck" class="col-sm-2 control-label">비밀번호 확인</label>
+						<label for="userPwdCheck" class="col-sm-2 control-label">비밀번호 확인</label>
 							<div class="col-sm-3">
-								<input type="password" id="mem_pwdCheck" name="mem_pwdCheck" maxlength="15" 
+								<input type="password" id="userPwdCheck" name="userPwdCheck" maxlength="15" 
 								class="form-control" placeholder="변경할 비밀번호 입력">
 							</div>
 							

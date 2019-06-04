@@ -11,8 +11,8 @@ $(function(){
 		$('.error').eq(index).html(message[index]);
 	});
 	
-	$("#oldUserPwd, #mem_pwd, #mem_pwdCheck, #mem_phone").bind("focus", function(){ 
-		var mem_no = $("#oldUserPwd, #mem_pwd, #mem_pwdCheck, #mem_phone").index(this);
+	$("#oldUserPwd, #mem_pwd, #userPwdCheck, #mem_phone").bind("focus", function(){ 
+		var mem_no = $("#oldUserPwd, #mem_pwd, #userPwdCheck, #mem_phone").index(this);
 		//console.log("대상: "+ mem_no):
 		$(this).parents(".form-group").find(".error").html(message[mem_no]);
 	});
@@ -30,10 +30,10 @@ $(function(){
 					if(!inputVerify(1, '#mem_pwd', '.error:eq(1)')) return;
 					if(!idPwdCheck()) return;
 				}
-				if($('#mem_pwdCheck').val()!="") {
-					if(!inputVerify(1, '#mem_pwdCheck', '.error:eq(2)')) return;
+				if($('#userPwdCheck').val()!="") {
+					if(!inputVerify(1, '#userPwdCheck', '.error:eq(2)')) return;
 				}
-				if($('#mem_pwd').val()!="" && $('#mem_pwdCheck').val()!="") {
+				if($('#mem_pwd').val()!="" && $('#userPwdCheck').val()!="") {
 					if(!passwordCheck()) return;
 				}
 				$("#mem_email").val($("#mem_email").val()+"@"+$("emailDomain").val());
@@ -57,10 +57,10 @@ $(function(){
 });
 
 function passwordCheck() {
-	if($("#mem_pwd").val()!=$("#mem_pwdCheck").val()) {
+	if($("#mem_pwd").val()!=$("#userPwdCheck").val()) {
 		alert("패스워드 입력이 일치하지 않습니다");
 		$("mem_pwd").val("");
-		$("#mem_pwdCheck").val("");
+		$("#userPwdCheck").val("");
 		$("#mem_pwd").focus();
 		return false;
 	}
