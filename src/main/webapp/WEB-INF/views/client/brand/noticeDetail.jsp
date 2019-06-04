@@ -33,14 +33,16 @@
 							<td class="text-left">${detail.no_kind}</td>
 							<td>작성일</td>
 							<td class="text-left">${detail.no_date}</td>
+							<td>작성자</td>
+							<td class="text-left">${detail.adm_no}</td>
 						</tr>
 						<tr>
 							<td>제 목</td>
-							<td colspan="3" class="text-left">${detail.no_content}</td>
+							<td colspan="5" class="text-left">${detail.no_content}</td>
 						</tr>
 						<tr class="table-height">
 							<td>내 용</td>
-							<td colspan="3" class="text-left"><textarea rows="8">${detail.no_content}</textarea></td>
+							<td colspan="5" class="text-left"><textarea>${detail.no_content}</textarea></td>
 						</tr>
 					</tbody>
 				</table>

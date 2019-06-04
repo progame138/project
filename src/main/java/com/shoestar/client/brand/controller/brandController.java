@@ -59,7 +59,7 @@ public class brandController {
 		NoticeVO detail = noticeService.noticeDetail(nvo);
 		model.addAttribute("detail", detail);
 		
-		return "board/noticeDetail";
+		return "client/brand/noticeDetail";
 	}
 	
 }
