@@ -3,14 +3,14 @@
 <mapper namespace="com.shoestar.client.login.dao.LoginDao">
 
 	<select id="userIdSelect" parameterType="String" resultType="login">
-		select mem_id, mem_pwd, mem_name 
+		select mem_id, mem_pwd, mem_name, mem_no
 		from member
 		where mem_id = #{mem_id}
 	</select>
 	
 	<!-- 로그인 처리 -->
 	<select id="loginSelect" parameterType="login" resultType="login">
-		select mem_id, mem_pwd, mem_name
+		select mem_id, mem_pwd, mem_name, mem_no
 		from member
 		where mem_id = #{mem_id} and mem_pwd = #{mem_pwd}
 	</select>

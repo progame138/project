@@ -31,7 +31,7 @@ import lombok.extern.log4j.Log4j;
 			//////////////////////[회원가입 폼 처리]////////////////////////
 			@RequestMapping(value="/join", method = RequestMethod.GET)
 			public String joinForm(Model model){
-				log.info("join post방식에 의한 메서드 호출 성공");
+				log.info("join get방식에 의한 메서드 호출 성공");
 				return "client/member/join";
 			}
 			
