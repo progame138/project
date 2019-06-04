@@ -7,14 +7,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.web.multipart.MultipartFile;
 
 //import com.fasterxml.jackson.core.JsonProcessingException;
 //import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shoestar.client.event.dao.EventDAO;
 import com.shoestar.admin.event.dao.AdminEventDAO;
 import com.shoestar.client.event.vo.EventVO;
-
+import com.shoestar.common.file.FileUploadUtil;
 
 import lombok.AllArgsConstructor;
 import lombok.Setter;
@@ -25,7 +25,7 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class AdminEventServiceImpl implements AdminEventService {
 
-	@Setter(onMethod_ =@Autowired)
+	@Setter(onMethod_ = @Autowired)
 	private AdminEventDAO aEventDao;
 	
 	// 이벤트 목록 구현
@@ -41,12 +41,20 @@ public class AdminEventServiceImpl implements AdminEventService {
 		return list;
 	
 	}
+	//글 수정 DAO 접속
+	@Override
+	public int eventUpdate(EventVO evo) {
+			int result = 0;
+			result = aEventDao.eventUpdate(evo);
+			return result;
+		
+	}
 	
 	// 이벤트 글 입력 구현
-	/*
+	
 	@Override
-	public String eventInsert(EventVO evo) {
-		String result = "";
+	public int eventInsert(EventVO evo) {
+		int result = 0;
 		
 		List<MultipartFile> list= evo.getFile();
 		
@@ -60,27 +68,29 @@ public class AdminEventServiceImpl implements AdminEventService {
 		
 			log.info("비어있지 않음");
 			
-			int z = 0;
-			int o = 1;
-			
-			if(list.get(z) != null ) {
-				String fileName1 = FileUploadUtil.fileUpload(evo.getFile().get(z), "eventImage");
-				evo.setEv_img(fileName1);
-			} else if (list.get(o) != null) {
-				String fileName2 = FileUploadUtil.fileUpload(evo.getFile().get(o), "eventThumb");
-				evo.setEv_thumb(fileName2);
-			}
-
+			for(int i = 1; i <=1; i++) {
+				if(i == 0) {
+					if(list.get(i) != null ) {
+						String fileName1 = FileUploadUtil.fileUpload(evo.getFile().get(i), "eventImage");
+						evo.setEv_img(fileName1);
+					}
+				} else if( i == 1 ) {
+					if (list.get(i) != null) {
+						String fileName2 = FileUploadUtil.fileUpload(evo.getFile().get(i), "eventThumb");
+						evo.setEv_thumb(fileName2);
+					}
+				}
+			} // for
 		}
 		
-		result = eventDao.eventList(evo);
+		result = aEventDao.eventInsert(evo);
 		
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		
 		return result;
-	}*/
+	}
 
 
 

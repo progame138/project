@@ -11,4 +11,6 @@ public interface AdminEventDAO {
 				   
 	
 	public List<EventVO> AdmineventList(EventVO evo); // 관리자 이벤트 리스트 (만료된 이벤트도 표시한다.)
+	public int eventUpdate(EventVO evo);
+	public int eventInsert(EventVO evo);
 }

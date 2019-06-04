@@ -2,6 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.shoestar.admin.event.dao.AdminEventDAO">
+
+	<sql id="AdmineventSearch">
+			<if test="search=='ev_no'">
+	            <![CDATA[ev_no LIKE '%'|| #{keyword} ||'%']]>
+	        </if>
+			<if test="search=='ev_title'">
+	            <![CDATA[ev_title LIKE '%'|| #{keyword} ||'%']]>
+	        </if>
+	        <if test="search=='ev_date'">
+	            <![CDATA[ev_date LIKE #{keyword} ]]>
+	        </if> 
+	</sql>
+
 	<!-- 이벤트 조회 -->
 	<select id="eventList" resultType="event">
 				SELECT
@@ -23,7 +36,8 @@
 	</select>
 	
 	<!-- 관리자 이벤트 조회 -->
-	<select id="AdmineventList" resultType="event">
+	
+	<select id="AdmineventList" resultType="event" parameterType="event">
 				SELECT
 				    ev_no,
 				    ev_title,
@@ -36,6 +50,25 @@
 				    event
 	</select>
 	
+	
+	<!-- 관리자 이벤트 리스트 조회(페이징 처리와 검색 처리) 05.27 -->
+	<!-- 위에서 sql 정의 -->
+<!--       <select id="AdmineventList" parameterType="event" resultType="event">
+      <![CDATA[
+      select 
+             ev_no,  ev_title,  ev_content, ev_img, ev_thumb, to_char(ev_date, 'YYYY-MM-DD') as ev_date, to_char(ev_edate, 'YYYY-MM-DD') as ev_edate
+      from (
+          select  /*+ INDEX_DESC(event event_pk) */
+              rownum as rnum, ev_no, ev_title, ev_date
+          from event
+             where ]]>
+             <trim prefix="(" suffix=") AND " prefixOverrides="AND">
+               <include refid="AdmineventSearch"></include>
+             </trim>
+            <![CDATA[ rownum <= #{pageNum} * #{amount})AdmineventList
+             where rnum > (#{pageNum} -1) * #{amount} ]]>
+      </select> -->
+	
 	<!-- 갤러리 상세 -->
 	<select id = "eventDetail" parameterType="event" resultType="event">
 				SELECT 
@@ -43,6 +76,7 @@
 					ev_title, 
 					ev_content, 
 					ev_img,
+					ev_thumb,
 					ev_date, 
 					ev_edate
 				FROM 
@@ -50,5 +84,19 @@
 				WHERE 
 					ev_no = #{ev_no}
 	</select>
+	
+	
+	<!-- 수정작업 -->
+	<update id="eventUpdate" parameterType="event">
+		UPDATE event
+			SET	
+				ev_title = #{ev_title},
+				ev_content = #{ev_content},
+				ev_img = #{ev_img},
+				ev_thumb = #{ev_thumb},
+				ev_date = sysdate
+			where ev_no = #{ev_no}
+	</update>
+	
 	
 </mapper>

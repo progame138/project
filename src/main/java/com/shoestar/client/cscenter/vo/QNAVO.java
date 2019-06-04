@@ -17,9 +17,10 @@ public class QNAVO{
 	private int qna_no = 0;
 	private String qna_title = "";
 	private String qna_content = "";
-	private MultipartFile file;
-	private String qna_file;
+	private String mem_id = "";
+	private String mem_name = "";
 	private Date qna_date = null;
 	private String qna_ctgr = "";
 	private String r_cnt = "";
+	
 }

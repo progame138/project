@@ -28,11 +28,11 @@
 
 <script type="text/javascript">
 	$(function() {
-		$("#ev_content").css("visibility", "hidden");
+		$("#ev_content").hide();
 		
 		
 		$("#Event_note_title").click(function(){
-			$("#ev_content").css("visibility", "visible");
+			$("#ev_content").toggle();
 		});
 		
 		var img = $("<img>");
