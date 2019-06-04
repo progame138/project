@@ -26,13 +26,13 @@
          <!-- jQuery프레임워크 참조 -->         
            <script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
            <script type="text/javascript" src="/resources/include/js/jquery.form.min.js"></script>
-           <script type="text/javascript" src="/resources/include/js/join.js"></script>
-           <script type="text/javascript" src="/resources/include/js/login.js"></script>
+          	<script type="text/javascript" src="/resources/include/js/join.js"></script>
+            <script type="text/javascript" src="/resources/include/js/login.js"></script>
            <script type="text/javascript" src="/resources/include/js/pwdPattern.js"></script>
            <script type="text/javascript" src="/resources/include/js/html5shiv.js"></script>
            <script type="text/javascript" src="/resources/include/js/modify.js"></script>
             <!-- <link rel="stylesheet" type="text/css" href="/resources/include/css/bootstrap.css"/> -->
-            <link rel="stylesheet" href="/resources/include/css/default.css"/>
+            <!-- <link rel="stylesheet" href="/resources/include/css/default.css"/> -->
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
@@ -40,7 +40,7 @@
            <!--  <link rel="stylesheet" href="/resources/include/css/lightbox.css"/>
             <script type="text/javascript" src="/resources/include/js/lightbox.min.js"></script> -->
            <script type="text/javascript">
-				function errorCodeCheck(){
+				function codeCheck(){
 					var codeNumber = '<c:out value ="${codeNumber}"/>';
 					if(codeNumber !=""){
 						alert("기존 비밀번호 검증에 실패하였습니다 \n기존 비밀번호를 다시 확인해 주세요");
@@ -50,8 +50,8 @@
 				
 		       	loginUserId = "${member.mem_id}";
 				function emailCheck(){
-					var mem_email = "${email[1]}";
-					$("#emailDomain").val(email).prop("selected", "true");
+					var mem_email = "${mem_email[1]}";
+					$("#emailDomain").val(mem_email).prop("selected", "true");
 				}
 			</script>
 		</head>
@@ -59,8 +59,8 @@
 		<div class="contentContainer">
 			<div class="well">
 				<form id="memberForm" class="form-horizontal">
-					<input type="hidden" name="mem_no" id="mem_no" value="${member.dix}"/>
-					<input type="hidden" name="mem_email" id="mem_no">
+					<%-- <input type="hidden" name="mem_no" id="mem_no" value="${member.mem_no}"/>
+					<input type="hidden" name="mem_email" id="mem_no"> --%>
 					
 					<div class="form-group form-group-sm">
 						<label for="mem_id" class="col-sm-2 control-label">아이디</label>
@@ -108,7 +108,7 @@
 					<div class="form-group form-group-sm">
 						<label for="mem_phone" class="col-sm-2 control-label">휴대폰번호</label>
 							<div class="col-sm-3">
-								<input type="password" id="mem_phone" name="mem_phone" maxlength="15" 
+								<input type="text" id="mem_phone" name="mem_phone" maxlength="15" 
 								class="form-control" placeholder="변경할 비밀번호 입력">
 							</div>
 							
@@ -120,14 +120,14 @@
 					<div class="form-group form-group-sm">
 						<label for="mem_phone" class="col-sm-2 control-label">생년월일</label>
 							<div class="col-sm-3">
-								{member.mem_birth}******
+								${member.mem_birth}
 							</div>
 					</div>
 					
 					<div class="form-group form-group-sm">
 						<label for="userName" class="col-sm-2 control-label">회원이름</label>
 							<div class="col-sm-3">
-								{member.userName}
+								${member.mem_name}
 							</div>
 					</div>
 					
@@ -140,12 +140,14 @@
 							
 							<div class="col-sm-2">
 								<select id="emailDomain" class="form-control">
-									<option value="naver.com">naver.com</option>
-									<option value="nate.com">nate.com</option>
-									<option value="google.com">google.com</option>
-									<option value="gmail.com">gmail.com</option>
-									<option value="hanmail.net">hanmail.net</option>
 									<option value="non">직접입력</option>
+									<option value="naver.com">네이버</option>
+									<option value="hanmail.net">다음</option>
+									<option value="nate.com">네이트</option>
+									<option value="google.com">구글</option>
+									<option value="gmail.com">gmail</option>
+									
+									
 								</select>
 							</div>
 							

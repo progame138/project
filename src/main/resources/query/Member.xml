@@ -3,7 +3,7 @@
 <mapper namespace="com.shoestar.client.member.dao.MemberDao">
 	
 	<select id="memberSelect" parameterType="String" resultType="member">
-		select mem_no, mem_id, mem_pwd, mem_name, mem_birth, mem_email, mem_phone, mem_zip, mem_addr1, mem_addr2
+		select mem_no, mem_id, mem_pwd, mem_name, mem_birth, mem_email, mem_phone, mem_zip, mem_addr1, mem_addr2, mem_addr3, mem_rdate
 		from member
 		where mem_id = #{mem_id}
 	</select>
