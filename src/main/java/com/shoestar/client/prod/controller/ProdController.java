@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shoestar.client.prod.service.ProdService;
+import com.shoestar.client.prod.vo.ProdInsVO;
 import com.shoestar.client.prod.vo.ProdVO;
 import com.shoestar.common.exception.ResourceNotFoundException;
 
@@ -59,17 +60,21 @@ public class ProdController {
 	 */
 	@RequestMapping(value="/prod", method=RequestMethod.GET)
 	public String showDetail(ProdVO pvo, String color, Model model) throws ResourceNotFoundException {
-		ProdVO result = prodService.prodDetail(pvo);
+		ProdVO prodInfo = prodService.prodDetail(pvo);
 		
-		if(result == null) {
+		if(prodInfo == null) {
 			throw new ResourceNotFoundException("해당 제품을 찾을 수 없습니다.");
 		}
 		
-		if(color == null) {
-			
+		ProdInsVO pivo = new ProdInsVO();
+		pivo.setPd_no(pvo.getPd_no());
+		if(color != null) {
+			try {
+				pivo.setPcl_no(Integer.parseInt(color));
+			} catch (NumberFormatException e) {}
 		}
 		
-		model.addAttribute(result);
+		model.addAttribute("prod", prodInfo);
 		
 		return "client/product/productDetail";
 	}

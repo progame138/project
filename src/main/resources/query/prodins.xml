@@ -2,7 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shoestar.client.prod.dao.ProdInsDao">
 	
-	<select id="getList" parameterType="prodins" resultType="prodins">
-		
+	<select id="getDetailList" parameterType="prodins" resultType="prodins">
+		SELECT
+			pi_no, pd_no, pi_size, pi_qty, pi_status, pcl_no,
+			(
+			SELECT
+				pim_file
+			FROM
+				prod_image
+			WHERE
+				prod_image.pi_no = prod_ins.pi_no AND
+				pim_use = 'p' AND
+				rownum = 1
+			) AS mainImage
+		FROM
+			prod_ins
+		<where><trim prefixOverrides="AND" suffixOverrides="AND">
+			pd_no = #{pd_no}
+			<choose>
+				<when test="includeAbnormal == false">
+					AND pi_status IS NULL
+				</when>
+				<otherwise><if test='pi_status != null OR pi_status != ""'>
+					AND pi_status = #{pi_status}
+				</if></otherwise>
+			</choose>
+		</trim></where>
+		ORDER BY
+			pi_size ASC
 	</select>
 </mapper>
