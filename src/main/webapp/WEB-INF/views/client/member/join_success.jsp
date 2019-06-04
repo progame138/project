@@ -25,10 +25,10 @@
          <!-- jQuery프레임워크 참조 -->         
            <script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
            <script type="text/javascript" src="/resources/include/js/jquery.form.min.js"></script>
-           <script type="text/javascript" src="/resources/include/js/common.js"></script>
+           <!-- <script type="text/javascript" src="/resources/include/js/common.js"></script> -->
            <script type="text/javascript" src="/resources/include/js/html5shiv.js"></script>
             <!-- <link rel="stylesheet" type="text/css" href="/resources/include/css/bootstrap.css"/> -->
-            <link rel="stylesheet" href="/resources/include/css/default.css"/>
+            <!-- <link rel="stylesheet" href="/resources/include/css/default.css"/> -->
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
@@ -43,10 +43,9 @@
 		<div class="contentContainer">
 			<div class="well">
 				<h1>회원가입이 완료되었습니다!!</h1>
-				<span class="label label-success">NEW</span>
+				<span class="label label-success">★NEW★</span>
 			</div>
 			<h4>ShoeStar가입을 축하합니다 !</h4>
-			<h5>곧 자동으로 로그인화면으로 이동됩니다</h5>
 		</div>
 	</body>
 </html>

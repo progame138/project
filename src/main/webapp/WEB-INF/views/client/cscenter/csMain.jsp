@@ -112,29 +112,7 @@
 	          </div> 	
            	
           </div>
-          <div id="boardList">
-          	<h2 style="font-weight:lighter;">공지사항</h2><hr>
-         <table summary="게시판리스트" class="table table-striped">
-            <colgroup>
-               <col width="10%" />
-               <col width="62%" />
-               <col width="15%" />
-               <col width="13%" />
-            </colgroup>
-            <thead>
-               <tr>
-                  <th data-value="b_num" class="order">글번호</th>
-                  <th>글제목</th>
-                  <th data-value="b_date" class="order">작성일</th>
-                  <th class="borcle">작성자</th>
-               </tr>
-            </thead>	
-            <tbody id="list">
-               <!-- 데이터 출력 -->
-               
-            </tbody>
-         </table>
-      </div>
+          
    </div>
         </div><!--/span-->
     <!--   </div>/row -->

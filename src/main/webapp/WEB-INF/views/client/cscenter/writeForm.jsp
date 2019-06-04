@@ -23,9 +23,10 @@
 					<div class="form-group">	
 						<label for="od_no">주문번호</label>
 						<select>
-							<%-- <c:forEach var="num" begin="${ }" end="${ }">
-								<option></option>
-							</c:forEach> --%>
+							<option value="배송/환불">상품/배송</option>
+							<option value="취소/반품">취소/반품</option>
+							<option value="이벤트">이벤트</option>
+							<option value="기타">기타</option>
 						</select>
 					</div>
 					<div class="form-group">

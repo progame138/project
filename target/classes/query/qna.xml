@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shoestar.client.cscenter.dao.QNADao">
+	<select id="qnaList" parameterType="com.shoestar.client.cscenter.vo.QNAVO" resultType="com.shoestar.client.cscenter.vo.QNAVO">
+			SELECT q.qna_no,q.mem_no,q.qna_ctgr, q.qna_title,  q.qna_date, m.mem_name
+			FROM qna q INNER JOIN member m ON q.mem_no = m.mem_no
+			WHERE m.mem_no = #{mem_no}
+	</select>
+</mapper>

@@ -20,9 +20,9 @@ $(function(){
 	//확인버튼 클릭시 처리 이벤트
 	$("#modify").click(function(){
 		//입력값 체크
-		if(!formCheck($('#oldUserPwd').$('error:eq(0)'), "기존 비밀번호를")) return;
+		if(!formCheck($('#oldUserPwd'), $('.error:eq(0)'), "기존 비밀번호를")) return;
 		else if(!inputVerify(1, '#oldUserPwd', '.error:eq(0)')) return;
-		else if(!formCheck($('#mem_phone'),$('.error:eq(3)'), "전화번호를")) return;
+		else if(!formCheck($('#mem_phone'), $('.error:eq(3)'), "전화번호를")) return;
 		else if(!inputVerify(2, '#mem_phone', '.error:eq(3)')) return;
 		else if(!formCheck($('#mem_email'), $('.error:eq(4)'), "이메일주소를")) return;
 		else {
@@ -36,7 +36,7 @@ $(function(){
 				if($('#mem_pwd').val()!="" && $('#userPwdCheck').val()!="") {
 					if(!passwordCheck()) return;
 				}
-				$("#mem_email").val($("#mem_email").val()+"@"+$("emailDomain").val());
+				$("#mem_email").val($("#mem_email").val()+"@"+$("#emailDomain").val());
 				$("#memberForm").attr({
 					"method":"post",
 					"action":"/member/modify"

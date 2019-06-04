@@ -21,12 +21,11 @@
 
 	<style type="text/css">
 		img{width: 500px; height: 400px;}
-	
+		li{list-style: none; }
 	</style>
 
 	<script type="text/javascript">
 		 $(function(){
-			
 			
 			$(".EventTitle").click(function() {
 				   var ev_no = $(this).parents("tr").attr("data-num");
@@ -41,23 +40,41 @@
 		      });
 			
 			$(".EventTitle").hover(function(){
-				$('li').eq(0).show();
+				var ss = $(this).attr("data-thumb");
+				//console.log(ss);
+				var uThumb = "/shoestarStorage/event/"+ss;
+				
+				$(this).parents().find(".item").find("img").attr("src",uThumb);
+				
+				$("li").css("list-style","none");
+				
+				$(this).parent().css("list-style","disc");
 			});
 		
-			 
-			var ev_title = this.ev_title;
-			var ev_content = this.ev_content;
-			var ev_thumb = this.ev_thumb;
-			var ev_file = this.ev_file;
-			var ev_date = this.ev_date;
-			var ev_edate = this.ev_edate;
-		
- 		thumbnailList(ev_no, ev_title, ev_content, ev_thumb, ev_file, ev_date, ev_edate);
-
-		});
+		}); // function 종료
 	
+		 
+		/*  function listData(){
+			 $(${eventList}).each(function() {
+					var ev_title = this.ev_title;
+					var ev_content = this.ev_content;
+					var ev_thumb = this.ev_thumb;
+					var ev_file = this.ev_file;
+					var ev_date = this.ev_date;
+					var ev_edate = this.ev_edate;
+   			
+   				
+   				thumbnailList(ev_no, ev_title, ev_content, ev_thumb, ev_file, ev_date, ev_edate);
+
+   			});
+   			
+   		}).fail(function() {
+   			alert("목록을 불러오는데 실패하였습니다. 잠시후에 다시 시도해 주세요.");
+   		});
+		 */
+		 
 		   // 섬네일 틀 생성 함수			// 카페서 작업 ★★														
-		  	function thumbnailList(ev_no, ev_title, ev_content, ev_thumb, ev_file, ev_date, ev_edate, index) {
+		 function thumbnailList(ev_no, ev_title, ev_content, ev_thumb, ev_file, ev_date, ev_edate) {
 		  		// body안에 있는 요소 접근 $("div") || 요소 생성 $("<div>")
 		  		
 		  		
@@ -76,7 +93,7 @@
 				column.append(thumbnail.append(img));
 					
 				$("#rowEventArea").append(column);
-		  	} // thumbnailList 끝
+		  	}  // thumbnailList 끝
 			
 	
 	</script>
@@ -119,7 +136,7 @@
 									  	  <c:choose>
 										  		<c:when test="${evt.ev_no == 2}">
 											    <div class="item">
-												      <a class="EventTitle" href="/event/detail?ev_no=${evt.ev_no}">
+												      <a class="EventImage" href="/event/detail?ev_no=${evt.ev_no}">
 												      		<img src="/shoestarStorage/event/${evt.ev_thumb}" alt="...">
 												      </a>
 											    </div>
@@ -127,7 +144,7 @@
 											    
 											    <c:otherwise>
 											    <div class="item active">
-											      <a class="EventTitle" href="/event/detail?ev_no=${evt.ev_no}">
+											      <a class="EventImage" href="/event/detail?ev_no=${evt.ev_no}">
 											      		<img src="/shoestarStorage/event/${evt.ev_thumb}" alt="...">
 											      </a>
 											    </div>
@@ -158,9 +175,13 @@
 							<tr class="evtno" data-num="${evt.ev_no}">
 								
 								<td class="Event_td">
-									<a class="EventTitle">
-											${evt.ev_title}							
-									</a>
+									<ul>
+										<li>
+											<a class="EventTitle" data-thumb="${evt.ev_thumb}">
+													${evt.ev_title}							
+											</a>
+										</li>
+									</ul>
 									
 								</td>
 							</tr>

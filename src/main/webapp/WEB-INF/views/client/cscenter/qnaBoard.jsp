@@ -7,19 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- 브라우저의 호환성 보기 모드를 막고, 해당 브라우저에서 지원하는 가장 최신 버전의 방식으로  html을 보여주도록 설정 -->
-<meta name="viewport"
-   content="width=device-width initial-scale=1.0,
-      maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
-<!-- viewport : 화면에 보이는 영역을 제어하는 기술.
-      width는 device-width로 설정. initial-scale는 초기비율 -->
-<!-- IE8이하 브라우저에서 HTML5를 인식하기 위해서는 아래의 패스필터를 적용하면 된다. -->
-<!-- 만약 lt IE 9보다 낮다면 script html5shiv.js를 읽어와 적용하라 -->
-<!-- [if lt IE 9]>
-         <script src="../js/html5shiv.js"></script>
-      <![endif] -->
-<link rel="shortcut icon" href="/resources/image/icon.png" />
-<link rel="apple-touch-icon" href="/resources/image/icon.png" />
+
 <link rel="stylesheet"
    href="/resources/include/dist/css/bootstrap.min.css">
 <link rel="stylesheet"
@@ -34,7 +22,12 @@
 <script type="text/javascript">
    $(function() {
    		$("#insertFormBtn").click(function(){
-   			location.href = "/cscenter/writeForm";
+   			alert("확인");
+   			//location.href = "/cscenter/writeForm";
+   		});
+   		$(".goDetail").click(function(){
+   			alert("확인2");
+   			//location.href = "/cscenter/qnaDetail";
    		});
    });
 </script>
@@ -66,34 +59,50 @@
       <div class="row-fluid">
         <div class="span9">
           <!-- 리스트시작 -->
-          <div id="provisionList"> 	
-	          <div class="row-fluid">     
-			          <c:choose>
-			          	<c:when test="${not empty faqList}">
-			          		<c:forEach var="faq" items="${faqList}" varStatus="status">
-			          			<div class="span4" data-num="${faq.faq_no}" data-value="${faq.fc_no}">
-			          				<h2>${faq.faq_title}</h2>
-			          				<p>${faq.faq_content}</p>
-			          				<p><button class="detailGo" >자세히보기</button></p>
-			          			</div>
-			          		</c:forEach>
-			          	</c:when>
-			          	<c:otherwise>
-			        		<div class="span4">
-			        			<h2>게시글이 존재하지 않습니다</h2>
-			        		</div>
-			          	</c:otherwise>
-			          </c:choose>
-	            
-	          </div><!--/row-->
-	        </div><!--/span-->
-	      </div><!--/row-->
-		</div><!--/faqList  -->
+         <div id="boardList">
+         <table summary="게시판리스트" class="table table-striped">
+            <colgroup>
+               <col width="10%" />
+               <col width="62%" />
+               <col width="15%" />
+               <col width="13%" />
+            </colgroup>
+            <thead>
+               <tr>
+                  <th data-value="qna_ctgr" class="order">분류</th>
+                  <th>글제목</th>
+                  <th data-value="qna_date" class="order">작성일</th>
+                  <th data-value="mem_name">작성자</th>
+               </tr>
+            </thead>
+            <tbody id="list">
+               <!-- 데이터 출력 -->
+               <c:choose>
+                  <c:when test="${not empty qnaList}">
+                     <c:forEach var="qna" items="${qnaList}" varStatus="status">
+                        <tr class="tac" data-num="${qna.qna_no}" data-num2="${qna.mem_no}">
+                           <td>${qna.qna_ctgr}</td>
+                           <td class="goDetail tal">${qna.qna_title}</td>          
+                           <td>${qna.qna_date}</td>
+                           <td class="name">${qna.mem_name}</td>
+                        </tr>
+                     </c:forEach>
+                  </c:when>
+                  <c:otherwise>
+                     <tr>
+                        <td colspan="4" class="tac">등록된 게시물이 없습니다.</td>
+                     </tr>
+                  </c:otherwise>
+               </c:choose>
+            </tbody>
+         </table>
+      </div>
+   </div>
       <div class="contentBtn text-right">
       		<input type="button" value="글쓰기" id="insertFormBtn" class="btn btn-primary">
   	  </div>
       <hr>
-      
+     </div> 
     </div><!--/.fluid-container-->
 	</div>
 	</div>

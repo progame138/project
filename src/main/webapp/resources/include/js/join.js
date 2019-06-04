@@ -95,7 +95,8 @@ $(function(){
 			return;
 		}else {
 			
-			$("#mem_email").val()+"@"+$("#emailDomain").val();
+			$("#mem_email").val($("#mem_email").val()+"@"+$("#emailDomain").val());
+			/*console.log($("#mem_email").val());*/
 			/*$("#mem_email").val($("#emailName").val()+"@"+$("#emailDomain").val());*/
 			
 			/*$("#mem_birth").val()+"-"+$("#gender").val();
