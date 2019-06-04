@@ -94,12 +94,12 @@ $(function(){
 			alert("아이디 중복 체크를 해주세요");
 			return;
 		}else {
-			$("#mem_email").val();
-			/*$("#mem_email").val()+"@"+$("#emailDomain").val();*/
+			
+			$("#mem_email").val()+"@"+$("#emailDomain").val();
 			/*$("#mem_email").val($("#emailName").val()+"@"+$("#emailDomain").val());*/
-			$("#mem_birth").val();
-			/*$("#mem_birth").val()+"-"+$("#gender").val();*/
-			/*$("#mem_birth").val($("#pinno").val()+"-"+$("#gender").val());*/
+			
+			/*$("#mem_birth").val()+"-"+$("#gender").val();
+			$("#mem_birth").val($("#pinno").val()+"-"+$("#gender").val());*/
 			$("#memberForm").attr({
 				"method":"post",
 				"action":"/member/join"

@@ -13,8 +13,8 @@
 		<selectKey keyProperty="mem_no" resultType="int" order="BEFORE">
 			select member_seq.nextval from dual
 		</selectKey>
-		insert into member(mem_no, mem_id, mem_pwd, mem_name, mem_birth, mem_email, mem_phone)
-		values(#{mem_no}, #{mem_id}, #{mem_pwd}, #{mem_name}, #{mem_birth}, #{mem_email}, #{mem_phone})
+		insert into member(mem_no, mem_id, mem_pwd, mem_name, mem_birth, mem_email, mem_phone, mem_sex, mem_zip, mem_addr1, mem_addr2, mem_addr3, mem_rdate)
+		values(#{mem_no}, #{mem_id}, #{mem_pwd}, #{mem_name}, #{mem_birth}, #{mem_email}, #{mem_phone}, #{mem_sex}, #{mem_zip}, #{mem_addr1}, #{mem_addr2}, #{mem_addr3}, sysdate)
 	</insert>
 	
 	<!-- <insert id="memberInsert" parameterType="member">
@@ -24,7 +24,7 @@
 		</selectKey>
 		insert into member(mem_no, mem_id, mem_pwd, mem_name, mem_birth, mem_email, mem_phone, mem_zip, mem_addr1, mem_addr2)
 		values(#{mem_no}, #{mem_id}, #{mem_pwd}, #{mem_name}, #{mem_birth}, #{mem_email}, #{mem_phone}, #{mem_zip}, #{mem_addr1}, #{mem_addr2})
-	</insert> -->	
+	</insert> -->
 	
 	<update id="memberUpdate" parameterType="member">
 		update member set
