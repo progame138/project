@@ -9,30 +9,23 @@ const PROD_LIST_URL = "/product/showList";
 /**
  * 상품 카테고리 정보를 읽고 상품 정보 리스트를 표시하는 함수
  * @param prodCtgVO 상품 카테고리 정보
- * @param requestParam 링크에 추가할 요청 정보
  * @returns 상품 카테고리 정보를 
  */
-function createProdCtgLink(prodCtgVO, requestParam) {
-	var requestToAppend = "";
-	
-	// 성별과 나이 정보 가져오기
-	try {
-		if(requestParam.startsWith("&") || requestParam == "") {
-			requestToAppend = requestParam;
-		} else {
-			requestToAppend = "&" + splitRequest(requestParam, "pd_sex", "pd_age");
-		}
-	} catch (e) {
-	}
+function createProdCtgLink(prodCtgVO) {
+	var linkUrl =  PROD_LIST_URL + "?" +
+			splitRequest(window.location.search, "pd_sex", "pd_age", "color", "size", "priceBottom", "priceTop");
+	var requestToAppend = "&pct_no=" + prodCtgVO.pct_no;
 	
 	var pcli = $("<li>");
-	var pca = $("<a>").attr({
-		"href" : PROD_LIST_URL + "?pct_no=" + prodCtgVO.pct_no + requestToAppend,
-	}).text(prodCtgVO.pct_name);
+	var pca = $("<a>").text(prodCtgVO.pct_name);
 	
 	if(getRequestValue("pct_no") == prodCtgVO.pct_no) {
 		pca.addClass("filterToggled");
+		requestToAppend = "";
 	}
+	pca.attr({
+		"href" : linkUrl + requestToAppend,
+	});
 	
 	var pcnt = $("<span>").text(" (" + prodCtgVO.pd_count + ")").addClass("ctgCount");
 	
@@ -143,3 +136,31 @@ function createSizeLink(pSize) {
 	
 	return psli;
 }
+
+/**
+ * 컬러 필터를 적용할 li 생성 함수
+ * @param prodColorVO 생성할 컬러 정보
+ * @returns jQuery li 태그
+ */
+function createColorLink(prodColorVO) {
+	var reqColor = getRequestValue("color");
+	
+	var pclli = $("<li>");
+	var pcla = $("<a>").attr({
+		"href" : PROD_LIST_URL + "?" + splitRequest(window.location.search, "pd_sex", "pd_age", "pct_no", "size", "priceBottom", "priceTop"),
+		"title" : prodColorVO.pcl_name
+	}).css("background-color", "#"+prodColorVO.pcl_code);
+	
+	var colorReqChunk = "&color=" + prodColorVO.pcl_no;
+	if(reqColor != null && reqColor == prodColorVO.pcl_no) {
+		colorReqChunk = "";
+		pcla.addClass("filterToggled");
+	}
+	pcla.attr("href", pcla.attr("href") + colorReqChunk);
+	
+	pclli.append(pcla.append());
+	
+	return pclli;
+}
+
+

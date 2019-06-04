@@ -33,10 +33,20 @@
 				prod
 			ON
 				prod_ctg.pct_no = prod.pct_no
-		<where>
+		<where><trim prefixOverrides="AND">
 			<include refid="sexReq"></include>
 			<trim prefix="AND"><include refid="ageReq"></include></trim>
-		</where>
+			<if test="includeItemless == false">
+				AND (
+					SELECT DISTINCT
+						pd_no
+					FROM
+						prod_ins
+					WHERE
+						pd_no = prod.pd_no
+				) IS NOT NULL
+			</if>
+		</trim></where>
 		GROUP BY
 			prod_ctg.pct_no, pct_name
 		ORDER BY
@@ -58,5 +68,13 @@
 		</where>
 		ORDER BY
 			1
+	</select>
+	
+	<select id="getAvailableColor" parameterType="prodctg" resultType="prodcolor">
+		SELECT
+			/*+ INDEX_ASC(prod_color prod_color_pk)*/
+			*
+		FROM
+			prod_color
 	</select>
 </mapper>
