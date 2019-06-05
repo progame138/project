@@ -104,7 +104,8 @@ import lombok.extern.log4j.Log4j;
 			@RequestMapping(value="/modify", method = RequestMethod.POST)
 			public ModelAndView memberModifyProcess(MemberVO mvo, @SessionAttribute("login") LoginVO login, ModelAndView mav){
 				log.info("modify post방식에 의한 메서드 호출 성공");
-				
+				log.info("mvo" + mvo);
+				log.info("login" + login);
 				if(login==null){
 					mav.setViewName("client/member/login");
 					return mav;
@@ -112,7 +113,7 @@ import lombok.extern.log4j.Log4j;
 				mvo.setMem_id(login.getMem_id());
 				MemberVO vo = memberService.memberSelect(mvo.getMem_id());
 				
-				if(loginService.loginSelect(mvo.getMem_id(), mvo.getOldUserpwd()) == null){
+				if(loginService.loginSelect(mvo.getMem_id(), mvo.getOldUserPwd()) == null){
 					mav.addObject("codeNumber", 1);
 					mav.addObject("member", vo);
 					mav.setViewName("client/member/modify");

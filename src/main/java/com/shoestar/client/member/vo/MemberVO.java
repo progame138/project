@@ -28,15 +28,6 @@ public class MemberVO extends LoginVO{
 	private int cls_no;
 	private String mem_zip;
 	
-	private int mem_no;
-	
-	
-	private String gender;
-	private String emailDomain;
-	
-	private String oldUserpwd;
-	private String pinno;
-	private Timestamp joinDate;
-
+	private String oldUserPwd;
 
 }

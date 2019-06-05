@@ -28,7 +28,7 @@
 	
 	<update id="memberUpdate" parameterType="member">
 		update member set
-		<if test="mem_pwd != null and mem_pwd != ''">
+		<if test="mem_pwd != ''">
 			mem_pwd=#{mem_pwd},
 		</if>
 			mem_phone=#{mem_phone}, mem_email=#{mem_email}

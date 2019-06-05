@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%-- <c:set var="email"  value="${fn:split{member.email,'@')}" /> --%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> <!-- 아래 fn:split을 쓰기위해 반드시 명시 -->
+<c:set var="email"  value="${fn:split(member.mem_email,'@')}" /> <!-- DB에서 불러오는 풀네임 email값에서 @를 분리시켜줌 -->
 <!DOCTYPE html>
    <html>
       <head>
@@ -26,8 +27,8 @@
          <!-- jQuery프레임워크 참조 -->         
            <script type="text/javascript" src="/resources/include/js/jquery-1.12.4.min.js"></script>
            <script type="text/javascript" src="/resources/include/js/jquery.form.min.js"></script>
-          	<script type="text/javascript" src="/resources/include/js/join.js"></script>
-            <script type="text/javascript" src="/resources/include/js/login.js"></script>
+          	<!-- <script type="text/javascript" src="/resources/include/js/join.js"></script>
+            <script type="text/javascript" src="/resources/include/js/login.js"></script> -->
            <script type="text/javascript" src="/resources/include/js/pwdPattern.js"></script>
            <script type="text/javascript" src="/resources/include/js/html5shiv.js"></script>
            <script type="text/javascript" src="/resources/include/js/modify.js"></script>
@@ -50,7 +51,7 @@
 				
 		       	loginUserId = "${member.mem_id}";
 				function emailCheck(){
-					var mem_email = "${mem_email[1]}";
+					var mem_email = "${email[1]}";
 					$("#emailDomain").val(mem_email).prop("selected", "true");
 				}
 			</script>
@@ -109,7 +110,7 @@
 						<label for="mem_phone" class="col-sm-2 control-label">휴대폰번호</label>
 							<div class="col-sm-3">
 								<input type="text" id="mem_phone" name="mem_phone" maxlength="15" 
-								class="form-control" placeholder="변경할 비밀번호 입력">
+								class="form-control" placeholder="변경할 비밀번호 입력" value="${member.mem_phone}">
 							</div>
 							
 							<div class="col-sm-5">
@@ -135,9 +136,9 @@
 						<label for="mem_email" class="col-sm-2 control-label">이메일</label>
 							<div class="col-sm-3">
 								<input type="text" id="mem_email" name="mem_email" maxlength="60" 
-								class="form-control">
+								class="form-control" value="${email[0]}">
 							</div>
-							 <%-- value="${email[0]}" --%>
+							 <%--  --%>
 							
 							<div class="col-sm-2">
 								<select id="emailDomain" class="form-control">
