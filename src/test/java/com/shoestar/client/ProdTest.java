@@ -31,9 +31,10 @@ public class ProdTest {
 		log.info("테스트를 시작합니다");
 		log.info("---------------------------------------------------------");
 		
-		ProdInsVO pivo = new ProdInsVO();
-		pivo.setPd_no(1);
+		ProdVO pvo = new ProdVO();
+		pvo.setSize(230);
+		pvo.setPd_sex("m");
 		
-		log.info(prodInsDao.getDetailList(pivo));
+		log.info(prodDao.prodList(pvo));
 	}
 }

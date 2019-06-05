@@ -9,11 +9,71 @@
 		<script type="text/javascript" src="/resources/include/js/common.js"></script>
 		<script type="text/javascript" src="/resources/include/js/product.js"></script>
 		<script type="text/javascript">
+			var pi_no = '${pins.pi_no}';
+			var pd_no = '${prod.pd_no}';
 			
-			
+			$(function() {
+				
+				getColorInfo();
+				getImageList();
+				getSizeList();
+			});
 			
 			function getColorInfo() {
-				
+				$.ajax({
+					url : "/product/pinsList",
+					type : "get",
+					data : "",
+					dataType : "json",
+					error : function() {
+						
+					},
+					success : function(data) {
+						if(!jQuery.isEmptyObject(data)) {
+							
+						} else {
+							
+						}
+					}
+				});
+			}
+			
+			function getImageList() {
+				$.ajax({
+					url : "",
+					type : "get",
+					data : "",
+					dataType : "json",
+					error : function() {
+						
+					},
+					success : function(data) {
+						if(!jQuery.isEmptyObject(data)) {
+							
+						} else {
+							
+						}
+					}
+				});
+			}
+			
+			function getSizeList() {
+				$.ajax({
+					url : "/product/",
+					type : "get",
+					data : "",
+					dataType : "json",
+					error : function() {
+						
+					},
+					success : function(data) {
+						if(!jQuery.isEmptyObject(data)) {
+							
+						} else {
+							
+						}
+					}
+				});
 			}
 		</script>
 	</head>
@@ -50,8 +110,11 @@
 				
 				<!-- 색상 선택 -->
 				<div class="colorSection">
+					<div class="colorInfo">${pins.pcl_name}</div>
 					<ul class="colorList"></ul>
 				</div>
+				
+				<hr class="blackLine">
 				
 				<!-- 상품 구매를 위한 색상/사이즈/수량 폼 -->
 				<div class="purchaseSection">
@@ -83,6 +146,7 @@
 			</div>
 			
 		</div>
+		<hr class="blackLine">
 		
 		<!-- 중단 상품 정보 영역 -->
 		<div class="infoSection">
@@ -114,6 +178,8 @@
 				</tr>
 			</table>
 		</div>
+		
+		<hr class="blackLine">
 		
 		<!-- 하단 상품평/관련 상품 영역 -->
 		<div class="extraSection">

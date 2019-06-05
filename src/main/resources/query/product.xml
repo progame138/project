@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shoestar.client.prod.dao.ProdDao">
 	
-	<!-- 최대 할인율 검색하는 쿼리문 -->
+	
+	<!--##################################### 최대 할인율 검색하는 쿼리문 #####################################-->
 	<sql id="dcmax">
 		(
 		SELECT
@@ -27,6 +28,8 @@
 		)
 	</sql>
 	
+	
+	<!--##################################### 검색해오는 prodvo 정보 #####################################-->
 	<sql id="prodInfo">
 		pd_no, pd_name, pd_sex, pd_age, pct_no, co_no, pd_price,
 		pd_fabric, pd_country, pd_year, pd_manu, pd_import, pi_no, pd_date, pd_status, pim_main,
@@ -42,12 +45,13 @@
 		<!-- 할인율 계산 하기 -->
 		(
 		NVL((
-			<include refid="dcmax"></include>
+			<include refid="dcmax"/>
 		), 0)
 		) AS pd_discount
 	</sql>
 	
-	<!-- 전체 검색 -->
+	
+	<!--##################################### 고객용 목록 검색 #####################################-->
 	<select id="prodList" parameterType="prod" resultType="prod">
 		SELECT
 			*
@@ -56,13 +60,13 @@
 			SELECT
 				/*+ INDEX_DESC(prod prod_pk)*/
 				rownum rn, rowid ri,
-				<include refid="prodInfo"></include>
+				<include refid="prodInfo"/>
 			FROM
 				prod
 			WHERE
 				<trim prefixOverrides="AND">
 					<!-- 성별 -->
-					<trim prefix="AND" suffix="OR pd_sex = 'u'"><if test='pd_sex != null and pd_sex != ""'>
+					<trim prefix="AND (" suffix="OR pd_sex = 'u')"><if test='pd_sex != null and pd_sex != ""'>
 						pd_sex = #{pd_sex}
 					</if></trim>
 					<!-- 연령 -->
@@ -88,38 +92,42 @@
 					<if test='keyword != null and keyword != ""'>
 						AND (pd_name LIKE '%'||#{keyword}||'%')
 					</if>
-					<!-- 사이즈와 컬러 필터링 -->
-					<if test="size != 0 or color != 0">
+					<!-- 컬러 필터링 -->
+					<if test="color != 0">
 						AND (
 							SELECT DISTINCT
 								1
 							FROM
 								prod_ins
+							WHERE
+								pd_no = prod.pd_no AND
+								pcl_no = #{color}
+						) IS NOT NULL
+					</if>
+					<!-- 사이즈 필터링 -->
+					<if test="size != 0">
+						AND (
+							SELECT DISTINCT
+								1
+							FROM
+								prod_stock
 								INNER JOIN
-									prod_stock
+									prod_ins
 								ON
 									prod_ins.pi_no = prod_stock.pi_no
 							WHERE
-							<trim>
-								pd_no = prod.pd_no
-								<if test="size != 0">
-								AND ps_size = #{size}
-								</if>
-								<if test="color != 0">
-								AND pcl_no = #{color}
-								</if>
-							</trim>
+								pd_no = prod.pd_no AND
+								ps_size = #{size}
 						) IS NOT NULL
 					</if>
-					<!-- 가격 범위 -->
 					<if test="priceBottom != 0">
 		   				AND
-							pd_price * NVL((100-(<include refid="dcmax"></include>))/100, 1)
+							pd_price * NVL((100-(<include refid="dcmax"/>))/100, 1)
 						<![CDATA[>= #{priceBottom}]]>
 					</if>
 					<if test="priceTop != 0">
 		   				AND
-							pd_price * NVL((100-(<include refid="dcmax"></include>))/100, 1)
+							pd_price * NVL((100-(<include refid="dcmax"/>))/100, 1)
 						<![CDATA[< #{priceTop}]]>
 					</if>
 					<!-- 페이징 -->
@@ -131,22 +139,46 @@
 			<if test="includeItemless == false">
 				AND (
 					SELECT DISTINCT
-						pd_no
+						1
 					FROM
-						prod_ins
+						prod_stock
+						INNER JOIN
+							prod_ins
+						ON
+							prod_stock.pi_no = prod_ins.pi_no
 					WHERE
 						pd_no = prodlist.pd_no
 				) IS NOT NULL
 			</if>
 	</select>
 	
-	<!-- 상품 검색 -->
+	
+	<!--##################################### 상품 단일 검색 #####################################-->
+	<!-- pd_no 기준 검색 -->
 	<select id="prodDetail" parameterType="prod" resultType="prod">
 		SELECT
-			<include refid="prodInfo"></include>
+			<include refid="prodInfo" />
 		FROM
 			prod
 		WHERE
 			pd_no = #{pd_no}
 	</select>
+	<!-- pi_no 기준 검색 -->
+	<select id="prodDetailByIns" parameterType="prodins" resultType="prod">
+		SELECT
+			<include refid="prodInfo" />
+		FROM
+			prod
+		WHERE
+			pd_no = (
+				SELECT
+					pd_no
+				FROM
+					prod_ins
+				WHERE
+					pi_no = #{pi_no}
+			)
+	</select>
+	
+	<!--#####################################  #####################################-->
 </mapper>

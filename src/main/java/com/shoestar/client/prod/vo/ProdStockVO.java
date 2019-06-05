@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class ProdStockVO {
-	private int ps_no;
 	private int pi_no;
 	private int ps_size;
 	private int ps_qty;

@@ -9,4 +9,5 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper=false)
 public class ProdInsFilterVO extends CommonVO {
 	private String mainImage;
+	private String pcl_name;
 }

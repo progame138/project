@@ -11,5 +11,5 @@ public interface ProdService {
 	
 	public ProdVO prodDetail(ProdVO pvo);
 	
-	public List<ProdInsVO> prodInsList(ProdInsVO pivo);
+	public ProdVO prodDetailByIns(ProdInsVO pivo);
 }

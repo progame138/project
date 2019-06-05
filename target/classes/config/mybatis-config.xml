@@ -11,5 +11,6 @@
 		<typeAlias type="com.shoestar.client.prod.vo.ProdColorVO" alias="prodcolor" />
 		<typeAlias type="com.shoestar.client.prod.vo.ProdInsVO" alias="prodins" />
 		<typeAlias type="com.shoestar.client.notice.vo.NoticeVO" alias="notice" />
+		<typeAlias type="com.shoestar.client.prod.vo.ProdStockVO" alias="prodstock" />
 	</typeAliases>
 </configuration>

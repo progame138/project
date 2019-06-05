@@ -85,6 +85,25 @@ function createProductDiv(prodVO) {
 	var pColumn = $("<div>").addClass("prodContainer");
 	pColumn.append(pImageSection).append(pEventSection).append(pNameSection).append(pCtgSection).append(pPriceSection).append(pRatingSection);
 	
+	var hrefLink = "/product/prod?";
+	var pclno = null;
+	try {
+		var pclno = getRequestValue("color");
+	} catch (e) {
+	}
+	
+	if(pclno != null) {
+		hrefLink = hrefLink + "pd_no=" + prodVO.pd_no + "&color=" + pclno;
+	} else if(prodVO.pi_no != 0) {
+		hrefLink = hrefLink + "pi_no=" + prodVO.pi_no;
+	} else {
+		hrefLink = hrefLink + "pd_no=" + prodVO.pd_no;
+	}
+	
+	pColumn.css({"cursor":"pointer"}).on("click", function() {
+		location.href = hrefLink;
+	});
+	
 	return pColumn;
 }
 

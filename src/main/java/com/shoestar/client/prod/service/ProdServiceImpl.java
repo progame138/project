@@ -44,9 +44,8 @@ public class ProdServiceImpl implements ProdService {
 	}
 
 	@Override
-	public List<ProdInsVO> prodInsList(ProdInsVO pivo) {
-		List<ProdInsVO> result = prodInsDao.getDetailList(pivo);
+	public ProdVO prodDetailByIns(ProdInsVO pivo) {
+		ProdVO result = prodDao.prodDetailByIns(pivo);
 		return result;
 	}
-
 }
