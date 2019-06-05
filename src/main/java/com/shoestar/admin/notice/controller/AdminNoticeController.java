@@ -26,7 +26,7 @@ public class AdminNoticeController {
 	AdminNoticeService noticeService;
 	
 	// 공지사항 리스트 매핑
-		@RequestMapping(value="/noticeList", method = RequestMethod.GET)
+		@RequestMapping(value="/adminNoticeList", method = RequestMethod.GET)
 		public String noticeList(@ModelAttribute("data") NoticeVO nvo, Model model){
 			log.info("noticeList 호출완료");
 			
@@ -45,10 +45,45 @@ public class AdminNoticeController {
 		NoticeVO detail = noticeService.noticeDetail(nvo);
 		model.addAttribute("detail", detail);
 		
-		return "notice/noticeDetail";
+		return "client/notice/noticeDetail";
 	}*/
 	
 	// 공지사항 글쓰기 폼 들어가기
+	@RequestMapping(value="/writeForm")
+	public String writeForm(@ModelAttribute("data") NoticeVO nvo){
+		log.info("공지사항 글쓰기 페이지 호출");
+		
+		return "admin/brand/noticeWriteForm";
+	}
 	
+	// 공지사항 글쓰기
+	@RequestMapping(value="/noticeInsert", method=RequestMethod.POST)
+	//@PostMapping("/noticeInsert")
+	public String noticeInsert(@ModelAttribute NoticeVO nvo, Model model){
+		log.info("boardInsert 호출");
+		
+		int result = 0;
+		String url = "";
+		
+		result = noticeService.noticeInsert(nvo);
+		if(result == 1){
+			url = "admin/brand/adminNoticeList";
+		}
+		return null;
+	}
+	
+	// 공지사항 상세보기
+	@RequestMapping(value="/adminNoticeDetail", method=RequestMethod.GET)
+	//@GetMapping("/adminNoticeDetail")
+	public String adminNoticeDetail(@ModelAttribute("data") NoticeVO nvo, Model model){
+		log.info("adminNoticeDetail 호출");
+		log.info("no_no"+nvo.getNo_no());
+		
+		NoticeVO detail = noticeService.noticeDetail(nvo);
+		model.addAttribute("detail",detail);
+		
+		return "admin/board/adminNoticeDetail";
+		
+	}
 
 }

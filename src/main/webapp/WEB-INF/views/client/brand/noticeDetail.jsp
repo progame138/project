@@ -47,6 +47,7 @@
 					</tbody>
 				</table>
 			</div>
+			<jsp:include page="noticeReply.jsp"/>
 		</div>
 	</body>
 </html>

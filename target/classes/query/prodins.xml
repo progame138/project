@@ -2,7 +2,78 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shoestar.client.prod.dao.ProdInsDao">
 	
-	<select id="getList" parameterType="prodins" resultType="prodins">
-		
+	
+	<!-- ############################## ProdInsVO 기본 정보 ############################## -->
+	<sql id="pinsInfo">
+		pi_no, pd_no, pcl_no,
+		(
+		SELECT
+			pim_file
+		FROM
+			prod_image
+		WHERE
+			prod_image.pi_no = prod_ins.pi_no AND
+			pim_use = 'p' AND
+			rownum = 1
+		) AS mainImage,
+		(
+		SELECT
+			pcl_name
+		FROM
+			prod_color
+		WHERE
+			prod_ins.pcl_no = prod_color.pcl_no
+		) AS pcl_name
+	</sql>
+	
+	<!-- ############################## prod에 해당되는 모든 prodIns 받아오기 ############################## -->
+	<select id="pinsListByProd" parameterType="prod" resultType="prodins">
+		SELECT
+			/*+ INDEX_ASC(prod_ins prod_ins_pk)*/
+			<include refid="pinsInfo" />
+		FROM
+			prod_ins
+		WHERE
+			pd_no = #{pd_no}
 	</select>
+	
+	<!-- ############################## 제공되는 색상 정보와 기본 이미지 받아오기 ############################## -->
+	<!-- pi_no로 찾기 -->
+	<select id="pinsDetail" parameterType="prodins" resultType="prodins">
+		SELECT
+			<include refid="pinsInfo" />
+		FROM
+			prod_ins
+		WHERE
+			pi_no = #{pi_no}
+	</select>
+	
+	<!-- prodvo로 찾기 -->
+	<select id="pinsDetailByColor" parameterType="prod" resultType="prodins">
+		SELECT
+			<include refid="pinsInfo" />
+		FROM
+			prod_ins
+		WHERE
+			pi_no = NVL((
+				SELECT
+					pi_no
+				FROM
+					prod_ins
+				WHERE
+					pd_no = #{pd_no} AND
+					pcl_no = #{color}
+			),(
+				SELECT
+					pi_no
+				FROM
+					prod_ins
+				WHERE
+					pd_no = #{pd_no} AND
+					rownum = 1
+			))
+	</select>
+	
+	<!-- ############################## prod_ins 기준으로 제공되는 사이즈와 수량 받아오기 ############################## -->
+	
 </mapper>

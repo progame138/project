@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shoestar.client.prod.dao.ProdDao;
+import com.shoestar.client.prod.dao.ProdInsDao;
+import com.shoestar.client.prod.vo.ProdInsVO;
 import com.shoestar.client.prod.vo.ProdVO;
 
 import lombok.Setter;
@@ -19,6 +21,9 @@ public class ProdServiceImpl implements ProdService {
 	
 	@Setter(onMethod_ = @Autowired)
 	private ProdDao prodDao;
+	
+	@Setter(onMethod_ = @Autowired)
+	private ProdInsDao prodInsDao;
 	
 	/**
 	 * 전체 검색 메서드
@@ -38,4 +43,9 @@ public class ProdServiceImpl implements ProdService {
 		return result;
 	}
 
+	@Override
+	public ProdVO prodDetailByIns(ProdInsVO pivo) {
+		ProdVO result = prodDao.prodDetailByIns(pivo);
+		return result;
+	}
 }

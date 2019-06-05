@@ -39,9 +39,13 @@
 			<if test="includeItemless == false">
 				AND (
 					SELECT DISTINCT
-						pd_no
+						1
 					FROM
-						prod_ins
+						prod_stock
+						INNER JOIN
+							prod_ins
+						ON
+							prod_stock.pi_no = prod_ins.pi_no
 					WHERE
 						pd_no = prod.pd_no
 				) IS NOT NULL
@@ -55,9 +59,13 @@
 	
 	<select id="getAvailableSize" parameterType="prodctg" resultType="java.lang.Integer">
 		SELECT DISTINCT
-			pi_size
+			ps_size
 		FROM
-			prod_ins pi
+			prod_stock ps
+			INNER JOIN
+				prod_ins pi
+			ON
+				ps.pi_no = pi.pi_no
 			INNER JOIN
 				prod p
 			ON
